@@ -6,7 +6,7 @@
 }
 
 body {
-    /* Fuente por defecto para todo, excepto el título */
+    /* Fuente por defecto (importada de Google Fonts) */
     font-family: 'Lato', sans-serif;
     color: #ffffff;
     line-height: 1.6;
@@ -16,11 +16,12 @@ body {
 .hero {
     height: 100vh; /* Ocupa el 100% de la altura de la pantalla */
     
-    /* ¡IMPORTANTE! 
-      Aquí usamos la imagen que subiste. Asegúrate de que el archivo
-      'imagen.jpg' esté en la misma carpeta que tus archivos HTML y CSS.
+    /* 👇 ¡IMPORTANTE! 
+      Reemplaza 'imagen.jpg' con la ruta a tu imagen de fondo.
+      La ruta debe ser relativa a donde está el CSS.
+      Ej: background-image: url('../../public/images/fondo-barberia.jpg');
     */
-    background-image: url('imagen.jpg');
+    background-image: url('/public/images/img1.jpg'); /* <- CAMBIA ESTO */
     
     background-size: cover;
     background-position: center;
@@ -32,7 +33,7 @@ body {
     display: flex;
     flex-direction: column;
     
-    /* Espaciado interno para que no se pegue a los bordes */
+    /* Espaciado interno (20px arriba/abajo, 5% a los lados) */
     padding: 20px 5%;
 }
 
@@ -46,8 +47,8 @@ body {
     height: 100%;
     
     /* Este es el filtro oscuro. 
-       rgba(0, 0, 0, 0.7) es negro con 70% de opacidad. 
-       Ajusta el 0.7 (de 0 a 1) si lo quieres más claro u oscuro.
+      rgba(0, 0, 0, 0.7) es negro con 70% de opacidad. 
+      Ajusta el 0.7 (de 0 a 1) si lo quieres más claro u oscuro.
     */
     background-color: rgba(0, 0, 0, 0.7);
     
