@@ -1,4 +1,4 @@
-/* --- Reseteo básico y fuentes --- */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +6,6 @@
 }
 
 body {
-    /* Fuente por defecto (importada de Google Fonts) */
     font-family: 'Lato', sans-serif;
     color: #ffffff;
     line-height: 1.6;
@@ -15,29 +14,19 @@ body {
 /* --- Estilos del Hero Principal --- */
 .hero {
     height: 100vh; /* Ocupa el 100% de la altura de la pantalla */
-    
-    /* 👇 ¡IMPORTANTE! 
-      Reemplaza 'imagen.jpg' con la ruta a tu imagen de fondo.
-      La ruta debe ser relativa a donde está el CSS.
-      Ej: background-image: url('../../public/images/fondo-barberia.jpg');
-    */
     background-image: url('/public/images/img1.jpg'); /* <- CAMBIA ESTO */
     
     background-size: cover;
     background-position: center;
     
-    /* Clave para la superposición y el contenido */
     position: relative; 
     
-    /* Organizamos el header y el contenido verticalmente */
     display: flex;
     flex-direction: column;
     
-    /* Espaciado interno (20px arriba/abajo, 5% a los lados) */
     padding: 20px 5%;
 }
 
-/* --- La superposición oscura (Overlay) --- */
 .hero::before {
     content: ""; /* Requerido para pseudo-elementos */
     position: absolute;
@@ -46,13 +35,8 @@ body {
     width: 100%;
     height: 100%;
     
-    /* Este es el filtro oscuro. 
-      rgba(0, 0, 0, 0.7) es negro con 70% de opacidad. 
-      Ajusta el 0.7 (de 0 a 1) si lo quieres más claro u oscuro.
-    */
     background-color: rgba(0, 0, 0, 0.7);
     
-    /* Se asegura que el overlay esté detrás del contenido (z-index: 2) */
     z-index: 1; 
 }
 
@@ -63,7 +47,6 @@ body {
     align-items: center;
     width: 100%;
     
-    /* Se asegura que esté sobre el overlay */
     position: relative; 
     z-index: 2;
 }
@@ -115,20 +98,17 @@ body {
     /* Crece para ocupar el espacio restante */
     flex-grow: 1; 
     
-    /* Centra el contenido vertical y horizontalmente */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     
-    /* Se asegura que esté sobre el overlay */
     position: relative; 
     z-index: 2;
 }
 
 .hero-content h1 {
-    /* Usamos la fuente de script que importamos */
     font-family: 'Pinyon Script', cursive;
     font-size: 7rem; /* Tamaño de fuente grande (ajusta si es necesario) */
     font-weight: 400; /* Las fuentes script no suelen ser 'bold' */
