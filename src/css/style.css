@@ -211,6 +211,172 @@ body.pagina-interna {
     color: #f0f0f0;
 }
 
+/* --- 8. Estilos de la Sección de Servicios (#servicios) --- */
+.service-section {
+    padding: 80px 5%;
+    background-color: #f0f0f0; /* Fondo blanco/claro para esta sección como en la imagen */
+    color: #222; /* Texto oscuro sobre fondo claro */
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #0D0F1A;
+    text-transform: uppercase;
+}
+
+.service-description {
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #555;
+}
+
+.service-list {
+    display: flex; /* Habilita Flexbox para la alineación horizontal */
+    justify-content: center; /* Centra el grupo de tarjetas */
+    gap: 30px; /* Espacio entre las tarjetas */
+    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en pantallas pequeñas */
+}
+
+.service-card {
+    flex-basis: calc(33.33% - 20px); /* 3 tarjetas por fila, restando el espacio del gap */
+    max-width: 350px; /* Límite para que no crezcan demasiado en pantallas grandes */
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden; /* Para contener la imagen */
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.service-card img {
+    width: 100%;
+    height: 350px; /* Altura fija para la imagen */
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%); 
+    transition: filter 0.3s ease;
+}
+
+.service-card:first-child img {
+    filter: grayscale(100%); 
+}
+
+.service-card:nth-child(2) img,
+.service-card:last-child img {
+    filter: none;
+}
+
+
+.card-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #0D0F1A; /* Fondo oscuro en la barra inferior */
+    color: #fff; /* Texto blanco */
+}
+
+.service-name {
+    font-weight: 400;
+    font-size: 1.1rem;
+}
+
+.service-price {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #f39c12; /* Color naranja/amarillo para el precio */
+}
+
+/* --- 9. Estilos de la Sección de Ubicación (#ubicacion) --- */
+.location-section {
+    padding: 100px 5%;
+    background-color: #0D0F1A; /* Fondo oscuro (usa el fondo del body) */
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Reutilizamos section-title de #servicios, pero ajustamos el margen si es necesario */
+.location-section .section-title {
+    margin-bottom: 50px;
+    color: #ffffff;
+}
+
+.location-map-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.map-placeholder,
+.map-iframe-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* Ancho máximo similar al de la imagen */
+    height: 450px; /* Altura del contenedor del mapa */
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.map-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.map-iframe-wrapper iframe {
+    /* Asegura que el iframe llene el contenedor */
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.map-info-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75); /* Fondo negro semi-transparente */
+    color: #ffffff;
+    padding: 15px;
+    text-align: left;
+}
+
+.map-info-overlay p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 50px;
+}
+
+.social-icons img {
+    width: 20px;
+    height: 20px;
+    filter: invert(100%); /* Hace los iconos blancos para fondo oscuro */
+    transition: opacity 0.3s ease;
+}
+
+.social-icons a:hover img {
+    opacity: 0.7;
+}
+
+
 /* --- 6. Componentes Globales (WhatsApp) --- */
 .whatsapp-float {
     position: fixed;
@@ -233,7 +399,37 @@ body.pagina-interna {
 
 /* --- 7. Media Queries (Diseño Responsivo) --- */
 
+@media (max-width: 992px) {
+    .service-list {
+        gap: 20px;
+    }
+    .service-card {
+        /* Permite 2 tarjetas por fila en tabletas */
+        flex-basis: calc(50% - 10px); 
+    }
+    
+}
+
 @media (max-width: 768px) {
+    
+    /* Ajustes responsivos para la sección de servicios */
+    .service-section {
+        padding: 50px 5%;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .service-card {
+        /* 1 tarjeta por fila en móvil */
+        flex-basis: 100%; 
+        max-width: 100%;
+    }
+    
+    .service-card img {
+        height: 250px; /* Altura de imagen más pequeña en móvil */
+    }
     
     /* Ajustes responsivos para #sobre */
     #sobre {
@@ -284,5 +480,14 @@ body.pagina-interna {
 
     .hero-content h1 {
         font-size: 4rem; /* Título más pequeño en móvil */
+    }
+    
+    /* Ajustes responsivos para Ubicación */
+    .location-map-container {
+        padding: 0 10px;
+    }
+    .map-placeholder,
+    .map-iframe-wrapper {
+        height: 350px;
     }
 }
