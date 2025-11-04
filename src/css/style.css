@@ -1,4 +1,4 @@
-
+/* --- 1. Estilos Base y Fuentes --- */
 * {
     margin: 0;
     padding: 0;
@@ -9,109 +9,102 @@ body {
     font-family: 'Lato', sans-serif;
     color: #ffffff;
     line-height: 1.6;
+    /* Por defecto, el fondo es oscuro (para páginas internas) */
+    background-color: #0D0F1A;
 }
 
-/* --- Estilos del Hero Principal --- */
+/* --- 2. Botón CTA (Reutilizable) --- */
+.btn-cta {
+    text-decoration: none;
+    background-color: #f39c12;
+    color: #222;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+    transition: background-color 0.3s ease;
+}
+
+.btn-cta:hover {
+    background-color: #e67e22;
+}
+
+/* --- 3. Estilos de la Página Principal (index.html) --- */
+
+/* Contenedor del Hero */
 .hero {
-    height: 100vh; /* Ocupa el 100% de la altura de la pantalla */
-    background-image: url('/public/images/img1.jpg'); /* <- CAMBIA ESTO */
-    
+    height: 100vh;
+    background-image: url('/public/images/img1.jpg'); /* Asegúrate que esta ruta sea correcta */
     background-size: cover;
     background-position: center;
-    
-    position: relative; 
-    
+    position: relative;
     display: flex;
     flex-direction: column;
-    
     padding: 20px 5%;
 }
 
+/* Overlay oscuro para el Hero */
 .hero::before {
-    content: ""; /* Requerido para pseudo-elementos */
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    
     background-color: rgba(0, 0, 0, 0.7);
-    
-    z-index: 1; 
+    z-index: 1;
 }
 
-/* --- 2. Barra de Navegación --- */
+/* Header de la página principal (sobre el Hero) */
 .main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    
-    position: relative; 
+    position: relative;
     z-index: 2;
 }
 
-.logo img {
-    height: 80px; /* Ajusta la altura de tu logo */
+/* Logo más grande en la página principal */
+.main-header .logo img {
+    height: 80px;
 }
 
 .main-nav ul {
     display: flex;
-    list-style: none; /* Quita los puntos de la lista */
-    gap: 25px; /* Espacio entre cada enlace */
+    list-style: none;
+    gap: 25px;
 }
 
 .main-nav a {
     text-decoration: none;
-    color: #f0f0f0; /* Un blanco un poco menos brillante */
+    color: #f0f0f0;
     font-weight: 700;
     font-size: 16px;
     transition: color 0.3s ease;
 }
 
 .main-nav a:hover {
-    color: #f39c12; /* Color dorado/naranja al pasar el mouse */
+    color: #f39c12;
 }
 
-/* --- Botón "Agendar" (CTA) --- */
-.btn-cta {
-    text-decoration: none;
-    background-color: #f39c12; /* Color dorado/naranja */
-    color: #222; /* Texto oscuro para buen contraste */
-    padding: 10px 20px;
-    border-radius: 20px; /* Bordes redondeados */
-    font-weight: 700;
-    
-    /* Se asegura que esté sobre el overlay */
-    position: relative; 
-    z-index: 2;
-    transition: background-color 0.3s ease;
-}
-
-.btn-cta:hover {
-    background-color: #e67e22; /* Un naranja más oscuro al pasar el mouse */
-}
-
-
-/* --- 3. Contenido Central --- */
+/* Contenido central del Hero */
 .hero-content {
-    /* Crece para ocupar el espacio restante */
-    flex-grow: 1; 
-    
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    
-    position: relative; 
+    position: relative;
     z-index: 2;
 }
 
 .hero-content h1 {
     font-family: 'Pinyon Script', cursive;
-    font-size: 7rem; /* Tamaño de fuente grande (ajusta si es necesario) */
-    font-weight: 400; /* Las fuentes script no suelen ser 'bold' */
+    font-size: 7rem;
+    font-weight: 400;
     color: #ffffff;
     margin-bottom: 10px;
 }
@@ -122,23 +115,176 @@ body {
     margin-bottom: 30px;
 }
 
+/* --- 4. Estilos para Páginas Internas (sobre.html, etc.) --- */
 
-/* --- 4. Botón flotante de WhatsApp --- */
+/*
+  Esta clase se la pones al <body> en sobre.html, servicios.html, etc.
+  (Ya lo hicimos en el HTML que te di)
+*/
+body.pagina-interna {
+    background-color: #0D0F1A;
+}
+
+/* Header para páginas internas (fondo sólido) */
+.header-interno {
+    background-color: #0D0F1A;
+    padding: 20px 5%;
+    border-bottom: 1px solid #2a2d40;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+/* Logo más pequeño en páginas internas */
+.header-interno .logo img {
+    height: 40px;
+}
+
+/* --- 5. Estilos de Secciones Comunes (#sobre, #servicios...) --- */
+
+/*
+  Esta sección "Sobre" funcionará tanto en index.html
+  como en sobre.html (si decides ponerla en ambas).
+*/
+#sobre {
+    background-color: #0D0F1A;
+    padding: 100px 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.image-collage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.image-collage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.image-collage img:hover {
+    transform: scale(1.03);
+}
+
+.image-collage .img-main {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+    height: 350px;
+}
+
+.image-collage .img-secondary-1 {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    height: 250px;
+}
+
+.image-collage .img-secondary-2 {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    height: 250px;
+}
+
+.text-content h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.text-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #c0c0c0;
+    margin-bottom: 20px;
+}
+
+.text-content p:last-child {
+    margin-bottom: 0;
+    font-weight: 700;
+    color: #f0f0f0;
+}
+
+/* --- 6. Componentes Globales (WhatsApp) --- */
 .whatsapp-float {
-    position: fixed; /* Se queda fijo en la pantalla */
+    position: fixed;
     bottom: 30px;
     right: 30px;
-    z-index: 100; /* Encima de todo */
+    z-index: 100;
     transition: transform 0.3s ease;
 }
 
 .whatsapp-float img {
-    width: 60px; /* Tamaño del ícono */
+    width: 60px;
     height: 60px;
-    border-radius: 50%; /* Lo hace circular */
+    border-radius: 50%;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .whatsapp-float:hover {
-    transform: scale(1.1); /* Efecto de zoom al pasar el mouse */
+    transform: scale(1.1);
+}
+
+/* --- 7. Media Queries (Diseño Responsivo) --- */
+
+@media (max-width: 768px) {
+    
+    /* Ajustes responsivos para #sobre */
+    #sobre {
+        grid-template-columns: 1fr; /* 1 sola columna */
+        padding: 60px 5%;
+        gap: 40px;
+    }
+    
+    .text-content h2 {
+        font-size: 2rem;
+    }
+    
+    .image-collage .img-main {
+        height: 250px; 
+    }
+    
+    .image-collage .img-secondary-1,
+    .image-collage .img-secondary-2 {
+        height: 180px;
+    }
+    
+    /* Ajustes responsivos para el header interno */
+    .header-interno {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 10px;
+    }
+
+    .header-interno .main-nav ul {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .header-interno .btn-cta {
+        margin-top: 15px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* Ajustes responsivos para el header principal (Hero) */
+    /* (Nota: Aún no hemos hecho este, pero iría aquí) */
+    .main-header {
+        /* ... estilos para hacer responsivo el header principal ... */
+    }
+
+    .hero-content h1 {
+        font-size: 4rem; /* Título más pequeño en móvil */
+    }
 }
