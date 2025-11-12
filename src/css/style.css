@@ -491,3 +491,141 @@ body.pagina-interna {
         height: 350px;
     }
 }
+
+/* --- 8. Sección "Quienes Somos" (Equipo) --- */
+
+#equipo {
+    background-color: #0D0F1A;
+    padding: 100px 5%;
+    display: flex; /* Para poner el título al lado de la cuadrícula */
+    align-items: center; /* Centra verticalmente */
+    gap: 50px; /* Espacio entre título y tarjetas */
+    min-height: 80vh;
+}
+
+/* El truco del título vertical */
+.titulo-vertical {
+    writing-mode: vertical-rl; /* Escribir de arriba a abajo */
+    transform: rotate(180deg);  /* Leer de abajo hacia arriba */
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 10px; /* Espacio entre letras */
+    white-space: nowrap; /* Evita que el texto se parta */
+}
+
+/* El truco del scroll horizontal */
+.equipo-grid {
+    display: grid;
+    grid-auto-flow: column; /* ¡Magia! Hace que la cuadrícula fluya horizontalmente */
+    grid-auto-columns: 300px; /* Ancho fijo para cada tarjeta */
+    gap: 30px;
+    
+    overflow-x: auto; /* Habilita el scroll horizontal si se desborda */
+    padding: 20px 5px; /* Pequeño padding para que la sombra y scrollbar se vean bien */
+    
+    /* Estilos para la barra de scroll (opcional pero elegante) */
+    scrollbar-width: thin; /* Para Firefox */
+    scrollbar-color: #f39c12 #1A1C2A; /* Color de la barra (dorado) y fondo (oscuro) */
+}
+
+/* Estilos de la barra de scroll para Chrome/Safari */
+.equipo-grid::-webkit-scrollbar {
+    height: 8px;
+}
+.equipo-grid::-webkit-scrollbar-track {
+    background: #1A1C2A;
+    border-radius: 4px;
+}
+.equipo-grid::-webkit-scrollbar-thumb {
+    background-color: #f39c12;
+    border-radius: 4px;
+}
+.equipo-grid::-webkit-scrollbar-thumb:hover {
+    background-color: #e67e22;
+}
+
+/* Tarjeta de Miembro */
+.miembro-card {
+    background-color: #1A1C2A;
+    border-radius: 10px;
+    overflow: hidden; /* Para que la imagen no se salga */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.miembro-card:hover {
+    transform: translateY(-5px);
+}
+
+.miembro-imagen {
+    position: relative; /* Para poner el nombre sobre la imagen */
+}
+
+.miembro-imagen img {
+    width: 100%;
+    height: 350px; /* Altura fija para todas las tarjetas */
+    object-fit: cover; /* Evita que la imagen se deforme */
+    display: block;
+}
+
+.miembro-imagen .nombre {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente */
+    color: #ffffff;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    white-space: nowrap;
+}
+
+.miembro-sociales {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.miembro-sociales a {
+    color: #c0c0c0;
+    text-decoration: none;
+    font-size: 1.5rem; /* Tamaño de los íconos de Font Awesome */
+    transition: color 0.3s ease;
+}
+
+.miembro-sociales a:hover {
+    color: #f39c12; /* Color dorado al pasar el mouse */
+}
+
+
+/* --- 9. Media Queries (Ajustes para "Equipo" en móvil) --- */
+
+@media (max-width: 768px) {
+    #equipo {
+        flex-direction: column; /* Apila el título sobre las tarjetas */
+        align-items: flex-start; /* Alinea todo a la izquierda */
+        gap: 30px;
+    }
+    
+    /* Título normal en móvil */
+    .titulo-vertical {
+        writing-mode: horizontal-tb; /* Vuelve a modo horizontal */
+        transform: none; /* Quita la rotación */
+        font-size: 2rem;
+        letter-spacing: 5px;
+    }
+    
+    /* Tarjetas más pequeñas en móvil */
+    .equipo-grid {
+        grid-auto-columns: 250px; /* Tarjetas más angostas */
+        width: 100%; /* Ocupa todo el ancho */
+    }
+    
+    .miembro-imagen img {
+        height: 300px;
+    }
+}
