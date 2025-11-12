@@ -10,6 +10,160 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+    <style>
+        /* Estilos generales del modal */
+        .modal {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
+            font-family: 'Lato', sans-serif;
+        }
+
+        /* Contenido del modal */
+        .modal-content {
+            background-color: #0d0d0d; /* Fondo muy oscuro, similar a la imagen */
+            margin: 10% auto; /* Centrar verticalmente y algo de margen */
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            color: #ffffff; /* Texto blanco */
+            position: relative;
+        }
+
+        /* Estilos del encabezado */
+        .modal-content h2 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        /* Campos de formulario */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 400;
+            color: #ccc;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2a2a2a; /* Fondo oscuro para inputs */
+            color: #ffffff;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        
+        /* Contenedor de horarios */
+        .horario-selector {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .horario-selector input[type="radio"] {
+            display: none;
+        }
+
+        .horario-selector label {
+            background-color: #2a2a2a;
+            color: #ffffff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            min-width: 60px; /* Ancho mínimo para los botones de hora */
+            transition: background-color 0.2s;
+        }
+
+        .horario-selector input[type="radio"]:checked + label {
+            background-color: #d1a355; /* Color naranja/dorado seleccionado */
+            color: #0d0d0d;
+            font-weight: 700;
+        }
+        
+        /* Botón de cerrar (X) */
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        /* Estilo del botón de acción (Agendar/Fechar) */
+        .btn-modal-action {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #d1a355; /* Dorado/naranja */
+            color: #0d0d0d;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-modal-action:hover {
+            background-color: #e0b365;
+        }
+
+        /* Estilo para el modal de éxito (imagen 2) */
+        #successModal .modal-content {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        #successModal .modal-content h2 {
+            font-size: 24px;
+            color: #d1a355;
+            margin-bottom: 30px;
+        }
+
+        #successModal .logo-apolo {
+            /* Simulación del logo para el modal de éxito */
+            display: block;
+            margin: 0 auto 20px;
+            font-size: 40px;
+            font-family: 'Pinyon Script', cursive;
+            color: #d1a355;
+            line-height: 1;
+        }
+
+        #successModal .btn-modal-action {
+            max-width: 200px;
+            margin: 20px auto 0;
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
@@ -29,22 +183,123 @@
     </ul>
 </nav>
             
-            <a href="#" class="btn-cta">Agendar horario</a>
+            <a href="#" class="btn-cta" onclick="openModal('scheduleModal'); return false;">Agendar horario</a>
         </header>
 
         <div class="hero-content">
             <h1>Barberia APOLO</h1>
             <p>Horario lunes a sabado de 9:00 am a 6 pm</p>
-            <a href="agendar.html" class="btn-cta">Agendar Horario</a>
+            <a href="#" class="btn-cta" onclick="openModal('scheduleModal'); return false;">Agendar Horario</a>
         </div>
 
         <a href="#" class="whatsapp-float" target="_blank">
             <img src="/public/images/imgIconWhts.png" alt="Contactar por WhatsApp">
         </a>
-
-        
-        
     </section>
 
+    <div id="scheduleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('scheduleModal')">&times;</span>
+            <h2>AGENDAR CITA</h2>
+            <form id="scheduleForm">
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" placeholder="Digite su nombre..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Número telefónico</label>
+                    <input type="tel" id="telefono" placeholder="Ej: +52 55 1234 5678" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="fecha">Seleccione la fecha</label>
+                    <input type="date" id="fecha" value="2025-11-12" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="unidad">Seleccione una unidad</label>
+                    <select id="unidad">
+                        <option value="centro">Campina Grande - Centro</option>
+                        <option value="sucursal">Otra Sucursal</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Seleccione un horario</label>
+                    <div class="horario-selector">
+                        <input type="radio" id="h900" name="horario" value="09:00" required checked>
+                        <label for="h900">09:00</label>
+                        
+                        <input type="radio" id="h1000" name="horario" value="10:00">
+                        <label for="h1000">10:00</label>
+                        
+                        <input type="radio" id="h1100" name="horario" value="11:00">
+                        <label for="h1100">11:00</label>
+                        
+                        <input type="radio" id="h1200" name="horario" value="12:00">
+                        <label for="h1200">12:00</label>
+                        
+                        <input type="radio" id="h1300" name="horario" value="13:00">
+                        <label for="h1300">13:00</label>
+                        </div>
+                </div>
+
+                <button type="submit" class="btn-modal-action">Agendar horario</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="logo-apolo">Apolo</div> 
+            <h2>¡Cita agendada con éxito!</h2>
+            <button class="btn-modal-action" onclick="window.location.href='index.html';">Ir al inicio</button>
+        </div>
+    </div>
+
+    <script>
+        // Función para abrir un modal
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        // Función para cerrar un modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Obtener el formulario de agendamiento
+        const form = document.getElementById('scheduleForm');
+
+        // Escuchar el evento de envío del formulario
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Detiene el envío real del formulario
+
+            // Simulación de agendamiento exitoso
+            // 1. Cierra el modal de agendar
+            closeModal('scheduleModal');
+
+            // 2. Abre el modal de éxito
+            openModal('successModal');
+
+            // Aquí se debería enviar la información a un servidor (backend)
+            // console.log("Datos a enviar:", {
+            //     nombre: document.getElementById('nombre').value,
+            //     telefono: document.getElementById('telefono').value,
+            //     fecha: document.getElementById('fecha').value,
+            //     unidad: document.getElementById('unidad').value,
+            //     horario: document.querySelector('input[name="horario"]:checked').value
+            // });
+        });
+
+        // Cierra el modal si el usuario hace clic fuera de él
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
