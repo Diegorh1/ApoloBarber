@@ -219,14 +219,6 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="unidad">Seleccione una unidad</label>
-                    <select id="unidad">
-                        <option value="centro">Campina Grande - Centro</option>
-                        <option value="sucursal">Otra Sucursal</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
                     <label>Seleccione un horario</label>
                     <div class="horario-selector">
                         <input type="radio" id="h900" name="horario" value="09:00" required checked>
@@ -283,15 +275,6 @@
 
             // 2. Abre el modal de éxito
             openModal('successModal');
-
-            // Aquí se debería enviar la información a un servidor (backend)
-            // console.log("Datos a enviar:", {
-            //     nombre: document.getElementById('nombre').value,
-            //     telefono: document.getElementById('telefono').value,
-            //     fecha: document.getElementById('fecha').value,
-            //     unidad: document.getElementById('unidad').value,
-            //     horario: document.querySelector('input[name="horario"]:checked').value
-            // });
         });
 
         // Cierra el modal si el usuario hace clic fuera de él
