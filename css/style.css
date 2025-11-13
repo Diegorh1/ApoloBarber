@@ -35,7 +35,7 @@ body {
 /* Contenedor del Hero */
 .hero {
     height: 100vh;
-    background-image: url('/public/images/img1.jpg'); /* Asegúrate que esta ruta sea correcta */
+    background-image: url('/images/img1.jpg'); /* Asegúrate que esta ruta sea correcta */
     background-size: cover;
     background-position: center;
     position: relative;
