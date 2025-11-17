@@ -35,7 +35,11 @@ body {
 /* --- 3. Estilos de la Página Principal (index.html) --- */
 .hero {
     height: 100vh;
-    background-image: url('/images/img1.jpg'); /* O /public/images/img1.jpg */
+    /* 👇 ¡CORRECCIÓN DE RUTA!
+      Cambiado de '/images/...' a '../images/...' 
+      para que funcione desde la carpeta 'css'.
+    */
+    background-image: url('../images/img1.jpg');
     background-size: cover;
     background-position: center;
     position: relative;
@@ -87,6 +91,11 @@ body {
 .main-nav a:hover {
     color: #f39c12;
 }
+/* 👇 CORRECCIÓN: Clase 'active' para el nav */
+.main-nav a.active {
+    color: #f39c12;
+    font-weight: 900;
+}
 
 .hero-content {
     flex-grow: 1;
@@ -99,19 +108,15 @@ body {
     z-index: 2;
 }
 
-/* 👇 ==========================================
-  👇 ¡AQUÍ ESTÁ LA CORRECCIÓN DE LA FUENTE!
-  👇 ==========================================
-*/
 .hero-content h1 {
     /* Texto Alternativo: Montserrat */
     font-family: 'Montserrat', sans-serif;
-    font-size: 5rem; /* <-- Ajustado (la cursiva era 7rem) */
-    font-weight: 700; /* <-- En negritas */
+    font-size: 5rem;
+    font-weight: 700;
     color: #ffffff;
     margin-bottom: 10px;
-    text-transform: uppercase; /* <-- Para que se vea fuerte */
-    letter-spacing: 5px; /* <-- Espacio entre letras */
+    text-transform: uppercase;
+    letter-spacing: 5px;
 }
 
 .hero-content p {
