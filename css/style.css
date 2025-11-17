@@ -711,14 +711,13 @@ body.pagina-interna {
 
 
 /* --- 11. Estilos Sección "Productos" (Estilo Wii/Cover Flow) --- */
-/* (Se movió la sección 11 para que el 12 sean las Media Queries) */
 
 #producto-catalogo {
-    padding: 80px 0 50px 0; /* Menos padding */
+    padding: 80px 0 50px 0; 
     background-color: #0D0F1A;
     color: #ffffff;
     text-align: center;
-    overflow: hidden; /* Oculta los items que se salen */
+    overflow: hidden;
 }
 
 #producto-catalogo .section-title {
@@ -726,68 +725,70 @@ body.pagina-interna {
     margin-bottom: 40px;
 }
 
-/* Contenedor del Carrusel */
 .catalogo-container {
     position: relative;
     width: 100%;
     padding: 20px 0;
 }
 
-/* El "track" que se mueve */
 .catalogo-slider {
-    display: flex; /* Ahora es flexbox */
+    display: flex; 
     gap: 30px;
-    
-    /* El JS ajustará este 'transform' para centrar */
     transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* 👇 ==========================================
+  👇 ¡AQUÍ ESTÁ LA CORRECCIÓN DE LA IMAGEN!
+  👇 ==========================================
+*/
 .slider-item {
-    width: 200px; /* Más chico */
-    height: 260px; /* Rectangular para que quepa el producto */
+    width: 200px; 
+    height: 260px; 
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    
     transition: transform 0.5s ease, opacity 0.5s ease;
-    
-    /* Por defecto, se ven pequeños y opacos */
     transform: scale(0.8);
     opacity: 0.5;
+    
+    /* FONDO BLANCO PARA RELLENAR */
+    background-color: #ffffff;
 }
 
 .slider-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Recorta para llenar (se ve mejor que 'contain') */
+    /* CAMBIO A 'CONTAIN' PARA QUE SE VEA COMPLETA */
+    object-fit: contain;
+    padding: 5px; /* Pequeño espacio interno */
 }
+/* ========================================== */
 
-/* El ítem seleccionado */
+
 .slider-item.active {
-    transform: scale(1.1); /* Más grande */
-    opacity: 1; /* Color completo */
+    transform: scale(1.1); 
+    opacity: 1;
     border: 3px solid #f39c12;
 }
 
-/* La información del producto */
 .catalogo-info {
-    max-width: 500px; /* Más compacto */
-    margin: 40px auto 0 auto; /* Menos espacio arriba */
+    max-width: 500px; 
+    margin: 40px auto 0 auto;
     padding: 0 20px;
-    min-height: 180px; /* Altura fija para que no "brinque" el layout */
+    min-height: 180px; 
 }
 
 .catalogo-info h2 {
     font-family: 'Montserrat', sans-serif;
-    font-size: 2rem; /* Más chico */
+    font-size: 2rem; 
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 8px;
 }
 
 .catalogo-info span {
-    font-size: 1.5rem; /* Más chico */
+    font-size: 1.5rem; 
     font-weight: 700;
     color: #f39c12;
     display: block;
@@ -795,18 +796,15 @@ body.pagina-interna {
 }
 
 .catalogo-info p {
-    font-size: 1rem; /* Más chico */
+    font-size: 1rem; 
     line-height: 1.6;
     color: #c0c0c0;
     margin-bottom: 25px;
 }
 
-/* Botones de Flecha */
 .nav-arrow {
     position: absolute;
     top: 50%;
-    /* Se posiciona relativo al .catalogo-slider, 
-       así que lo movemos a la mitad del alto del item */
     transform: translateY(calc(260px / 2 - 50%)); 
     z-index: 10;
     
@@ -827,22 +825,21 @@ body.pagina-interna {
 }
 
 .nav-arrow:disabled {
-    background-color: #333; /* Color gris si está deshabilitado */
+    background-color: #333; 
     cursor: not-allowed;
     opacity: 0.5;
 }
 
 #prev-btn {
-    left: 30px; /* Posición del botón izquierdo */
+    left: 30px; 
 }
 
 #next-btn {
-    right: 30px; /* Posición del botón derecho */
+    right: 30px; 
 }
 
 
 /* --- 12. Media Queries (Diseño Responsivo) --- */
-/* (Moví los de productos aquí para tener todo junto) */
 
 /* Estilos para 992px de ancho o menos (Tablets) */
 @media (max-width: 992px) {
@@ -998,15 +995,14 @@ body.pagina-interna {
     /* Sección Productos (Móvil) */
     .catalogo-slider {
         gap: 20px;
-        /* Ajuste de centrado para móvil */
         transform: translateX(25%);
     }
     .slider-item {
-        width: 150px; /* Aún más chico en móvil */
+        width: 150px; 
         height: 200px;
     }
     .catalogo-info {
-        min-height: 160px; /* Menos altura en móvil */
+        min-height: 160px; 
     }
     .catalogo-info h2 {
         font-size: 1.5rem;
@@ -1021,7 +1017,6 @@ body.pagina-interna {
         width: 40px;
         height: 40px;
         font-size: 1rem;
-        /* Ajuste de posición vertical para el tamaño móvil */
         transform: translateY(calc(200px / 2 - 50%));
     }
     .nav-arrow:hover {
