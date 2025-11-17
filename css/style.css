@@ -710,10 +710,143 @@ body.pagina-interna {
 }
 
 
-/* --- 11. Media Queries (Diseño Responsivo) --- */
+/* --- 11. Estilos Sección "Productos" (Estilo Wii/Cover Flow) --- */
+/* (Se movió la sección 11 para que el 12 sean las Media Queries) */
+
+#producto-catalogo {
+    padding: 80px 0 50px 0; /* Menos padding */
+    background-color: #0D0F1A;
+    color: #ffffff;
+    text-align: center;
+    overflow: hidden; /* Oculta los items que se salen */
+}
+
+#producto-catalogo .section-title {
+    color: #ffffff;
+    margin-bottom: 40px;
+}
+
+/* Contenedor del Carrusel */
+.catalogo-container {
+    position: relative;
+    width: 100%;
+    padding: 20px 0;
+}
+
+/* El "track" que se mueve */
+.catalogo-slider {
+    display: flex; /* Ahora es flexbox */
+    gap: 30px;
+    
+    /* El JS ajustará este 'transform' para centrar */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.slider-item {
+    width: 200px; /* Más chico */
+    height: 260px; /* Rectangular para que quepa el producto */
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    
+    /* Por defecto, se ven pequeños y opacos */
+    transform: scale(0.8);
+    opacity: 0.5;
+}
+
+.slider-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta para llenar (se ve mejor que 'contain') */
+}
+
+/* El ítem seleccionado */
+.slider-item.active {
+    transform: scale(1.1); /* Más grande */
+    opacity: 1; /* Color completo */
+    border: 3px solid #f39c12;
+}
+
+/* La información del producto */
+.catalogo-info {
+    max-width: 500px; /* Más compacto */
+    margin: 40px auto 0 auto; /* Menos espacio arriba */
+    padding: 0 20px;
+    min-height: 180px; /* Altura fija para que no "brinque" el layout */
+}
+
+.catalogo-info h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem; /* Más chico */
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.catalogo-info span {
+    font-size: 1.5rem; /* Más chico */
+    font-weight: 700;
+    color: #f39c12;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.catalogo-info p {
+    font-size: 1rem; /* Más chico */
+    line-height: 1.6;
+    color: #c0c0c0;
+    margin-bottom: 25px;
+}
+
+/* Botones de Flecha */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    /* Se posiciona relativo al .catalogo-slider, 
+       así que lo movemos a la mitad del alto del item */
+    transform: translateY(calc(260px / 2 - 50%)); 
+    z-index: 10;
+    
+    background-color: #f39c12;
+    color: #222;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-arrow:hover {
+    background-color: #e67e22;
+    transform: translateY(calc(260px / 2 - 50%)) scale(1.1);
+}
+
+.nav-arrow:disabled {
+    background-color: #333; /* Color gris si está deshabilitado */
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+#prev-btn {
+    left: 30px; /* Posición del botón izquierdo */
+}
+
+#next-btn {
+    right: 30px; /* Posición del botón derecho */
+}
+
+
+/* --- 12. Media Queries (Diseño Responsivo) --- */
+/* (Moví los de productos aquí para tener todo junto) */
 
 /* Estilos para 992px de ancho o menos (Tablets) */
 @media (max-width: 992px) {
+    /* Servicios */
     .service-list {
         gap: 20px;
     }
@@ -721,16 +854,15 @@ body.pagina-interna {
         flex-basis: calc(50% - 10px);
     }
     
+    /* Ubicación */
     .ubicacion-grid {
         grid-template-columns: 1fr;
         gap: 50px;
     }
-    
     .ubicacion-mapa-google {
         height: 450px;
         min-height: auto;
     }
-
     .ubicacion-info-local .map-placeholder {
         height: 400px;
     }
@@ -750,17 +882,14 @@ body.pagina-interna {
         align-items: flex-start;
         gap: 20px;
     }
-
     .hero .main-nav {
         width: 100%;
     }
-
     .hero .main-nav ul {
         flex-direction: column;
         gap: 15px; 
         width: 100%;
     }
-
     .hero .main-header .btn-cta {
         width: 100%;
         text-align: center;
@@ -772,18 +901,15 @@ body.pagina-interna {
         align-items: flex-start;
         padding-bottom: 10px;
     }
-
     .header-interno .main-nav {
         width: 100%; 
     }
-
     .header-interno .main-nav ul {
         flex-direction: column;
         gap: 10px;
         margin-top: 15px;
         width: 100%; 
     }
-
     .header-interno .btn-cta {
         margin-top: 15px;
         width: 100%;
@@ -796,16 +922,13 @@ body.pagina-interna {
         padding: 60px 5%;
         gap: 40px;
     }
-    
     .text-content h2,
     .section-title { /* Títulos de sección más pequeños en móvil */
         font-size: 2rem;
     }
-    
     .image-collage .img-main {
         height: 220px;
     }
-    
     .image-collage .img-secondary-1,
     .image-collage .img-secondary-2 {
         height: 150px;
@@ -815,12 +938,10 @@ body.pagina-interna {
     .service-section {
         padding: 50px 5%;
     }
-        
     .service-card {
         flex-basis: 100%;
         max-width: 100%;
     }
-    
     .service-card img {
         height: 250px;
     }
@@ -831,19 +952,16 @@ body.pagina-interna {
         align-items: flex-start;
         gap: 30px;
     }
-    
     .titulo-vertical {
         writing-mode: horizontal-tb;
         transform: none;
         font-size: 2rem;
         letter-spacing: 5px;
     }
-    
     .equipo-grid {
         grid-auto-columns: 250px;
         width: 100%;
     }
-    
     .miembro-imagen img {
         height: 300px;
     }
@@ -869,12 +987,50 @@ body.pagina-interna {
         width: 50px;
         height: 50px;
     }
-
     .admin-link {
         bottom: 20px;
         left: 20px;
         width: 50px; 
         height: 50px;
         font-size: 20px;
+    }
+
+    /* Sección Productos (Móvil) */
+    .catalogo-slider {
+        gap: 20px;
+        /* Ajuste de centrado para móvil */
+        transform: translateX(25%);
+    }
+    .slider-item {
+        width: 150px; /* Aún más chico en móvil */
+        height: 200px;
+    }
+    .catalogo-info {
+        min-height: 160px; /* Menos altura en móvil */
+    }
+    .catalogo-info h2 {
+        font-size: 1.5rem;
+    }
+    .catalogo-info span {
+        font-size: 1.2rem;
+    }
+    .catalogo-info p {
+        font-size: 0.9rem;
+    }
+    .nav-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+        /* Ajuste de posición vertical para el tamaño móvil */
+        transform: translateY(calc(200px / 2 - 50%));
+    }
+    .nav-arrow:hover {
+        transform: translateY(calc(200px / 2 - 50%)) scale(1.1);
+    }
+    #prev-btn {
+        left: 10px;
+    }
+    #next-btn {
+        right: 10px;
     }
 }
