@@ -1,53 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ubicación - Barberia APOLO</title>
-<link rel="stylesheet" href="/css/style.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubicación - Barberia APOLO</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
 </head>
 <body class="pagina-interna">
-<header class="main-header header-interno">
-<a href="/index.html" class="logo">
-<img src="/images/imgLogo.png" alt="Logo Barberia Apolo">
-</a>
-<nav class="main-nav">
-<ul>
-<li><a href="/html/intSobre.html">Sobre</a></li>
-<li><a href="/html/intServicios.html" class="active">Servicios</a></li>
-<li><a href="/html/intQuienesSomos.html">Quienes somos</a></li>
-<li><a href="/html/intUbicacion.html">Ubicación</a></li>
-</ul>
-</nav>
-<a href="#" class="btn-cta">Agendar horario</a>
-</header>
-<section id="ubicacion" class="location-section">
-<div class="container-content">
-<h1 class="section-title">UBICACIÓN</h1>
 
-<div class="location-map-container">
-<div class="map-placeholder">
-    <img src="/images/imgubi.jpeg" alt="Interior de la barbería Apolo">
-    <div class="map-info-overlay">
-        <p>Calz. De Los Reyes 401, Totela del monte</p>
-        <p>62130, Cuernavaca, Morelos</p>
-    </div>
-</div>
+    <header class="main-header header-interno">
+        <a href="/index.html" class="logo">
+            <img src="/images/imgLogo.png" alt="Logo Barberia Apolo">
+        </a>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="/html/intSobre.html">Sobre</a></li>
+                <li><a href="/html/intServicios.html">Servicios</a></li>
+                <li><a href="/html/intQuienesSomos.html">Quienes somos</a></li>
+                <li><a href="/html/intUbicacion.html" class="active">Ubicación</a></li>
+            </ul>
+        </nav>
+        <a href="#" class="btn-cta">Agendar horario</a>
+    </header>
 
-</div>
-<div class="social-icons">
-    <a href="#" target="_blank" title="Instagram"><img src="/images/instagram.png" alt="Instagram"></a>
-    <a href="#" target="_blank" title="Facebook"><img src="/images/facebook.png" alt="Facebook"></a>
-    <a href="#" target="_blank" title="Twitter"><img src="/images/gorjeo.png" alt="Twitter"></a>
-</div>
+    <section id="ubicacion" class="location-section">
+        <div class="container-content">
+            <h1 class="section-title">UBICACIÓN</h1>
 
-</div>
-</section>
-<a href="https://api.whatsapp.com/send?phone=TU_NUMERO" class="whatsapp-float" target="_blank" title="Contactar por WhatsApp">
-<img src="/images/imgIconWhts.png" alt="Contactar por WhatsApp">
-</a>
+            <div class="ubicacion-grid">
+
+                <div class="ubicacion-info-local">
+                    <div class="location-map-container">
+                        <div class="map-placeholder">
+                            <img src="/images/barberint.jpeg" alt="Interior de la barbería Apolo">
+                            <div class="map-info-overlay">
+                                <p>Calz. de Los Reyes 401, Tetela del Monte</p>
+                                <p>62130 Cuernavaca, Mor.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-icons">
+                        <a href="" target="_blank" title="Instagram"><img src="/images/instagram.png" alt="Instagram"></a>
+                        <a href="https://www.facebook.com/share/16mPy9VN44/?mibextid=wwXIfr" target="_blank" title="Facebook"><img src="/images/facebook.png" alt="Facebook"></a>
+                    </div>
+                </div>
+
+                <div class="ubicacion-mapa-google">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4618.969603322281!2d-99.25451578281479!3d18.95338353792015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cddfbabe97d93f%3A0xf69ea39c5549dbcf!2sBarber%C3%ADa%20Apolo!5e0!3m2!1ses-419!2smx!4v1763362803647!5m2!1ses-419!2smx" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <a href="https://wa.me/message/3AYVJOAZ6KT2C1" class="whatsapp-float" target="_blank" title="Contactar por WhatsApp">
+        <img src="/images/imgIconWhts.png" alt="Contactar por WhatsApp">
+    </a>
+
 </body>
 </html>

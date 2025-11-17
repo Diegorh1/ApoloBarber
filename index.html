@@ -5,194 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barberia APOLO</title>
     
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css"> 
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Aileron:wght@300;400;700&family=Montserrat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
 
-    <style>
-        /* Estilos generales del */
-        .modal {
-            display: none; /* Oculto por defecto */
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente */
-            font-family: 'Lato', sans-serif;
-        }
-
-        /* Contenido del modal */
-        .modal-content {
-            background-color: #0d0d0d; /* Fondo muy oscuro, similar a la imagen */
-            margin: 10% auto; /* Centrar verticalmente y algo de margen */
-            padding: 20px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 400px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            color: #ffffff; /* Texto blanco */
-            position: relative;
-        }
-
-        /* Estilos del encabezado */
-        .modal-content h2 {
-            text-align: center;
-            color: #ffffff;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        /* Campos de formulario */
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 400;
-            color: #ccc;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #2a2a2a; /* Fondo oscuro para inputs */
-            color: #ffffff;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        
-        /* Contenedor de horarios */
-        .horario-selector {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-        }
-
-        .horario-selector input[type="radio"] {
-            display: none;
-        }
-
-        .horario-selector label {
-            background-color: #2a2a2a;
-            color: #ffffff;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            min-width: 60px; /* Ancho mínimo para los botones de hora */
-            transition: background-color 0.2s;
-        }
-
-        .horario-selector input[type="radio"]:checked + label {
-            background-color: #d1a355; /* Color naranja/dorado seleccionado */
-            color: #0d0d0d;
-            font-weight: 700;
-        }
-        
-        /* Botón de cerrar (X) */
-        .close-btn {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            cursor: pointer;
-        }
-
-        .close-btn:hover,
-        .close-btn:focus {
-            color: #ffffff;
-            text-decoration: none;
-        }
-
-        /* Estilo del botón de acción (Agendar/Fechar) */
-        .btn-modal-action {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            background-color: #d1a355; /* Dorado/naranja */
-            color: #0d0d0d;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 20px;
-        }
-
-        .btn-modal-action:hover {
-            background-color: #e0b365;
-        }
-
-        /* Estilo para el modal de éxito (imagen 2) */
-        #successModal .modal-content {
-            text-align: center;
-            padding: 50px 20px;
-        }
-
-        #successModal .modal-content h2 {
-            font-size: 24px;
-            color: #d1a355;
-            margin-bottom: 30px;
-        }
-
-        #successModal .logo-apolo {
-            /* Simulación del logo para el modal de éxito */
-            display: block;
-            margin: 0 auto 20px;
-            font-size: 40px;
-            font-family: 'Pinyon Script', cursive;
-            color: #d1a355;
-            line-height: 1;
-        }
-
-        #successModal .btn-modal-action {
-            max-width: 200px;
-            margin: 20px auto 0;
-            display: block;
-        }
-    </style>
-</head>
+    </head>
 <body>
 
     <section class="hero">
         
         <header class="main-header">
-            <a href="#" class="logo">
-                <img src="/images/imgLogo.png" alt="Logo Barberia Apolo">
+            <a href="index.html" class="logo"> <img src="/images/imgLogo.png" alt="Logo Barberia Apolo">
             </a>
             
-        <nav class="main-nav">
-    <ul>
-        <li><a href="html/intSobre.html">Sobre</a></li>
-        <li><a href="html/intServicios.html">Servicios</a></li>
-        <li><a href="html/intQuienesSomos.html">Quienes somos</a></li>
-        <li><a href="html/intUbicacion.html">Ubicación</a></li>
-    </ul>
-</nav>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="html/intSobre.html">Sobre</a></li>
+                    <li><a href="html/intServicios.html">Servicios</a></li>
+                    <li><a href="html/intQuienesSomos.html">Quienes somos</a></li>
+                    <li><a href="html/intUbicacion.html">Ubicación</a></li>
+                </ul>
+            </nav>
             
-            <a href="#" class="btn-cta" onclick="openModal('scheduleModal'); return false;">Agendar horario</a>
+            <a href="#scheduleModal" class="btn-cta" onclick="openModal('scheduleModal')">Agendar horario</a>
         </header>
 
         <div class="hero-content">
             <h1>Barberia APOLO</h1>
             <p>Horario lunes a sabado de 9:00 am a 6 pm</p>
-            <a href="#" class="btn-cta" onclick="openModal('scheduleModal'); return false;">Agendar Horario</a>
+            <a href="#scheduleModal" class="btn-cta" onclick="openModal('scheduleModal')">Agendar Horario</a>
         </div>
 
-        <a href="#" class="whatsapp-float" target="_blank">
+        <a href="https://wa.me/message/3AYVJOAZ6KT2C1" class="whatsapp-float" target="_blank">
             <img src="/images/imgIconWhts.png" alt="Contactar por WhatsApp">
         </a>
     </section>

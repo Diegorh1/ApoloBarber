@@ -6,15 +6,17 @@
 }
 
 body {
-    font-family: 'Lato', sans-serif;
+    /* Texto Secundario: Aileron */
+    font-family: 'Aileron', sans-serif;
     color: #ffffff;
     line-height: 1.6;
-    /* Por defecto, el fondo es oscuro (para páginas internas) */
     background-color: #0D0F1A;
 }
 
 /* --- 2. Botón CTA (Reutilizable) --- */
 .btn-cta {
+    /* Texto Alternativo: Montserrat */
+    font-family: 'Montserrat', sans-serif;
     text-decoration: none;
     background-color: #f39c12;
     color: #222;
@@ -31,11 +33,9 @@ body {
 }
 
 /* --- 3. Estilos de la Página Principal (index.html) --- */
-
-/* Contenedor del Hero */
 .hero {
     height: 100vh;
-    background-image: url('/images/img1.jpg'); /* Asegúrate que esta ruta sea correcta */
+    background-image: url('/images/img1.jpg'); /* O /public/images/img1.jpg */
     background-size: cover;
     background-position: center;
     position: relative;
@@ -44,7 +44,6 @@ body {
     padding: 20px 5%;
 }
 
-/* Overlay oscuro para el Hero */
 .hero::before {
     content: "";
     position: absolute;
@@ -56,7 +55,6 @@ body {
     z-index: 1;
 }
 
-/* Header de la página principal (sobre el Hero) */
 .main-header {
     display: flex;
     justify-content: space-between;
@@ -66,7 +64,6 @@ body {
     z-index: 2;
 }
 
-/* Logo más grande en la página principal */
 .main-header .logo img {
     height: 80px;
 }
@@ -78,6 +75,8 @@ body {
 }
 
 .main-nav a {
+    /* Texto Alternativo: Montserrat */
+    font-family: 'Montserrat', sans-serif;
     text-decoration: none;
     color: #f0f0f0;
     font-weight: 700;
@@ -89,7 +88,6 @@ body {
     color: #f39c12;
 }
 
-/* Contenido central del Hero */
 .hero-content {
     flex-grow: 1;
     display: flex;
@@ -101,27 +99,33 @@ body {
     z-index: 2;
 }
 
+/* 👇 ==========================================
+  👇 ¡AQUÍ ESTÁ LA CORRECCIÓN DE LA FUENTE!
+  👇 ==========================================
+*/
 .hero-content h1 {
-    font-family: 'Pinyon Script', cursive;
-    font-size: 7rem;
-    font-weight: 400;
+    /* Texto Alternativo: Montserrat */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 5rem; /* <-- Ajustado (la cursiva era 7rem) */
+    font-weight: 700; /* <-- En negritas */
     color: #ffffff;
     margin-bottom: 10px;
+    text-transform: uppercase; /* <-- Para que se vea fuerte */
+    letter-spacing: 5px; /* <-- Espacio entre letras */
 }
 
 .hero-content p {
     font-size: 1.1rem;
     color: #f0f0f0;
     margin-bottom: 30px;
+    /* Usa Aileron del body */
 }
 
-/* --- 4. Estilos para Páginas Internas (sobre.html, etc.) --- */
-
+/* --- 4. Estilos para Páginas Internas (header-interno) --- */
 body.pagina-interna {
     background-color: #0D0F1A;
 }
 
-/* Header para páginas internas (fondo sólido) */
 .header-interno {
     background-color: #0D0F1A;
     padding: 20px 5%;
@@ -134,13 +138,11 @@ body.pagina-interna {
     z-index: 10;
 }
 
-/* Logo más pequeño en páginas internas */
 .header-interno .logo img {
-    height: 40px;
+    height: 60px; /* Tamaño corregido */
 }
 
-/* --- 5. Estilos de Secciones Comunes (#sobre, #servicios...) --- */
-
+/* --- 5. Estilos Sección "Sobre" --- */
 #sobre {
     background-color: #0D0F1A;
     padding: 100px 5%;
@@ -169,29 +171,27 @@ body.pagina-interna {
     transform: scale(1.03);
 }
 
-/* === CORRECCIÓN APLCIADA === */
 .image-collage .img-main {
     grid-column: 1 / 3;
     grid-row: 1 / 2;
-    height: 300px; /* <- Más pequeña (era 350px) */
+    height: 300px;
 }
 
-/* === CORRECCIÓN APLCIADA === */
 .image-collage .img-secondary-1 {
     grid-column: 1 / 2;
     grid-row: 2 / 3;
-    height: 200px; /* <- Más pequeña (era 250px) */
+    height: 200px;
 }
 
-/* === CORRECCIÓN APLCIADA === */
 .image-collage .img-secondary-2 {
     grid-column: 2 / 3;
     grid-row: 2 / 3;
-    height: 200px; /* <- Más pequeña (era 250px) */
+    height: 200px;
 }
-/* ============================= */
 
 .text-content h2 {
+    /* Texto Alternativo: Montserrat */
+    font-family: 'Montserrat', sans-serif;
     font-size: 2.5rem;
     font-weight: 700;
     color: #ffffff;
@@ -203,6 +203,7 @@ body.pagina-interna {
     line-height: 1.7;
     color: #c0c0c0;
     margin-bottom: 20px;
+    /* Usa Aileron del body */
 }
 
 .text-content p:last-child {
@@ -211,15 +212,17 @@ body.pagina-interna {
     color: #f0f0f0;
 }
 
-/* --- 8. Estilos de la Sección de Servicios (#servicios) --- */
+/* --- 6. Estilos Sección "Servicios" --- */
 .service-section {
     padding: 80px 5%;
-    background-color: #f0f0f0; /* Fondo blanco/claro para esta sección como en la imagen */
-    color: #222; /* Texto oscuro sobre fondo claro */
+    background-color: #f0f0f0;
+    color: #222;
     text-align: center;
 }
 
 .section-title {
+    /* Texto Alternativo: Montserrat */
+    font-family: 'Montserrat', sans-serif;
     font-size: 2.8rem;
     font-weight: 700;
     margin-bottom: 20px;
@@ -233,22 +236,23 @@ body.pagina-interna {
     font-size: 1.1rem;
     line-height: 1.6;
     color: #555;
+    /* Usa Aileron del body */
 }
 
 .service-list {
-    display: flex; /* Habilita Flexbox para la alineación horizontal */
-    justify-content: center; /* Centra el grupo de tarjetas */
-    gap: 30px; /* Espacio entre las tarjetas */
-    flex-wrap: wrap; /* Permite que las tarjetas se envuelvan en pantallas pequeñas */
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
 }
 
 .service-card {
-    flex-basis: calc(33.33% - 20px); /* 3 tarjetas por fila, restando el espacio del gap */
-    max-width: 350px; /* Límite para que no crezcan demasiado en pantallas grandes */
+    flex-basis: calc(33.33% - 20px);
+    max-width: 350px;
     background-color: #fff;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
-    overflow: hidden; /* Para contener la imagen */
+    overflow: hidden;
     transition: transform 0.3s ease;
 }
 
@@ -259,15 +263,15 @@ body.pagina-interna {
 
 .service-card img {
     width: 100%;
-    height: 350px; /* Altura fija para la imagen */
+    height: 350px;
     object-fit: cover;
     display: block;
-    filter: grayscale(100%); 
+    filter: grayscale(100%);
     transition: filter 0.3s ease;
 }
 
 .service-card:first-child img {
-    filter: grayscale(100%); 
+    filter: grayscale(100%);
 }
 
 .service-card:nth-child(2) img,
@@ -275,14 +279,13 @@ body.pagina-interna {
     filter: none;
 }
 
-
 .card-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    background-color: #0D0F1A; /* Fondo oscuro en la barra inferior */
-    color: #fff; /* Texto blanco */
+    background-color: #0D0F1A;
+    color: #fff;
 }
 
 .service-name {
@@ -293,91 +296,217 @@ body.pagina-interna {
 .service-price {
     font-weight: 700;
     font-size: 1.2rem;
-    color: #f39c12; /* Color naranja/amarillo para el precio */
+    color: #f39c12;
 }
 
-/* --- 9. Estilos de la Sección de Ubicación (#ubicacion) --- */
+/* --- 7. Estilos Sección "Equipo" --- */
+#equipo {
+    background-color: #0D0F1A;
+    padding: 100px 5%;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    min-height: 80vh;
+}
+
+.titulo-vertical {
+    /* Texto Alternativo: Montserrat */
+    font-family: 'Montserrat', sans-serif;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 10px;
+    white-space: nowrap;
+}
+
+.equipo-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 300px;
+    gap: 30px;
+    overflow-x: auto;
+    padding: 20px 5px;
+    scrollbar-width: thin;
+    scrollbar-color: #f39c12 #1A1C2A;
+}
+
+.equipo-grid::-webkit-scrollbar {
+    height: 8px;
+}
+.equipo-grid::-webkit-scrollbar-track {
+    background: #1A1C2A;
+    border-radius: 4px;
+}
+.equipo-grid::-webkit-scrollbar-thumb {
+    background-color: #f39c12;
+    border-radius: 4px;
+}
+.equipo-grid::-webkit-scrollbar-thumb:hover {
+    background-color: #e67e22;
+}
+
+.miembro-card {
+    background-color: #1A1C2A;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.miembro-card:hover {
+    transform: translateY(-5px);
+}
+
+.miembro-imagen {
+    position: relative;
+}
+
+.miembro-imagen img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+}
+
+.miembro-imagen .nombre {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    white-space: nowrap;
+}
+
+.miembro-sociales {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.miembro-sociales a {
+    color: #c0c0c0;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.miembro-sociales a:hover {
+    color: #f39c12;
+}
+
+/* --- 8. Estilos Sección "Ubicación" --- */
 .location-section {
     padding: 100px 5%;
-    background-color: #0D0F1A; /* Fondo oscuro (usa el fondo del body) */
+    background-color: #0D0F1A;
     color: #ffffff;
     text-align: center;
 }
 
-/* Reutilizamos section-title de #servicios, pero ajustamos el margen si es necesario */
+.location-section .container-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
 .location-section .section-title {
     margin-bottom: 50px;
     color: #ffffff;
+    /* Usa Montserrat heredado */
 }
 
-.location-map-container {
+.ubicacion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: stretch;
+}
+
+.ubicacion-info-local {
     display: flex;
-    justify-content: center;
-    margin-bottom: 50px;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
-.map-placeholder,
-.map-iframe-wrapper {
+.ubicacion-info-local .location-map-container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.ubicacion-info-local .map-placeholder {
     position: relative;
     width: 100%;
-    max-width: 500px; /* Ancho máximo similar al de la imagen */
-    height: 450px; /* Altura del contenedor del mapa */
+    height: 450px;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-.map-placeholder img {
+.ubicacion-info-local .map-placeholder img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
 }
 
-.map-iframe-wrapper iframe {
-    /* Asegura que el iframe llene el contenedor */
+.ubicacion-info-local .map-info-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    text-align: left;
+}
+
+.ubicacion-info-local .map-info-overlay p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    /* Usa Aileron del body */
+}
+
+.ubicacion-info-local .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.ubicacion-info-local .social-icons img {
+    width: 25px;
+    height: 25px;
+    filter: invert(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.ubicacion-info-local .social-icons a:hover img {
+    opacity: 0.8;
+    transform: scale(1.1);
+}
+
+.ubicacion-mapa-google {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.ubicacion-mapa-google iframe {
     width: 100%;
     height: 100%;
     border: none;
 }
 
-.map-info-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.75); /* Fondo negro semi-transparente */
-    color: #ffffff;
-    padding: 15px;
-    text-align: left;
-}
-
-.map-info-overlay p {
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.4;
-}
-
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 50px;
-}
-
-.social-icons img {
-    width: 20px;
-    height: 20px;
-    filter: invert(100%); /* Hace los iconos blancos para fondo oscuro */
-    transition: opacity 0.3s ease;
-}
-
-.social-icons a:hover img {
-    opacity: 0.7;
-}
-
-
-/* --- 6. Componentes Globales (WhatsApp) --- */
+/* --- 9. Componentes Globales (WhatsApp) --- */
 .whatsapp-float {
     position: fixed;
     bottom: 30px;
@@ -397,64 +526,194 @@ body.pagina-interna {
     transform: scale(1.1);
 }
 
-/* --- 7. Media Queries (Diseño Responsivo) --- */
+/* --- 10. Estilos del Modal (Agregados) --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Usa Aileron del body */
+}
 
+.modal-content {
+    background-color: #0d0d0d;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    position: relative;
+}
+
+.modal-content h2 {
+    /* Texto Alternativo: Montserrat */
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 400;
+    color: #ccc;
+    /* Usa Aileron del body */
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2a2a2a;
+    color: #ffffff;
+    box-sizing: border-box;
+    font-size: 16px;
+    /* Usa Aileron del body */
+}
+
+.horario-selector {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.horario-selector input[type="radio"] {
+    display: none;
+}
+
+.horario-selector label {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    min-width: 60px;
+    transition: background-color 0.2s;
+}
+
+.horario-selector input[type="radio"]:checked + label {
+    background-color: #d1a355;
+    color: #0d0d0d;
+    font-weight: 700;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.btn-modal-action {
+    /* Texto Alternativo: Montserrat */
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #d1a355;
+    color: #0d0d0d;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+.btn-modal-action:hover {
+    background-color: #e0b365;
+}
+
+#successModal .modal-content {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+#successModal .modal-content h2 {
+    font-size: 24px;
+    color: #d1a355;
+    margin-bottom: 30px;
+    /* Usa Montserrat heredado */
+}
+
+#successModal .logo-apolo {
+    display: block;
+    margin: 0 auto 20px;
+    font-size: 40px;
+    /* Texto Principal: Boston Angel (reemplazado) */
+    font-family: 'Pinyon Script', cursive;
+    color: #d1a355;
+    line-height: 1;
+}
+
+#successModal .btn-modal-action {
+    max-width: 200px;
+    margin: 20px auto 0;
+    display: block;
+}
+
+
+/* --- 11. Media Queries (Diseño Responsivo) --- */
+
+/* Estilos para 992px de ancho o menos (Tablets) */
 @media (max-width: 992px) {
     .service-list {
         gap: 20px;
     }
     .service-card {
-        /* Permite 2 tarjetas por fila en tabletas */
-        flex-basis: calc(50% - 10px); 
+        flex-basis: calc(50% - 10px);
     }
     
+    .ubicacion-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+    
+    .ubicacion-mapa-google {
+        height: 450px;
+        min-height: auto;
+    }
+
+    .ubicacion-info-local .map-placeholder {
+        height: 400px;
+    }
 }
 
+/* Estilos para 768px de ancho o menos (Móviles) */
 @media (max-width: 768px) {
     
-    /* Ajustes responsivos para la sección de servicios */
-    .service-section {
-        padding: 50px 5%;
+    /* Hero */
+    .hero-content h1 {
+        font-size: 4rem;
     }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .service-card {
-        /* 1 tarjeta por fila en móvil */
-        flex-basis: 100%; 
-        max-width: 100%;
-    }
-    
-    .service-card img {
-        height: 250px; /* Altura de imagen más pequeña en móvil */
-    }
-    
-    /* Ajustes responsivos para #sobre */
-    #sobre {
-        grid-template-columns: 1fr; /* 1 sola columna */
-        padding: 60px 5%;
-        gap: 40px;
-    }
-    
-    .text-content h2 {
-        font-size: 2rem;
-    }
-    
-    /* === CORRECCIÓN APLCIADA (Móvil) === */
-    .image-collage .img-main {
-        height: 220px; /* <- Más pequeña (era 250px) */
-    }
-    
-    /* === CORRECCIÓN APLCIADA (Móvil) === */
-    .image-collage .img-secondary-1,
-    .image-collage .img-secondary-2 {
-        height: 150px; /* <- Más pequeña (era 180px) */
-    }
-    /* ================================== */
-    
-    /* Ajustes responsivos para el header interno */
+
+    /* Header Interno */
     .header-interno {
         flex-direction: column;
         align-items: flex-start;
@@ -472,160 +731,71 @@ body.pagina-interna {
         width: 100%;
         text-align: center;
     }
+
+    /* Sección Sobre */
+    #sobre {
+        grid-template-columns: 1fr;
+        padding: 60px 5%;
+        gap: 40px;
+    }
     
-    /* Ajustes responsivos para el header principal (Hero) */
-    .main-header {
-        /* (Aquí puedes añadir estilos si el header del index se rompe en móvil) */
+    .text-content h2,
+    .section-title { /* Títulos de sección más pequeños en móvil */
+        font-size: 2rem;
+    }
+    
+    .image-collage .img-main {
+        height: 220px;
+    }
+    
+    .image-collage .img-secondary-1,
+    .image-collage .img-secondary-2 {
+        height: 150px;
+    }
+    
+    /* Sección Servicios */
+    .service-section {
+        padding: 50px 5%;
+    }
+        
+    .service-card {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+    
+    .service-card img {
+        height: 250px;
+    }
+    
+    /* Sección Equipo */
+    #equipo {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+    
+    .titulo-vertical {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 2rem;
+        letter-spacing: 5px;
+    }
+    
+    .equipo-grid {
+        grid-auto-columns: 250px;
+        width: 100%;
+    }
+    
+    .miembro-imagen img {
+        height: 300px;
     }
 
-    .hero-content h1 {
-        font-size: 4rem; /* Título más pequeño en móvil */
-    }
-    
-    /* Ajustes responsivos para Ubicación */
+    /* Sección Ubicación */
     .location-map-container {
         padding: 0 10px;
     }
     .map-placeholder,
     .map-iframe-wrapper {
         height: 350px;
-    }
-}
-
-/* --- 8. Sección "Quienes Somos" (Equipo) --- */
-
-#equipo {
-    background-color: #0D0F1A;
-    padding: 100px 5%;
-    display: flex; /* Para poner el título al lado de la cuadrícula */
-    align-items: center; /* Centra verticalmente */
-    gap: 50px; /* Espacio entre título y tarjetas */
-    min-height: 80vh;
-}
-
-/* El truco del título vertical */
-.titulo-vertical {
-    writing-mode: vertical-rl; /* Escribir de arriba a abajo */
-    transform: rotate(180deg);  /* Leer de abajo hacia arriba */
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #ffffff;
-    letter-spacing: 10px; /* Espacio entre letras */
-    white-space: nowrap; /* Evita que el texto se parta */
-}
-
-/* El truco del scroll horizontal */
-.equipo-grid {
-    display: grid;
-    grid-auto-flow: column; /* ¡Magia! Hace que la cuadrícula fluya horizontalmente */
-    grid-auto-columns: 300px; /* Ancho fijo para cada tarjeta */
-    gap: 30px;
-    
-    overflow-x: auto; /* Habilita el scroll horizontal si se desborda */
-    padding: 20px 5px; /* Pequeño padding para que la sombra y scrollbar se vean bien */
-    
-    /* Estilos para la barra de scroll (opcional pero elegante) */
-    scrollbar-width: thin; /* Para Firefox */
-    scrollbar-color: #f39c12 #1A1C2A; /* Color de la barra (dorado) y fondo (oscuro) */
-}
-
-/* Estilos de la barra de scroll para Chrome/Safari */
-.equipo-grid::-webkit-scrollbar {
-    height: 8px;
-}
-.equipo-grid::-webkit-scrollbar-track {
-    background: #1A1C2A;
-    border-radius: 4px;
-}
-.equipo-grid::-webkit-scrollbar-thumb {
-    background-color: #f39c12;
-    border-radius: 4px;
-}
-.equipo-grid::-webkit-scrollbar-thumb:hover {
-    background-color: #e67e22;
-}
-
-/* Tarjeta de Miembro */
-.miembro-card {
-    background-color: #1A1C2A;
-    border-radius: 10px;
-    overflow: hidden; /* Para que la imagen no se salga */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
-}
-
-.miembro-card:hover {
-    transform: translateY(-5px);
-}
-
-.miembro-imagen {
-    position: relative; /* Para poner el nombre sobre la imagen */
-}
-
-.miembro-imagen img {
-    width: 100%;
-    height: 350px; /* Altura fija para todas las tarjetas */
-    object-fit: cover; /* Evita que la imagen se deforme */
-    display: block;
-}
-
-.miembro-imagen .nombre {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente */
-    color: #ffffff;
-    padding: 5px 15px;
-    border-radius: 15px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    white-space: nowrap;
-}
-
-.miembro-sociales {
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-}
-
-.miembro-sociales a {
-    color: #c0c0c0;
-    text-decoration: none;
-    font-size: 1.5rem; /* Tamaño de los íconos de Font Awesome */
-    transition: color 0.3s ease;
-}
-
-.miembro-sociales a:hover {
-    color: #f39c12; /* Color dorado al pasar el mouse */
-}
-
-
-/* --- 9. Media Queries (Ajustes para "Equipo" en móvil) --- */
-
-@media (max-width: 768px) {
-    #equipo {
-        flex-direction: column; /* Apila el título sobre las tarjetas */
-        align-items: flex-start; /* Alinea todo a la izquierda */
-        gap: 30px;
-    }
-    
-    /* Título normal en móvil */
-    .titulo-vertical {
-        writing-mode: horizontal-tb; /* Vuelve a modo horizontal */
-        transform: none; /* Quita la rotación */
-        font-size: 2rem;
-        letter-spacing: 5px;
-    }
-    
-    /* Tarjetas más pequeñas en móvil */
-    .equipo-grid {
-        grid-auto-columns: 250px; /* Tarjetas más angostas */
-        width: 100%; /* Ocupa todo el ancho */
-    }
-    
-    .miembro-imagen img {
-        height: 300px;
     }
 }
