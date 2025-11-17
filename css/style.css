@@ -35,10 +35,7 @@ body {
 /* --- 3. Estilos de la Página Principal (index.html) --- */
 .hero {
     height: 100vh;
-    /* 👇 ¡CORRECCIÓN DE RUTA!
-      Cambiado de '/images/...' a '../images/...' 
-      para que funcione desde la carpeta 'css'.
-    */
+    /* Ruta Relativa Corregida */
     background-image: url('../images/img1.jpg');
     background-size: cover;
     background-position: center;
@@ -91,7 +88,7 @@ body {
 .main-nav a:hover {
     color: #f39c12;
 }
-/* 👇 CORRECCIÓN: Clase 'active' para el nav */
+/* Clase 'active' para el nav */
 .main-nav a.active {
     color: #f39c12;
     font-weight: 900;
@@ -109,7 +106,7 @@ body {
 }
 
 .hero-content h1 {
-    /* Texto Alternativo: Montserrat */
+    /* Texto Alternativo: Montserrat (Corregido) */
     font-family: 'Montserrat', sans-serif;
     font-size: 5rem;
     font-weight: 700;
@@ -715,20 +712,52 @@ body.pagina-interna {
     
     /* Hero */
     .hero-content h1 {
-        font-size: 4rem;
+        font-size: 3rem; /* Título principal aún más pequeño */
     }
 
-    /* Header Interno */
+    /* 👇 ==========================================
+      👇 ¡AQUÍ ESTÁ LA CORRECCIÓN PARA EL HEADER!
+      👇 ==========================================
+    */
+    /* Header Principal (index.html) */
+    .hero .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px; /* Espacio entre logo, nav y botón */
+    }
+
+    .hero .main-nav {
+        width: 100%;
+    }
+
+    .hero .main-nav ul {
+        flex-direction: column;
+        gap: 15px; /* Espacio entre enlaces */
+        width: 100%;
+    }
+
+    .hero .main-header .btn-cta {
+        width: 100%;
+        text-align: center;
+    }
+    /* ========================================== */
+
+    /* Header Interno (Otras páginas) */
     .header-interno {
         flex-direction: column;
         align-items: flex-start;
         padding-bottom: 10px;
     }
 
+    .header-interno .main-nav {
+        width: 100%; /* Añadido para consistencia */
+    }
+
     .header-interno .main-nav ul {
         flex-direction: column;
         gap: 10px;
         margin-top: 15px;
+        width: 100%; /* Añadido para consistencia */
     }
 
     .header-interno .btn-cta {
@@ -802,5 +831,14 @@ body.pagina-interna {
     .map-placeholder,
     .map-iframe-wrapper {
         height: 350px;
+    }
+
+    /* Modal */
+    .modal-content {
+        margin: 5% auto; /* Menos margen en móvil */
+    }
+
+    .hero-content h1 {
+        font-size: 3rem; /* Título de hero más pequeño */
     }
 }
