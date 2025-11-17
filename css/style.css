@@ -986,21 +986,22 @@ body.pagina-interna {
       👇 ¡AQUÍ ESTÁ LA CORRECCIÓN "APACHURRADA" v3! 👇
       ===============================================
     */
+    /* Sección Productos (Móvil) - CORREGIDO */
     .catalogo-slider {
         gap: 20px;
         transform: translateX(25%);
     }
     .slider-item {
-        width: 200px;  /* <- "Cuadrado grande" */
-        height: 200px; /* <- "Cuadrado grande" */
+        width: 140px;  /* <- "Cuadrito" (antes 100px) */
+        height: 140px; /* <- "Cuadrito" (antes 150px) */
         background-color: transparent; 
     }
     .slider-item img {
-        object-fit: cover; /* <- Llena el cuadrado (recorta) */
+        object-fit: cover; /* <- Corregido (llena el cuadro) */
         padding: 0; 
     }
     .catalogo-info {
-        min-height: 200px; 
+        min-height: 180px; /* Ajustado para que no salte */
     }
     .catalogo-info h2 {
         font-size: 1.5rem;
@@ -1015,12 +1016,12 @@ body.pagina-interna {
         width: 40px;
         height: 40px;
         font-size: 1rem;
-        /* 👇 CORRECCIÓN: Ajuste de altura para 160px */
-        transform: translateY(calc(160px / 1 - 30%));
+        /* 👇 CORRECCIÓN: Centrado vertical para 140px */
+        transform: translateY(calc(140px / 2 - 50%));
     }
     .nav-arrow:hover {
-        /* 👇 CORRECCIÓN: Ajuste de altura para 160px */
-        transform: translateY(calc(160px / 1 - 30%)) scale(1.1);
+        /* 👇 CORRECCIÓN: Centrado vertical para 140px */
+        transform: translateY(calc(140px / 2 - 50%)) scale(1.1);
     }
     #prev-btn {
         left: 10px;
