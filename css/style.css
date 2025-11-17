@@ -738,8 +738,8 @@ body.pagina-interna {
 }
 
 .slider-item {
-    width: 220px; /* Ancho de PC (Rectángulo) */
-    height: 280px; /* Alto de PC (Rectángulo) */
+    width: 220px; 
+    height: 280px; 
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
@@ -753,7 +753,7 @@ body.pagina-interna {
 .slider-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Recorta la imagen para llenar */
+    object-fit: cover;
 }
 
 
@@ -796,7 +796,7 @@ body.pagina-interna {
 .nav-arrow {
     position: absolute;
     top: 50%;
-    transform: translateY(calc(280px / 2 - 50%)); /* Centrado en 280px */
+    transform: translateY(calc(280px / 2 - 50%)); 
     z-index: 10;
     
     background-color: #f39c12;
@@ -811,7 +811,7 @@ body.pagina-interna {
 }
 
 .nav-arrow:hover {
-    transform: translateY(calc(280px / 2 - 50%)) scale(1.1); /* Centrado en 280px */
+    transform: translateY(calc(280px / 2 - 50%)) scale(1.1);
 }
 
 .nav-arrow:disabled {
@@ -877,10 +877,15 @@ body.pagina-interna {
         gap: 15px; 
         width: 100%;
     }
+    
+    /* 👇 ==========================================
+      👇 ¡AQUÍ ESTÁ LA CORRECCIÓN DEL BOTÓN!
+      👇 ==========================================
+    */
     .hero .main-header .btn-cta {
-        width: 100%;
-        text-align: center;
+        display: none; /* <-- ¡AQUÍ! Se oculta en móvil */
     }
+    /* ========================================== */
 
     /* Header Interno (Otras páginas) */
     .header-interno {
@@ -982,26 +987,22 @@ body.pagina-interna {
         font-size: 20px;
     }
 
-    /* ===============================================
-      👇 ¡AQUÍ ESTÁ LA CORRECCIÓN "APACHURRADA" v3! 👇
-      ===============================================
-    */
-    /* Sección Productos (Móvil) - CORREGIDO */
+    /* Sección Productos (Móvil) */
     .catalogo-slider {
         gap: 20px;
         transform: translateX(25%);
     }
     .slider-item {
-        width: 140px;  /* <- "Cuadrito" (antes 100px) */
-        height: 140px; /* <- "Cuadrito" (antes 150px) */
+        width: 140px;  /* <- "Cuadrito" */
+        height: 140px; /* <- "Cuadrito" */
         background-color: transparent; 
     }
     .slider-item img {
-        object-fit: cover; /* <- Corregido (llena el cuadro) */
+        object-fit: cover; 
         padding: 0; 
     }
     .catalogo-info {
-        min-height: 180px; /* Ajustado para que no salte */
+        min-height: 160px; 
     }
     .catalogo-info h2 {
         font-size: 1.5rem;
@@ -1016,11 +1017,11 @@ body.pagina-interna {
         width: 40px;
         height: 40px;
         font-size: 1rem;
-        /* 👇 CORRECCIÓN: Centrado vertical para 140px */
+        /* Centrado vertical para 140px */
         transform: translateY(calc(140px / 2 - 50%));
     }
     .nav-arrow:hover {
-        /* 👇 CORRECCIÓN: Centrado vertical para 140px */
+        /* Centrado vertical para 140px */
         transform: translateY(calc(140px / 2 - 50%)) scale(1.1);
     }
     #prev-btn {
