@@ -10,8 +10,44 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aileron:wght@300;400;700&family=Montserrat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Estilos del Select de Estado (Semáforo) */
+        .status-select {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            text-transform: uppercase;
+            outline: none;
+            appearance: none;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        .status-select.pendiente { background-color: rgba(241, 196, 15, 0.2); color: #f1c40f; border: 1px solid #f1c40f; }
+        .status-select.confirmada { background-color: rgba(52, 152, 219, 0.2); color: #3498db; border: 1px solid #3498db; }
+        .status-select.completada { background-color: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid #2ecc71; }
+        .status-select option { background-color: #1A1C2A; color: #fff; }
+
+        /* Estilo para el nuevo Select de Servicios en el Modal */
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #1A1C2A; 
+            color: #ffffff;
+            font-family: 'Aileron', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            cursor: pointer;
+        }
+        .form-group select:focus { border-color: #f39c12; }
+    </style>
 </head>
 <body class="pagina-interna">
 
@@ -20,13 +56,12 @@
             <img src="../images/imgLogo.png" alt="Logo">
             <span>PANEL ADMINISTRATIVO</span>
         </div>
-        
         <nav class="main-nav">
             <ul>
                 <li><a href="intPanelControl.html"><i class="fas fa-home"></i> Inicio</a></li>
-                <li><a href="intAgenda.html" class="active"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
+                <li><a href="#" class="active"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
                 <li><a href="intVentas.html"><i class="fas fa-cash-register"></i> Caja</a></li>
-                <li><a href="../index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+                <li><a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
             </ul>
         </nav>
     </header>
@@ -36,7 +71,7 @@
             
             <div class="page-header">
                 <h1>Gestión de Citas</h1>
-                <button class="btn-cta" onclick="alert('Aquí se abriría el modal para agendar manualmente')">
+                <button class="btn-cta" onclick="abrirModalAgendar()">
                     <i class="fas fa-plus"></i> Nueva Cita
                 </button>
             </div>
@@ -44,73 +79,252 @@
             <div class="agenda-toolbar">
                 <div class="filter-group">
                     <label>Fecha:</label>
-                    <input type="date" value="2025-11-19" class="admin-input">
+                    <input type="date" id="date-selector" class="admin-input">
                 </div>
             </div>
 
-            <div class="agenda-timeline">
-
-                <div class="time-slot">
-                    <div class="slot-time">09:00 AM</div>
-                    <div class="slot-content occupied confirmed">
-                        <div class="cita-info">
-                            <h3>Juan Pérez</h3>
-                            <p>Corte de Cabello</p> </div>
-                        <div class="cita-actions">
-                            <span class="status-badge confirmed">Confirmada</span>
-                            <button class="action-btn edit"><i class="fas fa-pen"></i></button>
-                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="time-slot">
-                    <div class="slot-time">10:00 AM</div>
-                    <div class="slot-content occupied pending">
-                        <div class="cita-info">
-                            <h3>Carlos Ruiz</h3>
-                            <p>Barba + Corte</p> </div>
-                        <div class="cita-actions">
-                            <span class="status-badge pending">Pendiente</span>
-                            <button class="action-btn edit"><i class="fas fa-pen"></i></button>
-                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="time-slot">
-                    <div class="slot-time">11:00 AM</div>
-                    <div class="slot-content free">
-                        <span>Disponible</span>
-                        <button class="btn-add-fast"><i class="fas fa-plus-circle"></i></button>
-                    </div>
-                </div>
-
-                <div class="time-slot">
-                    <div class="slot-time">12:00 PM</div>
-                    <div class="slot-content occupied in-process">
-                        <div class="cita-info">
-                            <h3>Luis Miguel</h3>
-                            <p>Masaje Relajante</p> </div>
-                        <div class="cita-actions">
-                            <span class="status-badge process">En Proceso</span>
-                            <button class="action-btn edit"><i class="fas fa-pen"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                 <div class="time-slot">
-                    <div class="slot-time">01:00 PM</div>
-                    <div class="slot-content free">
-                        <span>Disponible</span>
-                        <button class="btn-add-fast"><i class="fas fa-plus-circle"></i></button>
-                    </div>
-                </div>
-
+            <div class="agenda-timeline" id="timeline-container">
+                <p style="text-align: center; color: #ccc;">Cargando agenda...</p>
             </div> 
 
         </div>
     </section>
+
+    <div id="scheduleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="cerrarModal('scheduleModal')">&times;</span>
+            <h2>AGENDAR CITA</h2>
+            <form id="scheduleForm">
+                
+                <div class="form-group">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" placeholder="Nombre del cliente..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Número telefónico</label>
+                    <input type="tel" id="telefono" placeholder="Ej: 55 1234 5678" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="servicio">Servicio</label>
+                    <select id="servicio-modal" required>
+                        <option value="Corte adulto">Corte adulto</option>
+                        <option value="Afeitado de barba">Afeitado de barba</option>
+                        <option value="Masaje/Exfoliacion">Masaje/Exfoliación</option>
+                        <option value="Corte de niño">Corte de niño</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" id="fecha-modal" required> 
+                </div>
+                
+                <div class="form-group">
+                    <label>Horario</label>
+                    <div class="horario-selector">
+                        <input type="radio" id="h900" name="horario" value="09:00" required> <label for="h900">09:00</label>
+                        <input type="radio" id="h1000" name="horario" value="10:00"> <label for="h1000">10:00</label>
+                        <input type="radio" id="h1100" name="horario" value="11:00"> <label for="h1100">11:00</label>
+                        <input type="radio" id="h1200" name="horario" value="12:00"> <label for="h1200">12:00</label>
+                        <input type="radio" id="h1300" name="horario" value="13:00"> <label for="h1300">13:00</label>
+                        <input type="radio" id="h1400" name="horario" value="14:00"> <label for="h1400">14:00</label>
+                        <input type="radio" id="h1500" name="horario" value="15:00"> <label for="h1500">15:00</label>
+                        <input type="radio" id="h1600" name="horario" value="16:00"> <label for="h1600">16:00</label>
+                        <input type="radio" id="h1700" name="horario" value="17:00"> <label for="h1700">17:00</label>
+                        <input type="radio" id="h1800" name="horario" value="18:00"> <label for="h1800">18:00</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-modal-action">Guardar Cita</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import { db, verificarSesion, cerrarSesion } from "../js/firebase.js";
+        import { collection, query, where, getDocs, deleteDoc, updateDoc, addDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        verificarSesion();
+        const btnSalir = document.querySelector('.logout-btn');
+        if(btnSalir) btnSalir.addEventListener('click', (e) => { e.preventDefault(); cerrarSesion(); });
+
+        const dateInput = document.getElementById('date-selector');
+        const hoy = new Date();
+        const fechaHoyStr = hoy.toLocaleDateString('en-CA'); 
+        dateInput.value = fechaHoyStr;
+
+        dateInput.addEventListener('change', () => { cargarAgenda(dateInput.value); });
+
+        // --- FUNCIONES DEL MODAL ---
+        window.abrirModalAgendar = function(horaPreseleccionada = null) {
+            const modal = document.getElementById('scheduleModal');
+            const fechaModal = document.getElementById('fecha-modal');
+            fechaModal.value = dateInput.value;
+            if (horaPreseleccionada) {
+                const radio = document.querySelector(`input[name="horario"][value="${horaPreseleccionada}"]`);
+                if(radio) radio.checked = true;
+            }
+            modal.style.display = 'block';
+        }
+
+        window.cerrarModal = function(id) { document.getElementById(id).style.display = 'none'; }
+        window.onclick = function(event) { if (event.target.classList.contains('modal')) event.target.style.display = "none"; }
+
+        // --- GUARDAR CITA ---
+        const form = document.getElementById('scheduleForm');
+        
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const servicio = document.getElementById('servicio-modal').value; // Capturar servicio
+            const fecha = document.getElementById('fecha-modal').value;
+            const hora = document.querySelector('input[name="horario"]:checked').value;
+            const btn = document.querySelector('.btn-modal-action');
+            
+            try {
+                btn.innerText = "Guardando...";
+                btn.disabled = true;
+
+                await addDoc(collection(db, "agenda"), {
+                    cliente: nombre,
+                    telefono: telefono,
+                    servicio: servicio, // Guardar servicio específico
+                    fecha: fecha,
+                    hora: hora,
+                    estado: "pendiente", 
+                    creado: new Date()
+                });
+
+                window.cerrarModal('scheduleModal');
+                form.reset();
+                if(fecha === dateInput.value) cargarAgenda(fecha);
+                else alert("Cita guardada en: " + fecha);
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Error al guardar.");
+            } finally {
+                btn.innerText = "Guardar Cita";
+                btn.disabled = false;
+            }
+        });
+
+        // --- CARGAR AGENDA (CON LÓGICA DE OCULTAR COMPLETADAS) ---
+        async function cargarAgenda(fechaSeleccionada) {
+            const container = document.getElementById('timeline-container');
+            if(!container.querySelector('.time-slot')) container.innerHTML = '<p style="text-align: center; color: #ccc;">Cargando...</p>';
+
+            try {
+                const agendaRef = collection(db, "agenda");
+                const q = query(agendaRef, where("fecha", "==", fechaSeleccionada));
+                const snapshot = await getDocs(q);
+
+                const citasMap = {};
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    data.id = doc.id; 
+                    
+                    // --- AQUÍ ESTÁ LA MAGIA ---
+                    // Solo guardamos en el mapa visual si NO está completada.
+                    // Si está 'completada', la ignoramos, por lo tanto el espacio se verá libre.
+                    if(data.estado !== 'completada') {
+                        citasMap[data.hora] = data;
+                    }
+                });
+
+                const horarios = ["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"];
+                let htmlContent = "";
+
+                horarios.forEach(hora => {
+                    const cita = citasMap[hora];
+
+                    if (cita) {
+                        // Mostrar Cita (Solo Pendientes o Confirmadas)
+                        let claseCSS = "pendiente"; 
+                        if(cita.estado === "confirmada") claseCSS = "confirmada";
+                        
+                        htmlContent += `
+                        <div class="time-slot">
+                            <div class="slot-time">${convertirHora(hora)}</div>
+                            <div class="slot-content occupied ${claseCSS}" style="border-left: 5px solid currentColor;">
+                                <div class="cita-info">
+                                    <h3>${cita.cliente}</h3>
+                                    <p>${cita.servicio} <small>(${cita.telefono})</small></p>
+                                </div>
+                                <div class="cita-actions">
+                                    <select onchange="cambiarEstado('${cita.id}', this.value)" class="status-select ${claseCSS}">
+                                        <option value="pendiente" ${cita.estado === 'pendiente' ? 'selected' : ''}>Pendiente</option>
+                                        <option value="confirmada" ${cita.estado === 'confirmada' ? 'selected' : ''}>Confirmada</option>
+                                        <option value="completada">Completada (Finalizar)</option>
+                                    </select>
+                                    <button class="action-btn delete" onclick="borrarCita('${cita.id}')" title="Eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>`;
+                    } else {
+                        // Espacio Libre (Incluye los horarios donde hubo cita pero ya se completó)
+                        htmlContent += `
+                        <div class="time-slot">
+                            <div class="slot-time">${convertirHora(hora)}</div>
+                            <div class="slot-content free">
+                                <span>Disponible</span>
+                                <button class="btn-add-fast" onclick="abrirModalAgendar('${hora}')" title="Agendar a las ${hora}">
+                                    <i class="fas fa-plus-circle"></i>
+                                </button>
+                            </div>
+                        </div>`;
+                    }
+                });
+                container.innerHTML = htmlContent;
+
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        window.cambiarEstado = async function(idCita, nuevoEstado) {
+            // Si selecciona completada, podemos pedir confirmación
+            if(nuevoEstado === 'completada') {
+                if(!confirm("¿Marcar como completada? La cita desaparecerá de la agenda para liberar el horario.")) {
+                    // Si cancela, recargamos para que vuelva al estado anterior visualmente
+                    cargarAgenda(dateInput.value);
+                    return;
+                }
+            }
+
+            try {
+                await updateDoc(doc(db, "agenda", idCita), { estado: nuevoEstado });
+                cargarAgenda(dateInput.value); // Recargar para que desaparezca si es completada
+            } catch (error) { console.error(error); }
+        }
+
+        window.borrarCita = async function(idCita) {
+            if(confirm("¿Borrar cita permanentemente?")) {
+                try {
+                    await deleteDoc(doc(db, "agenda", idCita));
+                    cargarAgenda(dateInput.value);
+                } catch (error) { console.error(error); }
+            }
+        }
+
+        function convertirHora(hora24) {
+            const [h, m] = hora24.split(':');
+            let horas = parseInt(h);
+            const ampm = horas >= 12 ? 'PM' : 'AM';
+            horas = horas % 12;
+            horas = horas ? horas : 12; 
+            return `${horas}:${m} ${ampm}`;
+        }
+
+        cargarAgenda(dateInput.value);
+
+    </script>
 
 </body>
 </html>

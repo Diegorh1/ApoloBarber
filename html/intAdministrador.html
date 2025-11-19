@@ -9,24 +9,23 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
     <link href="https://fonts.googleapis.com/css2?family=Aileron:wght@300;400;700&family=Montserrat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body class="pagina-interna">
 
     <header class="main-header header-interno">
         <a href="../index.html" class="logo">
             <img src="../images/imgLogo.png" alt="Logo Barberia Apolo">
         </a>
-        
         <nav class="main-nav">
             <ul>
                 <li><a href="../index.html">Volver al Sitio Web</a></li>
             </ul>
         </nav>
-        </header>
+    </header>
 
     <section class="login-section">
         <div class="login-card">
@@ -36,9 +35,10 @@
             <h2>ACCESO ADMINISTRATIVO</h2>
             <p>Ingresa tus credenciales para gestionar el negocio.</p>
             
-            <form action="intPanelControl.html" method="GET"> <div class="input-group">
-                    <label for="adminUser"><i class="fas fa-user"></i> Usuario</label>
-                    <input type="text" id="adminUser" placeholder="Ej. admin_apolo" required>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="adminEmail"><i class="fas fa-user"></i> Correo Electrónico</label>
+                    <input type="email" id="adminEmail" placeholder="admin@apolo.com" required>
                 </div>
 
                 <div class="input-group">
@@ -46,13 +46,76 @@
                     <input type="password" id="adminPass" placeholder="••••••••" required>
                 </div>
 
+                <p id="errorMessage" style="color: #e74c3c; display: none; margin-bottom: 15px; font-weight: bold; font-size: 0.9rem;"></p>
+
                 <button type="submit" class="btn-cta btn-login">Ingresar al Sistema</button>
-                
             </form>
             
-            <a href="#" class="forgot-pass">¿Olvidaste tu contraseña?</a>
+            <a href="#" class="forgot-pass" onclick="alert('Contacta al soporte técnico para restablecer tu acceso.')">¿Olvidaste tu contraseña?</a>
         </div>
     </section>
+
+    <script type="module">
+        // 1. Importaciones de Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // 2. Configuración del Proyecto
+        const firebaseConfig = {
+            apiKey: "AIzaSyAFbN4EukMbQRCPSmCnWN_yLm9a0m4vlVc",
+            authDomain: "apolo-barber.firebaseapp.com",
+            projectId: "apolo-barber",
+            storageBucket: "apolo-barber.firebasestorage.app",
+            messagingSenderId: "401117168340",
+            appId: "1:401117168340:web:de6cc7c4b150ad9278b141"
+        };
+
+        // 3. Inicializar servicios
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // 4. Referencias al DOM
+        const loginForm = document.getElementById('loginForm');
+        const errorMsg = document.getElementById('errorMessage');
+
+        // 5. Evento Submit
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Evita recargar la página
+
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPass').value;
+            const btn = document.querySelector('.btn-login');
+
+            // Feedback visual (Cargando...)
+            btn.innerText = "Verificando...";
+            btn.disabled = true;
+            errorMsg.style.display = 'none';
+
+            // Intentar iniciar sesión con Firebase Auth
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // ¡Éxito!
+                    console.log("Bienvenido, Admin!");
+                    window.location.href = "intPanelControl.html";
+                })
+                .catch((error) => {
+                    // Error
+                    console.error(error.code, error.message);
+                    btn.innerText = "Ingresar al Sistema";
+                    btn.disabled = false;
+
+                    // Mensajes de error amigables
+                    errorMsg.style.display = 'block';
+                    if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                        errorMsg.innerText = "Correo o contraseña incorrectos.";
+                    } else if (error.code === 'auth/too-many-requests') {
+                        errorMsg.innerText = "Demasiados intentos. Intenta más tarde.";
+                    } else {
+                        errorMsg.innerText = "Error de conexión o acceso denegado.";
+                    }
+                });
+        });
+    </script>
 
 </body>
 </html>

@@ -14,6 +14,23 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <style>
+        /* Estilo para el Select de Servicios */
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #1A1C2A; 
+            color: #ffffff; 
+            font-family: 'Aileron', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            cursor: pointer;
+        }
+        .form-group select:focus { border-color: #f39c12; }
+    </style>
+
 </head>
 <body>
 
@@ -69,28 +86,34 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="servicio">Servicio deseado</label>
+                    <select id="servicio" required>
+                        <option value="Corte adulto">Corte adulto</option>
+                        <option value="Corte de niño">Corte de niño</option>
+                        <option value="Afeitado de barba">Afeitado de barba</option>
+                        <option value="Masaje/Exfoliacion">Masaje/Exfoliación cuero cabelludo</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="fecha">Seleccione la fecha</label>
-                    <input type="date" id="fecha" value="2025-11-17" required> 
+                    <input type="date" id="fecha" required> 
                 </div>
                 
                 <div class="form-group">
                     <label>Seleccione un horario</label>
                     <div class="horario-selector">
-                        <input type="radio" id="h900" name="horario" value="09:00" required checked>
-                        <label for="h900">09:00</label>
-                        
-                        <input type="radio" id="h1000" name="horario" value="10:00">
-                        <label for="h1000">10:00</label>
-                        
-                        <input type="radio" id="h1100" name="horario" value="11:00">
-                        <label for="h1100">11:00</label>
-                        
-                        <input type="radio" id="h1200" name="horario" value="12:00">
-                        <label for="h1200">12:00</label>
-                        
-                        <input type="radio" id="h1300" name="horario" value="13:00">
-                        <label for="h1300">13:00</label>
-                        </div>
+                        <input type="radio" id="h900" name="horario" value="09:00" required checked> <label for="h900">09:00</label>
+                        <input type="radio" id="h1000" name="horario" value="10:00"> <label for="h1000">10:00</label>
+                        <input type="radio" id="h1100" name="horario" value="11:00"> <label for="h1100">11:00</label>
+                        <input type="radio" id="h1200" name="horario" value="12:00"> <label for="h1200">12:00</label>
+                        <input type="radio" id="h1300" name="horario" value="13:00"> <label for="h1300">13:00</label>
+                        <input type="radio" id="h1400" name="horario" value="14:00"> <label for="h1400">14:00</label>
+                        <input type="radio" id="h1500" name="horario" value="15:00"> <label for="h1500">15:00</label>
+                        <input type="radio" id="h1600" name="horario" value="16:00"> <label for="h1600">16:00</label>
+                        <input type="radio" id="h1700" name="horario" value="17:00"> <label for="h1700">17:00</label>
+                        <input type="radio" id="h1800" name="horario" value="18:00"> <label for="h1800">18:00</label>
+                    </div>
                 </div>
 
                 <button type="submit" class="btn-modal-action">Agendar horario</button>
@@ -106,36 +129,108 @@
         </div>
     </div>
 
-    <script>
-        // Función para abrir un modal
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'block';
-        }
+    <div id="occupiedModal" class="modal" style="z-index: 1100;"> 
+        <div class="modal-content">
+            <div class="logo-apolo" style="color: #e74c3c;">Apolo</div> 
+            <h2>Horario No Disponible</h2>
+            <p style="color: #c0c0c0; margin-bottom: 20px; font-size: 1.1rem;">
+                Lo sentimos, esa hora ya está reservada. <br>Por favor selecciona otro horario.
+            </p>
+            <button class="btn-modal-action" onclick="closeModal('occupiedModal')">Seleccionar otra hora</button>
+        </div>
+    </div>
 
-        // Función para cerrar un modal
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
+    <script type="module">
+        import { db } from "./js/firebase.js";
+        import { collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // Obtener el formulario de agendamiento
-        const form = document.getElementById('scheduleForm');
-
-        // Escuchar el evento de envío del formulario
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Detiene el envío real del formulario
-
-            closeModal('scheduleModal');
-
-            // 2. Abre el modal de éxito
-            openModal('successModal');
-        });
-
-        // Cierra el modal si el usuario hace clic fuera de él
+        window.openModal = function(modalId) { document.getElementById(modalId).style.display = 'block'; }
+        window.closeModal = function(modalId) { document.getElementById(modalId).style.display = 'none'; }
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
                 event.target.style.display = "none";
             }
         }
+
+        document.getElementById('fecha').valueAsDate = new Date();
+
+        const form = document.getElementById('scheduleForm');
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault(); 
+
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const fecha = document.getElementById('fecha').value;
+            const servicioSeleccionado = document.getElementById('servicio').value;
+            const horaSeleccionada = document.querySelector('input[name="horario"]:checked').value;
+            
+            const btnAgendar = document.querySelector('.btn-modal-action');
+            const textoOriginal = btnAgendar.innerText;
+
+            try {
+                btnAgendar.innerText = "Verificando...";
+                btnAgendar.disabled = true;
+
+                // 1. VERIFICAR SI YA EXISTE UNA CITA "ACTIVA"
+                const q = query(collection(db, "agenda"), 
+                    where("fecha", "==", fecha), 
+                    where("hora", "==", horaSeleccionada)
+                );
+
+                const querySnapshot = await getDocs(q);
+
+                let horarioRealmenteOcupado = false;
+
+                // --- CORRECCIÓN DE LÓGICA AQUÍ ---
+                // Recorremos los resultados. Si encontramos AL MENOS UNA cita que NO esté completada,
+                // entonces el horario sí está ocupado.
+                querySnapshot.forEach((doc) => {
+                    const datos = doc.data();
+                    // Si el estado es diferente de 'completada', significa que sigue ocupando espacio
+                    if (datos.estado !== 'completada') {
+                        horarioRealmenteOcupado = true;
+                    }
+                });
+
+                if (horarioRealmenteOcupado) {
+                    window.openModal('occupiedModal');
+                    btnAgendar.innerText = textoOriginal;
+                    btnAgendar.disabled = false;
+                    return; 
+                }
+
+                // 2. SI ESTÁ LIBRE (O solo había citas completadas), GUARDAMOS
+                btnAgendar.innerText = "Guardando...";
+                
+                await addDoc(collection(db, "agenda"), {
+                    cliente: nombre,
+                    telefono: telefono,
+                    fecha: fecha, 
+                    hora: horaSeleccionada,
+                    servicio: servicioSeleccionado, 
+                    estado: "pendiente", 
+                    creado: new Date() 
+                });
+
+                // 3. ÉXITO
+                window.closeModal('scheduleModal');
+                window.openModal('successModal');
+                
+                form.reset();
+                document.getElementById('fecha').valueAsDate = new Date();
+
+            } catch (error) {
+                console.error("Error al agendar:", error);
+                alert("Hubo un error de conexión.");
+            } finally {
+                if(btnAgendar.innerText !== textoOriginal) {
+                     btnAgendar.innerText = textoOriginal;
+                     btnAgendar.disabled = false;
+                }
+            }
+        });
     </script>
+
 </body>
 </html>

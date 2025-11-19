@@ -12,6 +12,39 @@
     <link href="https://fonts.googleapis.com/css2?family=Aileron:wght@300;400;700&family=Montserrat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* --- COLORES DE ESTADO (Sobrescribimos para asegurar los colores pedidos) --- */
+        .status {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+        
+        /* Pendiente: Amarillo */
+        .status.pendiente { 
+            background-color: rgba(241, 196, 15, 0.15); 
+            color: #f1c40f; 
+            border: 1px solid rgba(241, 196, 15, 0.3);
+        }
+
+        /* Confirmada: Verde */
+        .status.confirmada { 
+            background-color: rgba(46, 204, 113, 0.15); 
+            color: #2ecc71; 
+            border: 1px solid rgba(46, 204, 113, 0.3);
+        }
+
+        /* Completada: Azul */
+        .status.completada { 
+            background-color: rgba(52, 152, 219, 0.15); 
+            color: #3498db; 
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+    </style>
 </head>
 <body class="pagina-interna">
 
@@ -26,7 +59,7 @@
                 <li><a href="#" class="active"><i class="fas fa-home"></i> Inicio</a></li>
                 <li><a href="intAgenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
                 <li><a href="intVentas.html"><i class="fas fa-cash-register"></i> Caja</a></li>
-                <li><a href="../index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+                <li><a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
             </ul>
         </nav>
     </header>
@@ -34,8 +67,8 @@
     <section class="dashboard-section">
         
         <div class="dashboard-header">
-            <h1>Hola, Administrador</h1>
-            <p>Resumen de operaciones del día</p>
+            <h1>Hola, Apolo Barber</h1>
+            <p>Resumen de operaciones del día: <strong id="fecha-hoy-texto" style="color: #f39c12;"></strong></p>
         </div>
 
         <div class="kpi-grid">
@@ -43,7 +76,7 @@
                 <div class="kpi-icon"><i class="fas fa-calendar-check"></i></div>
                 <div class="kpi-info">
                     <h3>Citas Hoy</h3>
-                    <span class="kpi-value">8</span>
+                    <span class="kpi-value" id="kpi-citas-hoy">...</span>
                 </div>
             </div>
 
@@ -51,7 +84,7 @@
                 <div class="kpi-icon"><i class="fas fa-dollar-sign"></i></div>
                 <div class="kpi-info">
                     <h3>Ventas del Día</h3>
-                    <span class="kpi-value">$2,450.00</span>
+                    <span class="kpi-value">$0.00</span> 
                 </div>
             </div>
 
@@ -59,7 +92,7 @@
                 <div class="kpi-icon"><i class="fas fa-cut"></i></div>
                 <div class="kpi-info">
                     <h3>Servicios Realizados</h3>
-                    <span class="kpi-value">12</span>
+                    <span class="kpi-value" id="kpi-servicios-realizados">0</span>
                 </div>
             </div>
         </div>
@@ -91,8 +124,8 @@
 
         <div class="recent-activity">
             <div class="table-header">
-                <h2>Próximas Citas</h2>
-                <a href="intAgenda.html" class="view-all">Ver todas</a>
+                <h2>Citas para Hoy</h2>
+                <a href="intAgenda.html" class="view-all">Ver Agenda Completa</a>
             </div>
             
             <div class="table-responsive">
@@ -105,24 +138,9 @@
                             <th>Estado</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tabla-citas-body">
                         <tr>
-                            <td>10:00 AM</td>
-                            <td>Juan Pérez</td>
-                            <td>Corte de Cabello</td>
-                            <td><span class="status confirmada">Confirmada</span></td>
-                        </tr>
-                        <tr>
-                            <td>11:30 AM</td>
-                            <td>Carlos Ruiz</td>
-                            <td>Barba + Corte</td>
-                            <td><span class="status pendiente">Pendiente</span></td>
-                        </tr>
-                        <tr>
-                            <td>01:00 PM</td>
-                            <td>Luis Miguel</td>
-                            <td>Masaje Relajante</td>
-                            <td><span class="status confirmada">Confirmada</span></td>
+                            <td colspan="4" style="text-align:center;">Cargando citas...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -130,6 +148,103 @@
         </div>
 
     </section>
+
+    <script type="module">
+        import { db, verificarSesion, cerrarSesion } from "../js/firebase.js";
+        import { collection, query, where, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        verificarSesion();
+
+        const btnSalir = document.querySelector('.logout-btn');
+        if(btnSalir) {
+            btnSalir.addEventListener('click', (e) => {
+                e.preventDefault();
+                cerrarSesion();
+            });
+        }
+
+        // Fecha Bonita
+        const fechaElemento = document.getElementById('fecha-hoy-texto');
+        const opciones = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        const fechaActualTexto = new Date().toLocaleDateString('es-ES', opciones);
+        fechaElemento.textContent = fechaActualTexto.charAt(0).toUpperCase() + fechaActualTexto.slice(1);
+
+        async function cargarDashboard() {
+            // Fecha YYYY-MM-DD local
+            const hoy = new Date();
+            const fechaQuery = hoy.toLocaleDateString('en-CA'); 
+
+            console.log("Buscando citas para:", fechaQuery);
+
+            try {
+                const citasRef = collection(db, "agenda");
+                const q = query(
+                    citasRef, 
+                    where("fecha", "==", fechaQuery),
+                    orderBy("hora", "asc")
+                );
+
+                const querySnapshot = await getDocs(q);
+
+                // 1. Total de Citas (Todas)
+                const cantidadTotal = querySnapshot.size;
+                document.getElementById('kpi-citas-hoy').innerText = cantidadTotal;
+
+                // 2. Variable para contar Servicios Realizados (Completados)
+                let serviciosCompletados = 0;
+
+                const tablaBody = document.getElementById('tabla-citas-body');
+                tablaBody.innerHTML = ""; 
+
+                if (cantidadTotal === 0) {
+                    tablaBody.innerHTML = `<tr><td colspan="4" style="text-align:center; color: #c0c0c0;">No hay citas programadas para hoy.</td></tr>`;
+                } else {
+                    querySnapshot.forEach((doc) => {
+                        const cita = doc.data();
+                        
+                        // --- LÓGICA DE COLORES Y CONTEO ---
+                        let claseEstado = "pendiente"; // Amarillo por defecto
+                        
+                        if (cita.estado === "confirmada") {
+                            claseEstado = "confirmada"; // Verde
+                        } else if (cita.estado === "completada") {
+                            claseEstado = "completada"; // Azul
+                            serviciosCompletados++; // ¡Aumentamos el contador!
+                        }
+                        
+                        // Crear fila
+                        const fila = `
+                            <tr>
+                                <td style="font-weight:bold; color:#f39c12;">${convertirHora(cita.hora)}</td>
+                                <td>${cita.cliente}</td>
+                                <td>${cita.servicio}</td>
+                                <td><span class="status ${claseEstado}">${cita.estado.toUpperCase()}</span></td>
+                            </tr>
+                        `;
+                        tablaBody.innerHTML += fila;
+                    });
+                }
+
+                // 3. Actualizar el número de "Servicios Realizados"
+                document.getElementById('kpi-servicios-realizados').innerText = serviciosCompletados;
+
+            } catch (error) {
+                console.error("Error al cargar el dashboard:", error);
+            }
+        }
+
+        function convertirHora(hora24) {
+            const [h, m] = hora24.split(':');
+            let horas = parseInt(h);
+            const ampm = horas >= 12 ? 'PM' : 'AM';
+            horas = horas % 12;
+            horas = horas ? horas : 12; 
+            return `${horas}:${m} ${ampm}`;
+        }
+
+        cargarDashboard();
+
+    </script>
 
 </body>
 </html>
