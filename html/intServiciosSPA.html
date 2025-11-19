@@ -9,8 +9,60 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
     <link href="https://fonts.googleapis.com/css2?family=Aileron:wght@300;400;700&family=Montserrat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Estilos específicos para la pantalla de "Próximamente" */
+        .proximamente-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 60vh; /* Ocupa buena parte de la pantalla */
+            padding: 20px;
+        }
+
+        .proximamente-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4rem; /* Grande e impactante */
+            font-weight: 700;
+            color: #f39c12; /* Color Dorado */
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .proximamente-subtitle {
+            /* 👇 CAMBIO AQUÍ: Ahora usa Montserrat (normal) en lugar de cursiva */
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 400; /* Peso normal */
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-transform: uppercase; /* Opcional: lo puse en mayúsculas para que combine */
+        }
+
+        .proximamente-desc {
+            font-family: 'Aileron', sans-serif;
+            font-size: 1.2rem;
+            color: #c0c0c0;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        /* Ajuste para móvil */
+        @media (max-width: 768px) {
+            .proximamente-title {
+                font-size: 2.5rem;
+            }
+            .proximamente-subtitle {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body class="pagina-interna">
 
@@ -32,49 +84,22 @@
         <a href="#scheduleModal" class="btn-cta">Agendar horario</a>
     </header>
 
-    <section id="servicios" class="service-section">
-        <div class="container-content">
+    <section class="location-section"> <div class="container-content">
             
-            <h1 class="section-title">APOLO SPA</h1>
-            <p class="service-description">
-                Un espacio dedicado a tu bienestar. Descubre nuestros tratamientos faciales y masajes diseñados para renovar tu energía y cuidar tu piel.
-            </p>
+            <div class="proximamente-container">
+                <div style="font-size: 3rem; color: #fff; margin-bottom: 20px;">
+                    <i class="fas fa-spa"></i>
+                </div>
 
-            <div class="service-list">
+                <h1 class="proximamente-title">PRÓXIMAMENTE</h1>
+                <h2 class="proximamente-subtitle">Apolo Spa</h2>
                 
-                <div class="service-card">
-                    <img src="../images/spa-facial1.jpg" alt="Facial limpieza profunda">
-                    <div class="card-info">
-                        <span class="service-name">Facial Limpieza Profunda</span>
-                        <span class="service-price">$---.--</span>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <img src="../images/spa-facial2.jpg" alt="Facial hidratante">
-                    <div class="card-info">
-                        <span class="service-name">Facial Hidratante</span>
-                        <span class="service-price">$---.--</span>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <img src="../images/spa-masaje1.jpg" alt="Masaje relajante">
-                    <div class="card-info">
-                        <span class="service-name">Masaje Relajante</span>
-                        <span class="service-price">$---.--</span>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <img src="../images/spa-masaje2.jpg" alt="Masaje descontracturante">
-                    <div class="card-info">
-                        <span class="service-name">Masaje Descontracturante</span>
-                        <span class="service-price">$---.--</span>
-                    </div>
-                </div>
-
+                <p class="proximamente-desc">
+                    Estamos preparando un espacio exclusivo dedicado a tu relajación y bienestar. 
+                    Muy pronto podrás disfrutar de nuestros nuevos tratamientos faciales y masajes.
+                </p>
             </div>
+
         </div>
     </section>
     
