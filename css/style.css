@@ -1031,3 +1031,964 @@ body.pagina-interna {
         right: 10px;
     }
 }
+
+/* --- 13. Estilos para Login de Administrador (NUEVO) --- */
+
+.login-section {
+    /* Centrar vertical y horizontalmente */
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0D0F1A;
+    padding: 20px;
+}
+
+.login-card {
+    background-color: #1A1C2A; /* Un tono más claro que el fondo */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    border: 1px solid #2a2d40;
+}
+
+.login-icon {
+    font-size: 3rem;
+    color: #f39c12;
+    margin-bottom: 20px;
+}
+
+.login-card h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+.login-card p {
+    color: #c0c0c0;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+/* Estilos de los Inputs */
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    color: #f39c12;
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background-color: #0D0F1A; /* Fondo oscuro para el input */
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: 'Aileron', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #f39c12; /* Borde dorado al escribir */
+}
+
+.btn-login {
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+}
+
+.forgot-pass {
+    display: block;
+    margin-top: 20px;
+    color: #666;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.forgot-pass:hover {
+    color: #f39c12;
+}
+
+/* Ajuste Responsive para Login */
+@media (max-width: 768px) {
+    .login-card {
+        padding: 30px 20px;
+    }
+}
+/* --- 14. Estilos del Panel de Control (Dashboard) --- */
+
+.dashboard-section {
+    padding: 50px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+.dashboard-header {
+    margin-bottom: 40px;
+}
+.dashboard-header h1 {
+    font-family: 'Montserrat', sans-serif;
+    color: #f39c12;
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+.dashboard-header p {
+    color: #c0c0c0;
+}
+
+/* Tarjetas de Resumen (KPIs) */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.kpi-card {
+    background-color: #1A1C2A;
+    padding: 25px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border-left: 4px solid #f39c12; /* Borde decorativo */
+}
+
+.kpi-icon {
+    background-color: rgba(243, 156, 18, 0.2);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #f39c12;
+}
+
+.kpi-info h3 {
+    font-size: 0.9rem;
+    color: #c0c0c0;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.kpi-value {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* Botones de Acciones Rápidas */
+.section-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.action-card {
+    background-color: #2a2d40;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    border: 1px solid #333;
+}
+
+.action-card:hover {
+    transform: translateY(-5px);
+    background-color: #32364a;
+    border-color: #f39c12;
+}
+
+.action-card i {
+    font-size: 2rem;
+    color: #f39c12;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.action-card span {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Tabla de Actividad Reciente */
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.table-header h2 {
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.view-all {
+    color: #f39c12;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1A1C2A;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #2a2d40;
+}
+
+table th {
+    background-color: #252836;
+    color: #f39c12;
+    font-weight: 700;
+}
+
+table td {
+    color: #c0c0c0;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.status.confirmada {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+.status.pendiente {
+    background-color: rgba(241, 196, 15, 0.2);
+    color: #f1c40f;
+}
+
+/* Ajustes del Header Admin */
+.logo-admin {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.logo-admin img {
+    height: 40px;
+}
+.logo-admin span {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-left: 1px solid #666;
+    padding-left: 10px;
+}
+
+/* Responsive Dashboard */
+@media (max-width: 768px) {
+    .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+    .actions-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+    .logo-admin span {
+        display: none; /* Ocultar texto "Panel Admin" en celular si no cabe */
+    }
+}
+/* --- 15. Estilos para la Agenda (Admin) --- */
+
+.admin-section {
+    padding: 40px 5%;
+    background-color: #0D0F1A;
+    min-height: 100vh;
+}
+
+.admin-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+}
+
+.page-header h1 {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: 2rem;
+}
+
+/* Barra de Herramientas */
+.agenda-toolbar {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    background-color: #1A1C2A;
+    padding: 20px;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-group label {
+    color: #c0c0c0;
+    font-weight: 700;
+}
+
+.admin-input {
+    background-color: #0D0F1A;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-family: 'Aileron', sans-serif;
+}
+
+/* Timeline de Citas */
+.agenda-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.time-slot {
+    display: flex;
+    align-items: stretch; /* Estirar altura */
+}
+
+.slot-time {
+    width: 100px;
+    color: #f39c12;
+    font-weight: 700;
+    padding-top: 15px; /* Alinear texto con la tarjeta */
+    font-size: 1.1rem;
+}
+
+.slot-content {
+    flex-grow: 1;
+    background-color: #1A1C2A;
+    border-radius: 8px;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid #333; /* Borde por defecto */
+    transition: transform 0.2s ease;
+}
+
+.slot-content:hover {
+    transform: translateX(5px);
+}
+
+/* Estados de la Cita (Borde Izquierdo) */
+.slot-content.confirmed { border-left-color: #2ecc71; } /* Verde */
+.slot-content.pending { border-left-color: #f1c40f; }   /* Amarillo */
+.slot-content.in-process { border-left-color: #3498db; } /* Azul */
+.slot-content.free { 
+    border-left-color: #666; 
+    background-color: transparent;
+    border: 1px dashed #333;
+    color: #666;
+}
+
+.cita-info h3 {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.cita-info p {
+    color: #c0c0c0;
+    font-size: 0.9rem;
+}
+
+.cita-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Badges de Estado */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.status-badge.confirmed { background-color: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+.status-badge.pending { background-color: rgba(241, 196, 15, 0.2); color: #f1c40f; }
+.status-badge.process { background-color: rgba(52, 152, 219, 0.2); color: #3498db; }
+
+/* Botones de Acción (Editar/Borrar) */
+.action-btn {
+    background: none;
+    border: none;
+    color: #c0c0c0;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+.action-btn:hover { color: #fff; }
+.action-btn.delete:hover { color: #e74c3c; }
+
+/* Botón para slot libre */
+.btn-add-fast {
+    background: none;
+    border: none;
+    color: #2ecc71;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Responsivo para Agenda */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .agenda-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .slot-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .cita-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+/* --- 16. Estilos para Punto de Venta (Caja) --- */
+
+.pos-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px; /* Catálogo flexible | Ticket fijo */
+    gap: 30px;
+    height: calc(100vh - 150px); /* Ocupa el resto de la pantalla */
+}
+
+/* Columna Izquierda: Catálogo */
+.pos-catalog {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.pos-tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.pos-tab {
+    background-color: #1A1C2A;
+    border: 1px solid #333;
+    color: #c0c0c0;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.pos-tab.active, .pos-tab:hover {
+    background-color: #f39c12;
+    color: #222;
+    border-color: #f39c12;
+}
+
+.pos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    overflow-y: auto; /* Scroll si hay muchos productos */
+    padding-right: 5px;
+}
+
+.pos-item {
+    background-color: #1A1C2A;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.pos-item:hover {
+    transform: translateY(-3px);
+    border-color: #f39c12;
+    background-color: #252836;
+}
+
+.pos-item-icon {
+    font-size: 2.5rem;
+    color: #f39c12;
+    margin-bottom: 10px;
+}
+
+.pos-item-info h4 {
+    font-size: 1rem;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.pos-item-info span {
+    color: #2ecc71; /* Verde para el precio */
+    font-weight: 700;
+}
+
+
+/* Columna Derecha: Ticket */
+.pos-ticket-panel {
+    background-color: #fff; /* Ticket blanco para contraste */
+    color: #222;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.ticket-header {
+    background-color: #f39c12;
+    padding: 15px;
+    text-align: center;
+}
+
+.ticket-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #222;
+    font-weight: 700;
+}
+
+.ticket-items {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+}
+
+.ticket-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed #ccc;
+    padding: 10px 0;
+}
+
+.t-desc p {
+    margin: 0;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.t-desc small {
+    color: #666;
+}
+
+.t-price {
+    font-weight: 700;
+    color: #333;
+}
+
+.t-remove {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.ticket-footer {
+    padding: 20px;
+    background-color: #fff;
+    border-top: 2px solid #eee;
+}
+
+.ticket-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.total-amount {
+    color: #2ecc71; /* Verde dinero */
+}
+
+.btn-checkout {
+    width: 100%;
+    text-align: center;
+    display: block;
+    font-size: 1.1rem;
+}
+
+/* Responsivo para POS */
+@media (max-width: 992px) {
+    .pos-layout {
+        grid-template-columns: 1fr; /* Apilar columnas */
+        height: auto;
+    }
+    .pos-ticket-panel {
+        min-height: 400px;
+    }
+}
+/* --- 17. Estilos para Control de Gastos (NUEVO) --- */
+
+.gastos-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* Formulario | Tabla */
+    gap: 30px;
+    align-items: start;
+}
+
+/* Tarjeta del Formulario */
+.gastos-form-card {
+    background-color: #1A1C2A;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-top: 4px solid #e74c3c; /* Color rojo para gastos */
+}
+
+.card-title {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+.form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.admin-input {
+    width: 100%;
+    padding: 12px;
+    background-color: #0D0F1A;
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: #fff;
+    font-family: 'Aileron', sans-serif;
+    font-size: 1rem;
+}
+
+.admin-input:focus {
+    outline: none;
+    border-color: #f39c12;
+}
+
+.full-width {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Panel de Historial */
+.gastos-history-panel {
+    background-color: #1A1C2A;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.history-header h2 {
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.total-expenses {
+    background-color: #0D0F1A;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: #c0c0c0;
+}
+
+/* Tabla Específica de Gastos */
+.table-gastos {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-gastos th {
+    text-align: left;
+    padding: 10px;
+    color: #f39c12;
+    border-bottom: 2px solid #333;
+    font-size: 0.9rem;
+}
+
+.table-gastos td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #2a2d40;
+    color: #c0c0c0;
+    font-size: 0.95rem;
+}
+
+.amount-negative {
+    color: #e74c3c !important; /* Rojo para números negativos */
+    font-weight: 700;
+}
+
+/* Badges de Categoría */
+.badge-cat {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.badge-cat.insumos { background-color: #3498db; }
+.badge-cat.servicios { background-color: #f39c12; color: #000; }
+.badge-cat.mtto { background-color: #95a5a6; }
+.badge-cat.ads { background-color: #9b59b6; }
+
+/* Responsivo para Gastos */
+@media (max-width: 992px) {
+    .gastos-layout {
+        grid-template-columns: 1fr; /* Apilar en vertical */
+    }
+}
+
+@media (max-width: 768px) {
+    .form-row-2 {
+        grid-template-columns: 1fr; /* Inputs uno debajo del otro */
+        gap: 0;
+    }
+}
+/* --- 18. Estilos para Reportes Financieros (NUEVO) --- */
+
+/* Toolbar de Reportes */
+.report-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1A1C2A;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.report-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #f39c12;
+    color: #f39c12;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background-color: #f39c12;
+    color: #222;
+}
+
+/* Colores Específicos para Tarjetas */
+.income-text { color: #2ecc71; }
+.expense-text { color: #e74c3c; }
+.balance-text { color: #3498db; }
+
+.kpi-icon.income { color: #2ecc71; background-color: rgba(46, 204, 113, 0.2); }
+.kpi-icon.expense { color: #e74c3c; background-color: rgba(231, 76, 60, 0.2); }
+.kpi-icon.balance { color: #3498db; background-color: rgba(52, 152, 219, 0.2); }
+
+/* Gráfica de Barras Simulada (CSS) */
+.chart-container {
+    background-color: #1A1C2A;
+    padding: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.chart-container h2 {
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.simple-bar-chart {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 250px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #333;
+}
+
+.chart-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15%;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.bar {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    transition: height 1s ease;
+    cursor: pointer;
+}
+
+/* Colores de las barras */
+.income-bar { background-color: #2ecc71; }
+.expense-bar { background-color: #e74c3c; }
+.balance-bar { background-color: #3498db; }
+
+.label {
+    margin-top: 10px;
+    color: #c0c0c0;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+/* Tooltip de la barra (aparece al pasar el mouse) */
+.bar .tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    color: #000;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+}
+
+.bar:hover .tooltip {
+    opacity: 1;
+}
+
+/* Tabla de Reportes */
+.table-report {
+    width: 100%;
+    border-collapse: collapse;
+}
+.table-report th {
+    text-align: left;
+    padding: 15px;
+    background-color: #252836;
+    color: #f39c12;
+}
+.table-report td {
+    padding: 15px;
+    border-bottom: 1px solid #2a2d40;
+    color: #c0c0c0;
+}
+
+.type-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.type-badge.in { background-color: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+.type-badge.out { background-color: rgba(231, 76, 60, 0.2); color: #e74c3c; }
+
+.amount-positive { color: #2ecc71; font-weight: 700; }
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .report-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .simple-bar-chart {
+        height: 200px;
+    }
+    .chart-group {
+        width: 25%; /* Barras más anchas en móvil */
+    }
+}

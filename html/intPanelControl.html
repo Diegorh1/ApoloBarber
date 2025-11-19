@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control - Barberia APOLO</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aileron:wght@300;400;700&family=Montserrat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="pagina-interna">
+
+    <header class="main-header header-interno">
+        <div class="logo-admin">
+            <img src="../images/imgLogo.png" alt="Logo">
+            <span>PANEL ADMINISTRATIVO</span>
+        </div>
+        
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#" class="active"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="intAgenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
+                <li><a href="intVentas.html"><i class="fas fa-cash-register"></i> Caja</a></li>
+                <li><a href="../index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="dashboard-section">
+        
+        <div class="dashboard-header">
+            <h1>Hola, Administrador</h1>
+            <p>Resumen de operaciones del día</p>
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-icon"><i class="fas fa-calendar-check"></i></div>
+                <div class="kpi-info">
+                    <h3>Citas Hoy</h3>
+                    <span class="kpi-value">8</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon"><i class="fas fa-dollar-sign"></i></div>
+                <div class="kpi-info">
+                    <h3>Ventas del Día</h3>
+                    <span class="kpi-value">$2,450.00</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon"><i class="fas fa-cut"></i></div>
+                <div class="kpi-info">
+                    <h3>Servicios Realizados</h3>
+                    <span class="kpi-value">12</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-subtitle">Acciones Rápidas</h2>
+        <div class="actions-grid">
+            
+            <a href="intAgenda.html" class="action-card">
+                <i class="fas fa-calendar-plus"></i>
+                <span>Nueva Cita</span>
+            </a>
+
+            <a href="intVentas.html" class="action-card">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>Registrar Venta</span>
+            </a>
+
+            <a href="intGastos.html" class="action-card">
+                <i class="fas fa-wallet"></i>
+                <span>Registrar Gasto</span>
+            </a>
+
+            <a href="intReportes.html" class="action-card">
+                <i class="fas fa-chart-line"></i>
+                <span>Ver Reportes</span>
+            </a>
+
+        </div>
+
+        <div class="recent-activity">
+            <div class="table-header">
+                <h2>Próximas Citas</h2>
+                <a href="intAgenda.html" class="view-all">Ver todas</a>
+            </div>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Cliente</th>
+                            <th>Servicio</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10:00 AM</td>
+                            <td>Juan Pérez</td>
+                            <td>Corte de Cabello</td>
+                            <td><span class="status confirmada">Confirmada</span></td>
+                        </tr>
+                        <tr>
+                            <td>11:30 AM</td>
+                            <td>Carlos Ruiz</td>
+                            <td>Barba + Corte</td>
+                            <td><span class="status pendiente">Pendiente</span></td>
+                        </tr>
+                        <tr>
+                            <td>01:00 PM</td>
+                            <td>Luis Miguel</td>
+                            <td>Masaje Relajante</td>
+                            <td><span class="status confirmada">Confirmada</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </section>
+
+</body>
+</html>

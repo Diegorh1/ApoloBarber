@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caja / Ventas - Barberia APOLO</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aileron:wght@300;400;700&family=Montserrat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="pagina-interna">
+
+    <header class="main-header header-interno">
+        <div class="logo-admin">
+            <img src="../images/imgLogo.png" alt="Logo">
+            <span>PANEL ADMINISTRATIVO</span>
+        </div>
+        
+        <nav class="main-nav">
+            <ul>
+                <li><a href="intPanelControl.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="intAgenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
+                <li><a href="intVentas.html" class="active"><i class="fas fa-cash-register"></i> Caja</a></li>
+                <li><a href="../index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="admin-section">
+        <div class="admin-container">
+            
+            <div class="page-header">
+                <h1>Punto de Venta</h1>
+                <div class="date-display">
+                    <i class="far fa-calendar"></i> <span id="current-date">Hoy</span>
+                </div>
+            </div>
+
+            <div class="pos-layout">
+                
+                <div class="pos-catalog">
+                    
+                    <div class="pos-tabs">
+                        <button class="pos-tab active">Servicios</button>
+                        <button class="pos-tab">Productos</button>
+                    </div>
+
+                    <div class="pos-grid">
+                        <div class="pos-item" onclick="addToTicket('Corte de Cabello', 150)">
+                            <div class="pos-item-icon"><i class="fas fa-cut"></i></div>
+                            <div class="pos-item-info">
+                                <h4>Corte de Cabello</h4>
+                                <span>$150.00</span>
+                            </div>
+                        </div>
+
+                        <div class="pos-item" onclick="addToTicket('Barba', 180)">
+                            <div class="pos-item-icon"><i class="fas fa-user-tie"></i></div>
+                            <div class="pos-item-info">
+                                <h4>Arreglo de Barba</h4>
+                                <span>$180.00</span>
+                            </div>
+                        </div>
+
+                        <div class="pos-item" onclick="addToTicket('Afeitado Clásico', 200)">
+                            <div class="pos-item-icon"><i class="fas fa-soap"></i></div>
+                            <div class="pos-item-info">
+                                <h4>Afeitado Clásico</h4>
+                                <span>$200.00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="pos-item" onclick="addToTicket('Masaje Relajante', 450)">
+                            <div class="pos-item-icon"><i class="fas fa-spa"></i></div>
+                            <div class="pos-item-info">
+                                <h4>Masaje Relajante</h4>
+                                <span>$450.00</span>
+                            </div>
+                        </div>
+
+                        <div class="pos-item" onclick="addToTicket('Facial Limpieza', 350)">
+                            <div class="pos-item-icon"><i class="far fa-face-smile-beam"></i></div>
+                            <div class="pos-item-info">
+                                <h4>Facial Limpieza</h4>
+                                <span>$350.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pos-ticket-panel">
+                    <div class="ticket-header">
+                        <h3>Ticket de Venta #00124</h3>
+                    </div>
+                    
+                    <div class="ticket-items" id="ticket-items">
+                        <div class="ticket-row">
+                            <div class="t-desc">
+                                <p>Corte de Cabello</p>
+                                <small>1 x $150.00</small>
+                            </div>
+                            <div class="t-price">$150.00</div>
+                            <button class="t-remove"><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="ticket-footer">
+                        <div class="ticket-total-row">
+                            <span>Total a Pagar:</span>
+                            <span class="total-amount">$150.00</span>
+                        </div>
+                        
+                        <button class="btn-cta btn-checkout" onclick="alert('Ticket generado e impreso')">
+                            <i class="fas fa-print"></i> Cobrar e Imprimir
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById('current-date').innerText = new Date().toLocaleDateString('es-ES', dateOptions);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes Financieros - Barberia APOLO</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aileron:wght@300;400;700&family=Montserrat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        .filters-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+        /* Ajuste para móvil */
+        @media (max-width: 768px) {
+            .report-toolbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            .filters-container {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .report-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body class="pagina-interna">
+
+    <header class="main-header header-interno">
+        <div class="logo-admin">
+            <img src="../images/imgLogo.png" alt="Logo">
+            <span>PANEL ADMINISTRATIVO</span>
+        </div>
+        
+        <nav class="main-nav">
+            <ul>
+                <li><a href="intPanelControl.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="intAgenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
+                <li><a href="intVentas.html"><i class="fas fa-cash-register"></i> Caja</a></li>
+                <li><a href="../index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="admin-section">
+        <div class="admin-container">
+            
+            <div class="page-header">
+                <h1>Reportes Financieros</h1>
+                <div class="date-display">
+                    <i class="fas fa-chart-pie"></i> Análisis Financiero
+                </div>
+            </div>
+
+            <div class="report-toolbar">
+                
+                <div class="filters-container">
+                    
+                    <div class="filter-group">
+                        <label>Periodo:</label>
+                        <select class="admin-input">
+                            <option value="mensual" selected>Mensual</option>
+                            <option value="bimestral">Bimestral</option>
+                            <option value="semestral">Semestral</option>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Desde:</label>
+                        <input type="date" value="2025-11-01" class="admin-input">
+                    </div>
+
+                    <div class="filter-group">
+                        <label>Hasta:</label>
+                        <input type="date" value="2025-11-30" class="admin-input">
+                    </div>
+
+                    <button class="btn-cta" style="padding: 10px 15px; height: 42px;">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+
+                <div class="report-actions">
+                    <button class="btn-outline" onclick="alert('Descargando PDF...')"><i class="fas fa-file-pdf"></i> PDF</button>
+                    <button class="btn-outline" onclick="alert('Descargando Excel...')"><i class="fas fa-file-excel"></i> Excel</button>
+                </div>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card income-card">
+                    <div class="kpi-icon income"><i class="fas fa-arrow-up"></i></div>
+                    <div class="kpi-info">
+                        <h3>Ingresos Totales</h3>
+                        <span class="kpi-value income-text">$12,500.00</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card expense-card">
+                    <div class="kpi-icon expense"><i class="fas fa-arrow-down"></i></div>
+                    <div class="kpi-info">
+                        <h3>Gastos Totales</h3>
+                        <span class="kpi-value expense-text">$4,250.00</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card balance-card">
+                    <div class="kpi-icon balance"><i class="fas fa-wallet"></i></div>
+                    <div class="kpi-info">
+                        <h3>Utilidad Neta</h3>
+                        <span class="kpi-value balance-text">$8,250.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h2>Balance del Periodo Seleccionado</h2>
+                <div class="simple-bar-chart">
+                    
+                    <div class="chart-group">
+                        <div class="bar income-bar" style="height: 80%;">
+                            <span class="tooltip">$12,500</span>
+                        </div>
+                        <span class="label">Ingresos</span>
+                    </div>
+
+                    <div class="chart-group">
+                        <div class="bar expense-bar" style="height: 35%;">
+                            <span class="tooltip">$4,250</span>
+                        </div>
+                        <span class="label">Gastos</span>
+                    </div>
+
+                     <div class="chart-group">
+                        <div class="bar balance-bar" style="height: 60%;">
+                            <span class="tooltip">$8,250</span>
+                        </div>
+                        <span class="label">Utilidad</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="recent-activity">
+                <div class="table-header">
+                    <h2>Desglose de Movimientos</h2>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table-report">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th>Descripción</th>
+                                <th>Categoría</th>
+                                <th>Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>17/11/2025</td>
+                                <td><span class="type-badge out">Gasto</span></td>
+                                <td>Compra de Ceras</td>
+                                <td>Insumos</td>
+                                <td class="amount-negative">-$1,200.00</td>
+                            </tr>
+                            <tr>
+                                <td>17/11/2025</td>
+                                <td><span class="type-badge in">Ingreso</span></td>
+                                <td>Corte + Barba (Juan P.)</td>
+                                <td>Servicios</td>
+                                <td class="amount-positive">+$280.00</td>
+                            </tr>
+                            <tr>
+                                <td>16/11/2025</td>
+                                <td><span class="type-badge in">Ingreso</span></td>
+                                <td>Venta Gummy Gel</td>
+                                <td>Productos</td>
+                                <td class="amount-positive">+$150.00</td>
+                            </tr>
+                             <tr>
+                                <td>16/11/2025</td>
+                                <td><span class="type-badge out">Gasto</span></td>
+                                <td>Pago Internet</td>
+                                <td>Servicios</td>
+                                <td class="amount-negative">-$550.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>

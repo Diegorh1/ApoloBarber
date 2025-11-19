@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda - Barberia APOLO</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aileron:wght@300;400;700&family=Montserrat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="pagina-interna">
+
+    <header class="main-header header-interno">
+        <div class="logo-admin">
+            <img src="../images/imgLogo.png" alt="Logo">
+            <span>PANEL ADMINISTRATIVO</span>
+        </div>
+        
+        <nav class="main-nav">
+            <ul>
+                <li><a href="intPanelControl.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="intAgenda.html" class="active"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
+                <li><a href="intVentas.html"><i class="fas fa-cash-register"></i> Caja</a></li>
+                <li><a href="../index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="admin-section">
+        <div class="admin-container">
+            
+            <div class="page-header">
+                <h1>Gestión de Citas</h1>
+                <button class="btn-cta" onclick="alert('Aquí se abriría el modal para agendar manualmente')">
+                    <i class="fas fa-plus"></i> Nueva Cita
+                </button>
+            </div>
+
+            <div class="agenda-toolbar">
+                <div class="filter-group">
+                    <label>Fecha:</label>
+                    <input type="date" value="2025-11-19" class="admin-input">
+                </div>
+            </div>
+
+            <div class="agenda-timeline">
+
+                <div class="time-slot">
+                    <div class="slot-time">09:00 AM</div>
+                    <div class="slot-content occupied confirmed">
+                        <div class="cita-info">
+                            <h3>Juan Pérez</h3>
+                            <p>Corte de Cabello</p> </div>
+                        <div class="cita-actions">
+                            <span class="status-badge confirmed">Confirmada</span>
+                            <button class="action-btn edit"><i class="fas fa-pen"></i></button>
+                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="time-slot">
+                    <div class="slot-time">10:00 AM</div>
+                    <div class="slot-content occupied pending">
+                        <div class="cita-info">
+                            <h3>Carlos Ruiz</h3>
+                            <p>Barba + Corte</p> </div>
+                        <div class="cita-actions">
+                            <span class="status-badge pending">Pendiente</span>
+                            <button class="action-btn edit"><i class="fas fa-pen"></i></button>
+                            <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="time-slot">
+                    <div class="slot-time">11:00 AM</div>
+                    <div class="slot-content free">
+                        <span>Disponible</span>
+                        <button class="btn-add-fast"><i class="fas fa-plus-circle"></i></button>
+                    </div>
+                </div>
+
+                <div class="time-slot">
+                    <div class="slot-time">12:00 PM</div>
+                    <div class="slot-content occupied in-process">
+                        <div class="cita-info">
+                            <h3>Luis Miguel</h3>
+                            <p>Masaje Relajante</p> </div>
+                        <div class="cita-actions">
+                            <span class="status-badge process">En Proceso</span>
+                            <button class="action-btn edit"><i class="fas fa-pen"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="time-slot">
+                    <div class="slot-time">01:00 PM</div>
+                    <div class="slot-content free">
+                        <span>Disponible</span>
+                        <button class="btn-add-fast"><i class="fas fa-plus-circle"></i></button>
+                    </div>
+                </div>
+
+            </div> 
+
+        </div>
+    </section>
+
+</body>
+</html>

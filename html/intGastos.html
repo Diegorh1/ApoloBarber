@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Gastos - Barberia APOLO</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aileron:wght@300;400;700&family=Montserrat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="pagina-interna">
+
+    <header class="main-header header-interno">
+        <div class="logo-admin">
+            <img src="../images/imgLogo.png" alt="Logo">
+            <span>PANEL ADMINISTRATIVO</span>
+        </div>
+        
+        <nav class="main-nav">
+            <ul>
+                <li><a href="intPanelControl.html"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="intAgenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
+                <li><a href="intVentas.html"><i class="fas fa-cash-register"></i> Caja</a></li>
+                <li><a href="../index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="admin-section">
+        <div class="admin-container">
+            
+            <div class="page-header">
+                <h1>Registro de Egresos</h1>
+                <div class="date-display">
+                    <i class="fas fa-wallet"></i> Control Financiero
+                </div>
+            </div>
+
+            <div class="gastos-layout">
+                
+                <div class="gastos-form-card">
+                    <h2 class="card-title"><i class="fas fa-plus-circle"></i> Nuevo Gasto</h2>
+                    
+                    <form id="expenseForm">
+                        
+                        <div class="form-group">
+                            <label>Concepto / Descripción</label>
+                            <input type="text" class="admin-input" placeholder="Ej. Pago de luz, Compra de toallas..." required>
+                        </div>
+
+                        <div class="form-row-2">
+                            <div class="form-group">
+                                <label>Categoría</label>
+                                <select class="admin-input">
+                                    <option value="servicios">Servicios Básicos (Luz/Agua)</option>
+                                    <option value="insumos">Insumos / Inventario</option>
+                                    <option value="mantenimiento">Mantenimiento</option>
+                                    <option value="sueldos">Sueldos / Comisiones</option>
+                                    <option value="publicidad">Publicidad</option>
+                                    <option value="otros">Otros</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Monto ($)</label>
+                                <input type="number" class="admin-input" placeholder="0.00" min="0" step="0.01" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row-2">
+                            <div class="form-group">
+                                <label>Fecha</label>
+                                <input type="date" class="admin-input" id="expense-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Método de Pago</label>
+                                <select class="admin-input">
+                                    <option value="efectivo">Efectivo (Caja)</option>
+                                    <option value="transferencia">Transferencia</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Notas Adicionales</label>
+                            <textarea class="admin-input" rows="3" placeholder="Detalles adicionales..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-cta full-width">
+                            <i class="fas fa-save"></i> Registrar Gasto
+                        </button>
+
+                    </form>
+                </div>
+
+                <div class="gastos-history-panel">
+                    <div class="history-header">
+                        <h2>Últimos Movimientos</h2>
+                        <span class="total-expenses">Mes: <b style="color: #e74c3c;">$4,250.00</b></span>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table-gastos">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Concepto</th>
+                                    <th>Categoría</th>
+                                    <th>Monto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>17/11/2025</td>
+                                    <td>Compra de Ceras</td>
+                                    <td><span class="badge-cat insumos">Insumos</span></td>
+                                    <td class="amount-negative">-$1,200.00</td>
+                                </tr>
+                                <tr>
+                                    <td>16/11/2025</td>
+                                    <td>Pago Internet</td>
+                                    <td><span class="badge-cat servicios">Servicios</span></td>
+                                    <td class="amount-negative">-$550.00</td>
+                                </tr>
+                                <tr>
+                                    <td>15/11/2025</td>
+                                    <td>Reparación Silla</td>
+                                    <td><span class="badge-cat mtto">Mantenimiento</span></td>
+                                    <td class="amount-negative">-$800.00</td>
+                                </tr>
+                                <tr>
+                                    <td>14/11/2025</td>
+                                    <td>Publicidad FB</td>
+                                    <td><span class="badge-cat ads">Publicidad</span></td>
+                                    <td class="amount-negative">-$300.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // Poner la fecha de hoy automáticamente
+        document.getElementById('expense-date').valueAsDate = new Date();
+    </script>
+
+</body>
+</html>

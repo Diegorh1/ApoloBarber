@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Barberia APOLO</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Aileron:wght@300;400;700&family=Montserrat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="pagina-interna">
+
+    <header class="main-header header-interno">
+        <a href="../index.html" class="logo">
+            <img src="../images/imgLogo.png" alt="Logo Barberia Apolo">
+        </a>
+        
+        <nav class="main-nav">
+            <ul>
+                <li><a href="../index.html">Volver al Sitio Web</a></li>
+            </ul>
+        </nav>
+        </header>
+
+    <section class="login-section">
+        <div class="login-card">
+            <div class="login-icon">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <h2>ACCESO ADMINISTRATIVO</h2>
+            <p>Ingresa tus credenciales para gestionar el negocio.</p>
+            
+            <form action="intPanelControl.html" method="GET"> <div class="input-group">
+                    <label for="adminUser"><i class="fas fa-user"></i> Usuario</label>
+                    <input type="text" id="adminUser" placeholder="Ej. admin_apolo" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="adminPass"><i class="fas fa-lock"></i> Contraseña</label>
+                    <input type="password" id="adminPass" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="btn-cta btn-login">Ingresar al Sistema</button>
+                
+            </form>
+            
+            <a href="#" class="forgot-pass">¿Olvidaste tu contraseña?</a>
+        </div>
+    </section>
+
+</body>
+</html>
