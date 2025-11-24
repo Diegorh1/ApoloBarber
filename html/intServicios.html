@@ -11,6 +11,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <link href="https://fonts.googleapis.com/css2?family=Aileron:wght@300;400;700&family=Montserrat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        .form-group select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background-color: #1A1C2A; color: #ffffff; font-family: 'Aileron', sans-serif; font-size: 1rem; outline: none; cursor: pointer; }
+        .form-group select:focus { border-color: #f39c12; }
+    </style>
 </head>
 <body class="pagina-interna">
 
@@ -21,14 +27,14 @@
         <nav class="main-nav">
             <ul>
                 <li><a href="intSobre.html">Sobre</a></li>
-                <li><a href="intServicios.html"class="active">Servicios Barberia</a></li>
+                <li><a href="intServicios.html" class="active">Servicios Barberia</a></li>
                 <li><a href="intServiciosSPA.html">Servicios SPA</a></li>
                 <li><a href="intProductos.html">Productos</a></li>
                 <li><a href="intQuienesSomos.html">Quienes somos</a></li>
                 <li><a href="intUbicacion.html">Ubicación</a></li>
             </ul>
         </nav>
-        <a href="#" class="btn-cta">Agendar horario</a>
+        <a href="#scheduleModal" class="btn-cta" onclick="openModal('scheduleModal')">Agendar Horario</a>
     </header>
 
     <section id="servicios" class="service-section">
@@ -37,28 +43,18 @@
             <p class="service-description">
                 En Apolo Barbería, cada corte y afeitado es una obra de arte. Ofrecemos cortes de cabello precisos y a la moda, arreglos de barba que incluyen el ritual de toalla caliente para un perfilado perfecto, y el clásico afeitado a navaja para una piel impecable.
             </p>
-            <div class="service-list">
-                <div class="service-card">
-                    <img src="../images/Corte1.png" alt="Hombre con corte de cabello moderno, perfil lateral">
-                    <div class="card-info">
-                        <span class="service-name">Corte de cabello</span>
-                        <span class="service-price">$150.00</span>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <img src="../images/Corte2.png" alt="Hombre con corte de cabello degradado, vista frontal">
-                    <div class="card-info">
-                        <span class="service-name">Corte de cabello</span>
-                        <span class="service-price">$150.00</span>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <img src="../images/Corte3.png" alt="Hombre de negocios con corte de cabello y gafas de sol">
-                    <div class="card-info">
-                        <span class="service-name">Corte de cabello</span>
-                        <span class="service-price">$150.00</span>
-                    </div>
-                </div>
+            
+            <div class="service-list" id="lista-servicios">
+                
+                <div class="service-card"><img src="../images/corteAdulto.jpeg" alt="Corte Adulto"><div class="card-info"><span class="service-name">Corte de cabello adulto</span><span class="service-price">$150.00</span></div></div>
+                <div class="service-card"><img src="../images/corteNiño.jpeg" alt="Corte Niño"><div class="card-info"><span class="service-name">Corte de cabello niño</span><span class="service-price">$130.00</span></div></div>
+                <div class="service-card"><img src="../images/corteBarba.png" alt="Afeitado"><div class="card-info"><span class="service-name">Afeitado de barba</span><span class="service-price">$150.00</span></div></div>
+                <div class="service-card"><img src="../images/exfolacion.jpeg" alt="Exfoliación"><div class="card-info"><span class="service-name">Exfoliación</span><span class="service-price">$180.00</span></div></div>
+                <div class="service-card"><img src="../images/Corte2.png" alt="Corte y afeitado"><div class="card-info"><span class="service-name">Corte y afeitado</span><span class="service-price">$250.00</span></div></div>
+                <div class="service-card"><img src="../images/Corte1.png" alt="Corte y Exfoliación"><div class="card-info"><span class="service-name">Corte y Exfoliación</span><span class="service-price">$280.00</span></div></div>
+                <div class="service-card"><img src="../images/img12.jpeg" alt="Corte y mascarilla"><div class="card-info"><span class="service-name">Corte y mascarilla</span><span class="service-price">$220.00</span></div></div>
+                <div class="service-card"><img src="../images/exfolacion.jpeg" alt="Mascarilla Express"><div class="card-info"><span class="service-name">Mascarilla Express</span><span class="service-price">$100.00</span></div></div>
+                <div class="service-card"><img src="../images/LimpiezaFacial.png" alt="Facial limpieza"><div class="card-info"><span class="service-name">Facial limpieza</span><span class="service-price">$180.00</span></div></div>
             </div>
         </div>
     </section>
@@ -66,6 +62,124 @@
     <a href="https://wa.me/message/3AYVJOAZ6KT2C1" class="whatsapp-float" target="_blank" title="Contactar por WhatsApp">
         <img src="../images/imgIconWhts.png" alt="Contactar por WhatsApp">
     </a>
+
+    <div id="scheduleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('scheduleModal')">&times;</span>
+            <h2>AGENDAR CITA</h2>
+            <form id="scheduleForm">
+                <div class="form-group"><label>Nombre completo</label><input type="text" id="nombre" required></div>
+                <div class="form-group"><label>Teléfono</label><input type="tel" id="telefono" required></div>
+                <div class="form-group"><label>Servicio</label>
+                    <select id="servicio" required>
+                        <option value="Corte adulto">Corte adulto - $150</option>
+                        <option value="Corte de niño">Corte de niño - $130</option>
+                        <option value="Afeitado de barba">Afeitado de barba - $150</option>
+                        <option value="Exfoliacion">Exfoliación - $180</option>
+                        <option value="Corte y afeitado">Corte y afeitado - $250</option>
+                        <option value="Corte y Exfoliacion">Corte y Exfoliación - $280</option>
+                        <option value="Corte y mascarilla">Corte y mascarilla - $220</option>
+                        <option value="Mascarilla Express">Mascarilla Express - $100</option>
+                        <option value="Facial limpieza">Facial limpieza - $180</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Fecha</label><input type="date" id="fecha" required></div>
+                <div class="form-group"><label>Horario</label>
+                    <div class="horario-selector">
+                        <input type="radio" id="h900" name="horario" value="09:00" required checked><label for="h900">09:00</label>
+                        <input type="radio" id="h1000" name="horario" value="10:00"><label for="h1000">10:00</label>
+                        <input type="radio" id="h1100" name="horario" value="11:00"><label for="h1100">11:00</label>
+                        <input type="radio" id="h1200" name="horario" value="12:00"><label for="h1200">12:00</label>
+                        <input type="radio" id="h1300" name="horario" value="13:00"><label for="h1300">13:00</label>
+                        <input type="radio" id="h1400" name="horario" value="14:00"><label for="h1400">14:00</label>
+                        <input type="radio" id="h1500" name="horario" value="15:00"><label for="h1500">15:00</label>
+                        <input type="radio" id="h1600" name="horario" value="16:00"><label for="h1600">16:00</label>
+                        <input type="radio" id="h1700" name="horario" value="17:00"><label for="h1700">17:00</label>
+                        <input type="radio" id="h1800" name="horario" value="18:00"><label for="h1800">18:00</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn-modal-action">Agendar horario</button>
+            </form>
+        </div>
+    </div>
+    <div id="successModal" class="modal"><div class="modal-content"><div class="logo-apolo">Apolo</div><h2>¡Cita agendada!</h2><button class="btn-modal-action" onclick="window.location.href='../index.html';">Ir al inicio</button></div></div>
+    <div id="occupiedModal" class="modal" style="z-index: 1100;"><div class="modal-content"><div class="logo-apolo" style="color: #e74c3c;">Apolo</div><h2>Horario No Disponible</h2><p style="color: #c0c0c0;">Lo sentimos, esa hora ya está reservada.</p><button class="btn-modal-action" onclick="closeModal('occupiedModal')">Seleccionar otra hora</button></div></div>
+
+    <script type="module">
+        import { db } from "../js/firebase.js";
+        import { collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // --- CARGAR SERVICIOS NUEVOS ---
+        async function cargarServiciosNuevos() {
+            const container = document.getElementById('lista-servicios');
+            try {
+                const q = query(collection(db, "catalogo"), where("tipo", "==", "servicio"));
+                const snapshot = await getDocs(q);
+
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    const div = document.createElement('div');
+                    div.className = 'service-card';
+                    
+                    // CORRECCIÓN: Forzar altura 350px para igualar a las tarjetas fijas
+                    let imgUrl = "../images/imgLogo.png"; 
+                    let imgStyle = "width: 100%; height: 350px; object-fit: contain; background: #000; display: block;"; // Estilo por defecto
+
+                    if(data.imagenUrl && data.imagenUrl.length > 5) {
+                        imgUrl = data.imagenUrl;
+                        // Si es imagen real, usamos cover pero mantenemos la altura fija de 350px
+                        imgStyle = "width: 100%; height: 350px; object-fit: cover; display: block;";
+                    }
+
+                    div.innerHTML = `
+                        <img src="${imgUrl}" alt="${data.nombre}" style="${imgStyle}">
+                        <div class="card-info">
+                            <span class="service-name">${data.nombre}</span>
+                            <span class="service-price">$${data.precio.toFixed(2)}</span>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+            } catch (e) { console.error(e); }
+        }
+        
+        cargarServiciosNuevos();
+
+        // --- LÓGICA DE CITAS ---
+        window.openModal = (id) => document.getElementById(id).style.display = 'block';
+        window.closeModal = (id) => document.getElementById(id).style.display = 'none';
+        window.onclick = (e) => { if(e.target.classList.contains('modal')) e.target.style.display = 'none'; }
+        document.getElementById('fecha').valueAsDate = new Date();
+
+        const form = document.getElementById('scheduleForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const fecha = document.getElementById('fecha').value;
+            const servicio = document.getElementById('servicio').value;
+            const hora = document.querySelector('input[name="horario"]:checked').value;
+            const btn = document.querySelector('.btn-modal-action');
+            const txt = btn.innerText;
+
+            try {
+                btn.innerText = "Verificando..."; btn.disabled = true;
+                const q = query(collection(db, "agenda"), where("fecha", "==", fecha), where("hora", "==", hora));
+                const snap = await getDocs(q);
+                let ocupado = false;
+                snap.forEach(d => { if(d.data().estado !== 'completada') ocupado = true; });
+
+                if(ocupado) { window.openModal('occupiedModal'); btn.innerText = txt; btn.disabled = false; return; }
+
+                btn.innerText = "Guardando...";
+                await addDoc(collection(db, "agenda"), { cliente: nombre, telefono, fecha, hora, servicio, estado: "pendiente", creado: new Date() });
+                window.closeModal('scheduleModal'); window.openModal('successModal');
+                form.reset(); document.getElementById('fecha').valueAsDate = new Date();
+            } catch(err) { console.error(err); alert("Error de conexión"); }
+            finally { if(btn.innerText !== txt) { btn.innerText = txt; btn.disabled = false; } }
+        });
+    </script>
 
 </body>
 </html>

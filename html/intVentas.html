@@ -10,8 +10,62 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Aileron:wght@300;400;700&family=Montserrat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        .grid-hidden { display: none !important; }
+        .pos-item-info h4 { font-size: 0.9rem; margin-bottom: 5px; line-height: 1.2; }
+        
+        .btn-add-new {
+            background-color: #2ecc71; color: #fff; border: none; width: 40px; height: 40px;
+            border-radius: 50%; font-size: 1.2rem; cursor: pointer; margin-left: 15px;
+            transition: transform 0.2s; display: flex; align-items: center; justify-content: center;
+        }
+        .btn-add-new:hover { transform: scale(1.1); background-color: #27ae60; }
+        
+        .tabs-container { display: flex; align-items: center; margin-bottom: 20px; }
+        
+        /* Estilo para items dinámicos */
+        .pos-item.dynamic { border: 1px dashed #666; position: relative; }
+        
+        .btn-delete-item {
+            position: absolute; top: -10px; right: -10px;
+            background: #e74c3c; color: white; border: 2px solid #1A1C2A;
+            width: 28px; height: 28px; border-radius: 50%;
+            font-size: 0.8rem; cursor: pointer; display: flex;
+            align-items: center; justify-content: center; z-index: 50;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+        .btn-delete-item:hover { background: #c0392b; transform: scale(1.1); }
+
+        /* Inputs del Modal */
+        .form-group select, .form-group input {
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333;
+            background-color: #1A1C2A; color: #ffffff; font-family: 'Aileron', sans-serif;
+            font-size: 1rem; outline: none; cursor: pointer;
+        }
+        
+        .pos-item img {
+            width: 40px; height: 40px; object-fit: cover; margin-bottom: 10px; border-radius: 5px;
+        }
+
+        /* --- NUEVOS ESTILOS PARA DATOS DEL TICKET --- */
+        .ticket-inputs {
+            padding: 15px;
+            border-bottom: 1px dashed #ccc;
+            background-color: #f9f9f9;
+        }
+        .ticket-input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Aileron', sans-serif;
+            font-size: 0.9rem;
+        }
+        .ticket-input:last-child { margin-bottom: 0; }
+    </style>
 </head>
 <body class="pagina-interna">
 
@@ -20,13 +74,14 @@
             <img src="../images/imgLogo.png" alt="Logo">
             <span>PANEL ADMINISTRATIVO</span>
         </div>
-        
         <nav class="main-nav">
             <ul>
                 <li><a href="intPanelControl.html"><i class="fas fa-home"></i> Inicio</a></li>
                 <li><a href="intAgenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
                 <li><a href="intVentas.html" class="active"><i class="fas fa-cash-register"></i> Caja</a></li>
-                <li><a href="../index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+                <li><a href="intGastos.html"><i class="fas fa-wallet"></i> Gastos</a></li>
+                <li><a href="intReportes.html"><i class="fas fa-chart-line"></i> Reportes</a></li>
+                <li><a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
             </ul>
         </nav>
     </header>
@@ -45,77 +100,59 @@
                 
                 <div class="pos-catalog">
                     
-                    <div class="pos-tabs">
-                        <button class="pos-tab active">Servicios</button>
-                        <button class="pos-tab">Productos</button>
+                    <div class="tabs-container">
+                        <div class="pos-tabs">
+                            <button class="pos-tab active" onclick="cambiarPestana('servicios')">Servicios</button>
+                            <button class="pos-tab" onclick="cambiarPestana('productos')">Productos</button>
+                        </div>
+                        <button class="btn-add-new" onclick="openModal('newItemModal')" title="Agregar Nuevo Item">
+                            <i class="fas fa-plus"></i>
+                        </button>
                     </div>
 
-                    <div class="pos-grid">
-                        <div class="pos-item" onclick="addToTicket('Corte de Cabello', 150)">
-                            <div class="pos-item-icon"><i class="fas fa-cut"></i></div>
-                            <div class="pos-item-info">
-                                <h4>Corte de Cabello</h4>
-                                <span>$150.00</span>
-                            </div>
-                        </div>
-
-                        <div class="pos-item" onclick="addToTicket('Barba', 180)">
-                            <div class="pos-item-icon"><i class="fas fa-user-tie"></i></div>
-                            <div class="pos-item-info">
-                                <h4>Arreglo de Barba</h4>
-                                <span>$180.00</span>
-                            </div>
-                        </div>
-
-                        <div class="pos-item" onclick="addToTicket('Afeitado Clásico', 200)">
-                            <div class="pos-item-icon"><i class="fas fa-soap"></i></div>
-                            <div class="pos-item-info">
-                                <h4>Afeitado Clásico</h4>
-                                <span>$200.00</span>
-                            </div>
-                        </div>
-                        
-                        <div class="pos-item" onclick="addToTicket('Masaje Relajante', 450)">
-                            <div class="pos-item-icon"><i class="fas fa-spa"></i></div>
-                            <div class="pos-item-info">
-                                <h4>Masaje Relajante</h4>
-                                <span>$450.00</span>
-                            </div>
-                        </div>
-
-                        <div class="pos-item" onclick="addToTicket('Facial Limpieza', 350)">
-                            <div class="pos-item-icon"><i class="far fa-face-smile-beam"></i></div>
-                            <div class="pos-item-info">
-                                <h4>Facial Limpieza</h4>
-                                <span>$350.00</span>
-                            </div>
-                        </div>
+                    <div class="pos-grid" id="grid-servicios">
+                        <div class="pos-item" onclick="agregarAlTicket('Corte Adulto', 150)"><div class="pos-item-icon"><i class="fas fa-cut"></i></div><div class="pos-item-info"><h4>Corte Adulto</h4><span>$150.00</span></div></div>
+                        <div class="pos-item" onclick="agregarAlTicket('Corte Niño', 130)"><div class="pos-item-icon"><i class="fas fa-child"></i></div><div class="pos-item-info"><h4>Corte Niño</h4><span>$130.00</span></div></div>
+                        <div class="pos-item" onclick="agregarAlTicket('Afeitado Barba', 150)"><div class="pos-item-icon"><i class="fas fa-user-tie"></i></div><div class="pos-item-info"><h4>Afeitado Barba</h4><span>$150.00</span></div></div>
+                        <div class="pos-item" onclick="agregarAlTicket('Exfoliación', 180)"><div class="pos-item-icon"><i class="fas fa-spa"></i></div><div class="pos-item-info"><h4>Exfoliación</h4><span>$180.00</span></div></div>
+                        <div class="pos-item" onclick="agregarAlTicket('Corte + Afeitado', 250)"><div class="pos-item-icon"><i class="fas fa-cut"></i></div><div class="pos-item-info"><h4>Corte + Afeitado</h4><span>$250.00</span></div></div>
+                        <div class="pos-item" onclick="agregarAlTicket('Corte + Exfoliac.', 280)"><div class="pos-item-icon"><i class="fas fa-magic"></i></div><div class="pos-item-info"><h4>Corte + Exfoliac.</h4><span>$280.00</span></div></div>
+                        <div class="pos-item" onclick="agregarAlTicket('Corte + Mascarilla', 220)"><div class="pos-item-icon"><i class="fas fa-mask"></i></div><div class="pos-item-info"><h4>Corte + Mascarilla</h4><span>$220.00</span></div></div>
+                        <div class="pos-item" onclick="agregarAlTicket('Mascarilla Exp.', 100)"><div class="pos-item-icon"><i class="far fa-clock"></i></div><div class="pos-item-info"><h4>Mascarilla Exp.</h4><span>$100.00</span></div></div>
+                        <div class="pos-item" onclick="agregarAlTicket('Facial Limpieza', 180)"><div class="pos-item-icon"><i class="far fa-face-smile-beam"></i></div><div class="pos-item-info"><h4>Facial Limpieza</h4><span>$180.00</span></div></div>
                     </div>
+
+                    <div class="pos-grid grid-hidden" id="grid-productos">
+                        <div class="pos-item" onclick="agregarAlTicket('Cera Gummy', 250)"><div class="pos-item-icon"><i class="fas fa-pump-soap"></i></div><div class="pos-item-info"><h4>Cera Gummy</h4><span>$250.00</span></div></div>
+                        <div class="pos-item" onclick="agregarAlTicket('Shampoo Caída', 320)"><div class="pos-item-icon"><i class="fas fa-flask"></i></div><div class="pos-item-info"><h4>Shampoo Caída</h4><span>$320.00</span></div></div>
+                        <div class="pos-item" onclick="agregarAlTicket('Firm Pomade', 340)"><div class="pos-item-icon"><i class="fas fa-spray-can"></i></div><div class="pos-item-info"><h4>Firm Pomade</h4><span>$340.00</span></div></div>
+                        <div class="pos-item" onclick="agregarAlTicket('Shampoo Lumina', 380)"><div class="pos-item-icon"><i class="fas fa-bottle-droplet"></i></div><div class="pos-item-info"><h4>Shampoo Lumina</h4><span>$380.00</span></div></div>
+                        <div class="pos-item" onclick="agregarAlTicket('Extra Hold Gel', 300)"><div class="pos-item-icon"><i class="fas fa-hand-holding-water"></i></div><div class="pos-item-info"><h4>Extra Hold Gel</h4><span>$300.00</span></div></div>
+                    </div>
+
                 </div>
 
                 <div class="pos-ticket-panel">
                     <div class="ticket-header">
-                        <h3>Ticket de Venta #00124</h3>
+                        <h3>Ticket de Venta</h3>
                     </div>
                     
+                    <div class="ticket-inputs">
+                        <input type="text" id="ticket-barbero" class="ticket-input" placeholder="Nombre del Barbero" required>
+                        <input type="text" id="ticket-cliente" class="ticket-input" placeholder="Nombre del Cliente" required>
+                    </div>
+
                     <div class="ticket-items" id="ticket-items">
-                        <div class="ticket-row">
-                            <div class="t-desc">
-                                <p>Corte de Cabello</p>
-                                <small>1 x $150.00</small>
-                            </div>
-                            <div class="t-price">$150.00</div>
-                            <button class="t-remove"><i class="fas fa-times"></i></button>
-                        </div>
+                        <p style="text-align: center; color: #666; margin-top: 20px;">Ticket vacío</p>
                     </div>
 
                     <div class="ticket-footer">
                         <div class="ticket-total-row">
                             <span>Total a Pagar:</span>
-                            <span class="total-amount">$150.00</span>
+                            <span class="total-amount" id="total-amount">$0.00</span>
                         </div>
                         
-                        <button class="btn-cta btn-checkout" onclick="alert('Ticket generado e impreso')">
+                        <button class="btn-cta btn-checkout" id="btn-cobrar">
                             <i class="fas fa-print"></i> Cobrar e Imprimir
                         </button>
                     </div>
@@ -126,9 +163,234 @@
         </div>
     </section>
 
-    <script>
+    <div id="newItemModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('newItemModal')">&times;</span>
+            <h2>Agregar al Catálogo</h2>
+            <form id="newItemForm">
+                <div class="form-group">
+                    <label>Nombre del Item</label>
+                    <input type="text" id="new-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Precio ($)</label>
+                    <input type="number" id="new-price" placeholder="0.00" step="0.50" required>
+                </div>
+                <div class="form-group">
+                    <label>Tipo</label>
+                    <select id="new-type">
+                        <option value="servicio">Servicio</option>
+                        <option value="producto">Producto</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Link de Imagen (Opcional)</label>
+                    <input type="text" id="new-image-url" placeholder="https://ejemplo.com/foto.jpg">
+                    <small style="color: #888; font-size: 0.8rem; margin-top:5px; display:block;">Copia y pega el link de la imagen desde internet.</small>
+                </div>
+                <button type="submit" class="btn-modal-action">Guardar en Catálogo</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import { db, verificarSesion, cerrarSesion } from "../js/firebase.js";
+        import { collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        verificarSesion();
+        const btnSalir = document.querySelector('.logout-btn');
+        if(btnSalir) btnSalir.addEventListener('click', (e) => { e.preventDefault(); cerrarSesion(); });
+
+        // UI Helpers
         const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         document.getElementById('current-date').innerText = new Date().toLocaleDateString('es-ES', dateOptions);
+
+        window.openModal = (id) => document.getElementById(id).style.display = 'block';
+        window.closeModal = (id) => document.getElementById(id).style.display = 'none';
+        window.onclick = (e) => { if (e.target.classList.contains('modal')) e.target.style.display = 'none'; }
+
+        window.cambiarPestana = function(tipo) {
+            const s = document.getElementById('grid-servicios'), p = document.getElementById('grid-productos');
+            const b = document.querySelectorAll('.pos-tab');
+            if (tipo === 'servicios') { s.classList.remove('grid-hidden'); p.classList.add('grid-hidden'); b[0].classList.add('active'); b[1].classList.remove('active'); }
+            else { s.classList.add('grid-hidden'); p.classList.remove('grid-hidden'); b[0].classList.remove('active'); b[1].classList.add('active'); }
+        }
+
+        // --- CARGAR CATÁLOGO ---
+        async function cargarCatalogoExtra() {
+            try {
+                document.querySelectorAll('.pos-item.dynamic').forEach(e => e.remove());
+                const snapshot = await getDocs(collection(db, "catalogo"));
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    crearTarjetaHTML(data.nombre, data.precio, data.tipo, data.imagenUrl, doc.id);
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        // --- CREAR TARJETA ---
+        function crearTarjetaHTML(nombre, precio, tipo, imgUrl, docId) {
+            const contenedor = (tipo === 'servicio') ? document.getElementById('grid-servicios') : document.getElementById('grid-productos');
+            
+            const div = document.createElement('div');
+            div.className = 'pos-item dynamic';
+            div.id = `card-${docId}`;
+
+            const btnDelete = document.createElement('button');
+            btnDelete.className = 'btn-delete-item';
+            btnDelete.innerHTML = '<i class="fas fa-times"></i>';
+            
+            btnDelete.onclick = async (e) => {
+                e.stopPropagation(); 
+                await eliminarItem(docId);
+            };
+
+            let visualHTML = '';
+            if (imgUrl && imgUrl.length > 10) { 
+                visualHTML = `<img src="${imgUrl}" alt="${nombre}" onerror="this.style.display='none'">`;
+            } else {
+                const iconClass = (tipo === 'servicio') ? 'fa-cut' : 'fa-box-open';
+                visualHTML = `<div class="pos-item-icon"><i class="fas ${iconClass}"></i></div>`;
+            }
+
+            const infoHTML = `
+                ${visualHTML}
+                <div class="pos-item-info">
+                    <h4>${nombre}</h4>
+                    <span>$${parseFloat(precio).toFixed(2)}</span>
+                </div>
+            `;
+
+            div.appendChild(btnDelete); 
+            div.insertAdjacentHTML('beforeend', infoHTML); 
+            div.onclick = () => agregarAlTicket(nombre, parseFloat(precio));
+            contenedor.appendChild(div);
+        }
+
+        // --- GUARDAR NUEVO ITEM ---
+        const newItemForm = document.getElementById('newItemForm');
+        newItemForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nombre = document.getElementById('new-name').value;
+            const precio = document.getElementById('new-price').value;
+            const tipo = document.getElementById('new-type').value;
+            const imageUrl = document.getElementById('new-image-url').value; 
+            const btn = newItemForm.querySelector('button');
+
+            try {
+                btn.innerText = "Guardando...";
+                btn.disabled = true;
+
+                const docRef = await addDoc(collection(db, "catalogo"), {
+                    nombre: nombre,
+                    precio: parseFloat(precio),
+                    tipo: tipo,
+                    imagenUrl: imageUrl, 
+                    creado: new Date()
+                });
+
+                crearTarjetaHTML(nombre, precio, tipo, imageUrl, docRef.id);
+                
+                newItemForm.reset();
+                window.closeModal('newItemModal');
+                alert("Item agregado.");
+
+            } catch (error) {
+                console.error(error);
+                alert("Error al guardar.");
+            } finally {
+                btn.innerText = "Guardar en Catálogo";
+                btn.disabled = false;
+            }
+        });
+
+        // --- ELIMINAR ITEM ---
+        window.eliminarItem = async function(docId) {
+            if(!confirm("¿Eliminar este ítem permanentemente?")) return;
+            try {
+                await deleteDoc(doc(db, "catalogo", docId));
+                document.getElementById(`card-${docId}`).remove();
+                alert("Eliminado.");
+            } catch(e) { console.error(e); alert("Error al eliminar."); }
+        }
+
+        // --- TICKET ---
+        let carrito = []; let total = 0;
+        window.agregarAlTicket = (n, p) => { carrito.push({nombre:n, precio:p}); actualizarTicketVisual(); };
+        window.quitarDelTicket = (i) => { carrito.splice(i, 1); actualizarTicketVisual(); };
+        
+        function actualizarTicketVisual() {
+            const c = document.getElementById('ticket-items');
+            const t = document.getElementById('total-amount');
+            c.innerHTML = ""; total = 0;
+            if(carrito.length === 0) { c.innerHTML = '<p style="text-align:center;color:#666;margin-top:20px;">Ticket vacío</p>'; t.innerText="$0.00"; return; }
+            carrito.forEach((item, i) => {
+                total += item.precio;
+                c.innerHTML += `<div class="ticket-row"><div class="t-desc"><p>${item.nombre}</p></div><div class="t-price">$${item.precio.toFixed(2)}</div><button class="t-remove" onclick="quitarDelTicket(${i})"><i class="fas fa-times"></i></button></div>`;
+            });
+            t.innerText = `$${total.toFixed(2)}`;
+        }
+
+        // --- COBRAR E IMPRIMIR (SIMULADO) ---
+        document.getElementById('btn-cobrar').addEventListener('click', async () => {
+            if(carrito.length===0) { alert("Vacío"); return; }
+            
+            // Validar campos nuevos
+            const barbero = document.getElementById('ticket-barbero').value;
+            const cliente = document.getElementById('ticket-cliente').value;
+
+            if(!barbero || !cliente) {
+                alert("Por favor ingresa el nombre del Barbero y del Cliente.");
+                return;
+            }
+
+            if(!confirm(`¿Cobrar $${total.toFixed(2)}?`)) return;
+
+            try {
+                const hoy = new Date();
+                const fechaStr = hoy.toLocaleDateString('en-CA'); 
+                const horaStr = hoy.toLocaleTimeString('es-MX');
+
+                await addDoc(collection(db, "ventas"), {
+                    fecha: fechaStr,
+                    total: total,
+                    items: carrito,
+                    tipo: 'ingreso',
+                    metodo: 'Efectivo',
+                    barbero: barbero, // Guardamos barbero
+                    cliente: cliente, // Guardamos cliente
+                    creado: new Date()
+                });
+
+                // --- GENERAR TICKET VISUAL (ALERTA) ---
+                let ticketTexto = "--------------------------------\n";
+                ticketTexto += "      BARBERÍA APOLO      \n";
+                ticketTexto += "   Cuernavaca, Morelos    \n";
+                ticketTexto += "--------------------------------\n";
+                ticketTexto += `Fecha: ${fechaStr}  Hora: ${horaStr}\n`;
+                ticketTexto += `Atendió: ${barbero}\n`;
+                ticketTexto += `Cliente: ${cliente}\n`;
+                ticketTexto += "--------------------------------\n";
+                carrito.forEach(item => {
+                    ticketTexto += `${item.nombre.padEnd(20)} $${item.precio.toFixed(2)}\n`;
+                });
+                ticketTexto += "--------------------------------\n";
+                ticketTexto += `TOTAL: $${total.toFixed(2)}\n`;
+                ticketTexto += "--------------------------------\n";
+                ticketTexto += "    ¡Gracias por su visita!    \n";
+
+                alert(ticketTexto);
+
+                // Limpiar
+                carrito = [];
+                document.getElementById('ticket-barbero').value = "";
+                document.getElementById('ticket-cliente').value = "";
+                actualizarTicketVisual();
+
+            } catch(e) { console.error(e); }
+        });
+
+        cargarCatalogoExtra();
     </script>
 
 </body>

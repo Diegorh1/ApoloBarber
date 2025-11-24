@@ -6,21 +6,20 @@
     <title>Productos - Barberia APOLO</title>
 
     <link rel="stylesheet" href="../css/style.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
     <link href="https://fonts.googleapis.com/css2?family=Aileron:wght@300;400;700&family=Montserrat:wght@400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        .form-group select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #333; background-color: #1A1C2A; color: #ffffff; font-family: 'Aileron', sans-serif; font-size: 1rem; outline: none; cursor: pointer; }
+        .form-group select:focus { border-color: #f39c12; }
+    </style>
 </head>
 <body class="pagina-interna">
 
     <header class="main-header header-interno">
-        <a href="../index.html" class="logo">
-            <img src="../images/imgLogo.png" alt="Logo Barberia Apolo">
-        </a>
-        
+        <a href="../index.html" class="logo"><img src="../images/imgLogo.png" alt="Logo Barberia Apolo"></a>
         <nav class="main-nav">
             <ul>
                 <li><a href="intSobre.html">Sobre</a></li>
@@ -31,162 +30,192 @@
                 <li><a href="intUbicacion.html">Ubicación</a></li>
             </ul>
         </nav>
-        <a href="#scheduleModal" class="btn-cta">Agendar horario</a>
+        <a href="#scheduleModal" class="btn-cta" onclick="openModal('scheduleModal')">Agendar horario</a>
     </header>
 
     <section id="producto-catalogo">
         <div class="container-content">
-            
             <h1 class="section-title">CATÁLOGO DE PRODUCTOS</h1>
-            
             <div class="catalogo-container">
-                
-                <button id="prev-btn" class="nav-arrow" aria-label="Producto anterior">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                
-                <div class="catalogo-slider">
-                    </div>
-                
-                <button id="next-btn" class="nav-arrow" aria-label="Siguiente producto">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+                <button id="prev-btn" class="nav-arrow" aria-label="Producto anterior"><i class="fas fa-chevron-left"></i></button>
+                <div class="catalogo-slider"></div>
+                <button id="next-btn" class="nav-arrow" aria-label="Siguiente producto"><i class="fas fa-chevron-right"></i></button>
             </div>
-            
             <div class="catalogo-info">
                 <h2 id="producto-nombre">...</h2>
                 <span id="producto-precio">...</span>
                 <p id="producto-desc">...</p>
                 <a href="https://wa.me/message/3AYVJOAZ6KT2C1" target="_blank" class="btn-cta">Consultar por WhatsApp</a>
             </div>
-
         </div>
     </section>
     
-    <a href="https://wa.me/message/3AYVJOAZ6KT2C1" class="whatsapp-float" target="_blank" title="Contactar por WhatsApp">
-        <img src="../images/imgIconWhts.png" alt="Contactar por WhatsApp">
-    </a>
+    <a href="https://wa.me/message/3AYVJOAZ6KT2C1" class="whatsapp-float" target="_blank" title="Contactar por WhatsApp"><img src="../images/imgIconWhts.png" alt="Contactar por WhatsApp"></a>
 
-    <script>
-        // 1. La base de datos de tus productos
+    <div id="scheduleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('scheduleModal')">&times;</span>
+            <h2>AGENDAR CITA</h2>
+            <form id="scheduleForm">
+                <div class="form-group"><label>Nombre</label><input type="text" id="nombre" required></div>
+                <div class="form-group"><label>Teléfono</label><input type="tel" id="telefono" required></div>
+                <div class="form-group"><label>Servicio</label>
+                    <select id="servicio" required>
+                        <option value="Corte adulto">Corte adulto</option>
+                        <option value="Corte de niño">Corte de niño</option>
+                        <option value="Afeitado de barba">Afeitado de barba</option>
+                        <option value="Exfoliacion">Exfoliación</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Fecha</label><input type="date" id="fecha" required></div>
+                <div class="form-group"><label>Horario</label>
+                    <div class="horario-selector">
+                        <input type="radio" id="h900" name="horario" value="09:00" required checked><label for="h900">09:00</label>
+                        <input type="radio" id="h1000" name="horario" value="10:00"><label for="h1000">10:00</label>
+                        <input type="radio" id="h1100" name="horario" value="11:00"><label for="h1100">11:00</label>
+                        <input type="radio" id="h1200" name="horario" value="12:00"><label for="h1200">12:00</label>
+                        <input type="radio" id="h1300" name="horario" value="13:00"><label for="h1300">13:00</label>
+                        <input type="radio" id="h1400" name="horario" value="14:00"><label for="h1400">14:00</label>
+                        <input type="radio" id="h1500" name="horario" value="15:00"><label for="h1500">15:00</label>
+                        <input type="radio" id="h1600" name="horario" value="16:00"><label for="h1600">16:00</label>
+                        <input type="radio" id="h1700" name="horario" value="17:00"><label for="h1700">17:00</label>
+                        <input type="radio" id="h1800" name="horario" value="18:00"><label for="h1800">18:00</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn-modal-action">Agendar horario</button>
+            </form>
+        </div>
+    </div>
+    <div id="successModal" class="modal"><div class="modal-content"><div class="logo-apolo">Apolo</div><h2>¡Cita agendada!</h2><button class="btn-modal-action" onclick="window.location.href='../index.html';">Ir al inicio</button></div></div>
+    <div id="occupiedModal" class="modal" style="z-index: 1100;"><div class="modal-content"><div class="logo-apolo" style="color: #e74c3c;">Apolo</div><h2>Horario No Disponible</h2><p style="color: #c0c0c0;">Lo sentimos, esa hora ya está reservada.</p><button class="btn-modal-action" onclick="closeModal('occupiedModal')">Seleccionar otra hora</button></div></div>
+
+    <script type="module">
+        import { db } from "../js/firebase.js";
+        import { collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // 1. CATALOGO BASE
         const products = [
-            {
-                name: "Gummy duo Shave gel y after Shave",
-                price: "$---.--",
-                desc: "El gel proporciona un afeitado más suave y cómodo, mientras que el after shave calma la piel.",
-                img: "../images/imgGummy.jpeg"
-            },
-            {
-                name: "Cera gel efecto húmedo",
-                price: "$---.--",
-                desc: "Cera gel de fijación fuerte, ideal para un look con efecto húmedo y controlado.",
-                img: "../images/imgCera1.jpeg"
-            },
-            {
-                name: "Firm pomade",
-                price: "MX$340.00",
-                desc: "Fórmula a base de agua que proporciona una fijación firme y brillo medio.",
-                img: "../images/imgPomade.jpeg"
-            },
-            {
-                name: "Shampoo caída",
-                price: "MX$320.00",
-                desc: "Shampoo de acción refrescante formulado para ayudar a prevenir la caída del cabello.",
-                img: "../images/imgShampooCaida.jpeg"
-            },
-            {
-                name: "Shampoo Lumina",
-                price: "MX$380.00",
-                desc: "Shampoo matizador para cabello rubio o con canas, neutraliza tonos amarillos.",
-                img: "../images/imgShampooLumida.jpeg"
-            },
-            {
-                name: "Extra Hold Gel",
-                price: "MX$300.00",
-                desc: "Su consistencia es perfecta para crear peinados duraderos con máxima fijación.",
-                img: "../images/imgExtraGEl.jpeg"
-            },
-            {
-                name: "Balsami presto",
-                price: "MX$350.00",
-                desc: "Tratamiento revitalizante intensivo que repara y da brillo al cabello al instante.",
-                img: "../images/imgBalami.jpeg"
-            }
+            { name: "Gummy duo Shave gel", price: "$---.--", desc: "El gel proporciona un afeitado más suave.", img: "../images/imgGummy.jpeg" },
+            { name: "Cera gel efecto húmedo", price: "$---.--", desc: "Fijación fuerte, look húmedo.", img: "../images/imgCera1.jpeg" },
+            { name: "Firm pomade", price: "MX$340.00", desc: "Base agua, fijación firme.", img: "../images/imgPomade.jpeg" },
+            { name: "Shampoo caída", price: "MX$320.00", desc: "Acción refrescante.", img: "../images/imgShampooCaida.jpeg" },
+            { name: "Shampoo Lumina", price: "MX$380.00", desc: "Matizador para cabello rubio.", img: "../images/imgShampooLumida.jpeg" },
+            { name: "Extra Hold Gel", price: "MX$300.00", desc: "Peinados duraderos.", img: "../images/imgExtraGEl.jpeg" },
+            { name: "Balsami presto", price: "MX$350.00", desc: "Tratamiento revitalizante.", img: "../images/imgBalami.jpeg" }
         ];
 
-        // 2. Elementos del DOM
         const slider = document.querySelector('.catalogo-slider');
         const nombreProducto = document.getElementById('producto-nombre');
         const precioProducto = document.getElementById('producto-precio');
         const descProducto = document.getElementById('producto-desc');
         const prevBtn = document.getElementById('prev-btn');
         const nextBtn = document.getElementById('next-btn');
-
         let currentIndex = 0;
-        let slides = []; // Array para guardar las tarjetas
+        let slides = [];
 
-        // 3. Crear las tarjetas de producto dinámicamente
-        products.forEach((product, index) => {
-            const slide = document.createElement('div');
-            slide.className = 'slider-item';
-            slide.innerHTML = `<img src="${product.img}" alt="${product.name}">`;
-            
-            // Añadir el 'click' para seleccionar este producto
-            slide.onclick = () => {
-                selectProduct(index);
-            };
-            
-            slider.appendChild(slide);
-            slides.push(slide); // Guardar la tarjeta en el array
-        });
+        // 2. CARGAR NUEVOS PRODUCTOS DE FIREBASE (CORREGIDO)
+        async function iniciarCatalogo() {
+            try {
+                const q = query(collection(db, "catalogo"), where("tipo", "==", "producto"));
+                const snapshot = await getDocs(q);
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    
+                    // --- CORRECCIÓN AQUÍ ---
+                    // Verificamos si hay un link de imagen válido en la base de datos
+                    let imagenFinal = "../images/imgLogo.png"; // Default
+                    if (data.imagenUrl && data.imagenUrl.length > 5) {
+                        imagenFinal = data.imagenUrl;
+                    }
 
-        // 4. Función para seleccionar un producto
+                    products.push({
+                        name: data.nombre,
+                        price: `MX$${data.precio.toFixed(2)}`,
+                        desc: "Nuevo producto disponible en tienda.",
+                        img: imagenFinal
+                    });
+                });
+            } catch (e) { console.error(e); }
+            construirSlider();
+        }
+
+        function construirSlider() {
+            slider.innerHTML = "";
+            slides = [];
+            products.forEach((product, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'slider-item';
+                // Si es el logo por defecto, le ponemos estilo para que no se estire feo
+                // Si es una imagen real (URL), se mostrará normal (cover)
+                const estiloExtra = product.img.includes('imgLogo.png') ? 'object-fit:contain; padding:20px; background:#000;' : 'object-fit:cover;';
+                
+                slide.innerHTML = `<img src="${product.img}" alt="${product.name}" style="width:100%; height:100%; ${estiloExtra}">`;
+                
+                slide.onclick = () => selectProduct(index);
+                slider.appendChild(slide);
+                slides.push(slide);
+            });
+            if(products.length > 0) selectProduct(0);
+        }
+
         function selectProduct(index) {
-            // Validar límites
             if (index < 0) index = 0;
             if (index >= products.length) index = products.length - 1;
-            
             currentIndex = index;
             const product = products[index];
-
-            // Centrar el carrusel en el ítem seleccionado
             const slideWidth = slides[0].offsetWidth;
-            const gap = 30; // El 'gap' del CSS
-            const offset = (slider.offsetWidth / 2) - (slideWidth / 2); // Centrar en la pantalla
+            const gap = 30;
+            const offset = (slider.offsetWidth / 2) - (slideWidth / 2);
             const newTransform = `translateX(${offset - index * (slideWidth + gap)}px)`;
-            
             slider.style.transform = newTransform;
-
-            // Actualizar la información
             nombreProducto.innerText = product.name;
             precioProducto.innerText = product.price;
             descProducto.innerText = product.desc;
-
-            // Actualizar clases 'active' (para el efecto de escala)
-            slides.forEach((slide, i) => {
-                slide.classList.toggle('active', i === index);
-            });
-            
-            // Habilitar/deshabilitar botones de flecha
+            slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
             prevBtn.disabled = (currentIndex === 0);
             nextBtn.disabled = (currentIndex === products.length - 1);
         }
 
-        // 5. Conectar los botones de flecha
-        prevBtn.onclick = () => {
-            selectProduct(currentIndex - 1);
-        };
-        
-        nextBtn.onclick = () => {
-            selectProduct(currentIndex + 1);
-        };
+        prevBtn.onclick = () => selectProduct(currentIndex - 1);
+        nextBtn.onclick = () => selectProduct(currentIndex + 1);
 
-        // 6. Cargar el primer producto al inicio
-        window.onload = () => {
-            // Esperar un milisegundo para que el navegador calcule los anchos
-            setTimeout(() => selectProduct(0), 100);
-        };
+        iniciarCatalogo();
 
+        // 3. LÓGICA CITAS
+        window.openModal = (id) => document.getElementById(id).style.display = 'block';
+        window.closeModal = (id) => document.getElementById(id).style.display = 'none';
+        window.onclick = (e) => { if(e.target.classList.contains('modal')) e.target.style.display = 'none'; }
+        document.getElementById('fecha').valueAsDate = new Date();
+
+        const form = document.getElementById('scheduleForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const fecha = document.getElementById('fecha').value;
+            const servicio = document.getElementById('servicio').value;
+            const hora = document.querySelector('input[name="horario"]:checked').value;
+            const btn = document.querySelector('.btn-modal-action');
+            const txt = btn.innerText;
+
+            try {
+                btn.innerText = "Verificando..."; btn.disabled = true;
+                const q = query(collection(db, "agenda"), where("fecha", "==", fecha), where("hora", "==", hora));
+                const snap = await getDocs(q);
+                let ocupado = false;
+                snap.forEach(d => { if(d.data().estado !== 'completada') ocupado = true; });
+
+                if(ocupado) { window.openModal('occupiedModal'); btn.innerText = txt; btn.disabled = false; return; }
+
+                btn.innerText = "Guardando...";
+                await addDoc(collection(db, "agenda"), { cliente: nombre, telefono, fecha, hora, servicio, estado: "pendiente", creado: new Date() });
+                window.closeModal('scheduleModal'); window.openModal('successModal');
+                form.reset(); document.getElementById('fecha').valueAsDate = new Date();
+            } catch(err) { console.error(err); alert("Error"); }
+            finally { if(btn.innerText !== txt) { btn.innerText = txt; btn.disabled = false; } }
+        });
     </script>
+
 </body>
 </html>

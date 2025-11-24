@@ -26,7 +26,8 @@
                 <li><a href="intPanelControl.html"><i class="fas fa-home"></i> Inicio</a></li>
                 <li><a href="intAgenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
                 <li><a href="intVentas.html"><i class="fas fa-cash-register"></i> Caja</a></li>
-                <li><a href="../index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+                <li><a href="#" class="active"><i class="fas fa-wallet"></i> Gastos</a></li>
+                <li><a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
             </ul>
         </nav>
     </header>
@@ -50,13 +51,13 @@
                         
                         <div class="form-group">
                             <label>Concepto / Descripción</label>
-                            <input type="text" class="admin-input" placeholder="Ej. Pago de luz, Compra de toallas..." required>
+                            <input type="text" id="desc-gasto" class="admin-input" placeholder="Ej. Pago de luz, Compra de toallas..." required>
                         </div>
 
                         <div class="form-row-2">
                             <div class="form-group">
                                 <label>Categoría</label>
-                                <select class="admin-input">
+                                <select id="cat-gasto" class="admin-input">
                                     <option value="servicios">Servicios Básicos (Luz/Agua)</option>
                                     <option value="insumos">Insumos / Inventario</option>
                                     <option value="mantenimiento">Mantenimiento</option>
@@ -67,7 +68,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Monto ($)</label>
-                                <input type="number" class="admin-input" placeholder="0.00" min="0" step="0.01" required>
+                                <input type="number" id="monto-gasto" class="admin-input" placeholder="0.00" min="0" step="0.01" required>
                             </div>
                         </div>
 
@@ -78,7 +79,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Método de Pago</label>
-                                <select class="admin-input">
+                                <select id="metodo-gasto" class="admin-input">
                                     <option value="efectivo">Efectivo (Caja)</option>
                                     <option value="transferencia">Transferencia</option>
                                 </select>
@@ -87,7 +88,7 @@
 
                         <div class="form-group">
                             <label>Notas Adicionales</label>
-                            <textarea class="admin-input" rows="3" placeholder="Detalles adicionales..."></textarea>
+                            <textarea id="notas-gasto" class="admin-input" rows="3" placeholder="Detalles adicionales..."></textarea>
                         </div>
 
                         <button type="submit" class="btn-cta full-width">
@@ -100,7 +101,7 @@
                 <div class="gastos-history-panel">
                     <div class="history-header">
                         <h2>Últimos Movimientos</h2>
-                        <span class="total-expenses">Mes: <b style="color: #e74c3c;">$4,250.00</b></span>
+                        <span class="total-expenses">Total: <b style="color: #e74c3c;" id="total-display">$0.00</b></span>
                     </div>
 
                     <div class="table-responsive">
@@ -111,33 +112,11 @@
                                     <th>Concepto</th>
                                     <th>Categoría</th>
                                     <th>Monto</th>
+                                    <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>17/11/2025</td>
-                                    <td>Compra de Ceras</td>
-                                    <td><span class="badge-cat insumos">Insumos</span></td>
-                                    <td class="amount-negative">-$1,200.00</td>
-                                </tr>
-                                <tr>
-                                    <td>16/11/2025</td>
-                                    <td>Pago Internet</td>
-                                    <td><span class="badge-cat servicios">Servicios</span></td>
-                                    <td class="amount-negative">-$550.00</td>
-                                </tr>
-                                <tr>
-                                    <td>15/11/2025</td>
-                                    <td>Reparación Silla</td>
-                                    <td><span class="badge-cat mtto">Mantenimiento</span></td>
-                                    <td class="amount-negative">-$800.00</td>
-                                </tr>
-                                <tr>
-                                    <td>14/11/2025</td>
-                                    <td>Publicidad FB</td>
-                                    <td><span class="badge-cat ads">Publicidad</span></td>
-                                    <td class="amount-negative">-$300.00</td>
-                                </tr>
+                            <tbody id="tabla-gastos-body">
+                                <tr><td colspan="5" style="text-align:center">Cargando...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -148,9 +127,133 @@
         </div>
     </section>
 
-    <script>
-        // Poner la fecha de hoy automáticamente
-        document.getElementById('expense-date').valueAsDate = new Date();
+    <script type="module">
+        import { db, verificarSesion, cerrarSesion } from "../js/firebase.js";
+        import { collection, addDoc, query, orderBy, getDocs, deleteDoc, doc, limit } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // 1. Seguridad
+        verificarSesion();
+        const btnSalir = document.querySelector('.logout-btn');
+        if(btnSalir) btnSalir.addEventListener('click', (e) => { e.preventDefault(); cerrarSesion(); });
+
+        // 2. Fecha por defecto
+        const dateInput = document.getElementById('expense-date');
+        dateInput.valueAsDate = new Date();
+
+        // 3. GUARDAR GASTO
+        const form = document.getElementById('expenseForm');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const desc = document.getElementById('desc-gasto').value;
+            const cat = document.getElementById('cat-gasto').value;
+            const monto = parseFloat(document.getElementById('monto-gasto').value);
+            const fecha = document.getElementById('expense-date').value;
+            const metodo = document.getElementById('metodo-gasto').value;
+            const notas = document.getElementById('notas-gasto').value;
+            const btn = form.querySelector('button');
+
+            try {
+                btn.innerText = "Guardando...";
+                btn.disabled = true;
+
+                // Guardar en colección 'gastos'
+                await addDoc(collection(db, "gastos"), {
+                    descripcion: desc,
+                    categoria: cat,
+                    monto: monto,
+                    fecha: fecha,
+                    metodo: metodo,
+                    notas: notas,
+                    creado: new Date()
+                });
+
+                alert("Gasto registrado correctamente");
+                form.reset();
+                dateInput.valueAsDate = new Date();
+                cargarGastos(); // Recargar tabla
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Error al guardar.");
+            } finally {
+                btn.innerHTML = '<i class="fas fa-save"></i> Registrar Gasto';
+                btn.disabled = false;
+            }
+        });
+
+        // 4. CARGAR TABLA Y CALCULAR TOTAL
+        async function cargarGastos() {
+            const tbody = document.getElementById('tabla-gastos-body');
+            const totalDisplay = document.getElementById('total-display');
+            
+            try {
+                // Ordenar por fecha descendente (lo nuevo arriba)
+                const q = query(collection(db, "gastos"), orderBy("fecha", "desc"), limit(50));
+                const snapshot = await getDocs(q);
+
+                let totalSuma = 0;
+                let html = "";
+
+                if(snapshot.empty) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#666;">No hay gastos registrados.</td></tr>';
+                    totalDisplay.innerText = "$0.00";
+                    return;
+                }
+
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    totalSuma += Number(data.monto);
+
+                    // Colores para las categorías
+                    let badgeClass = "badge-cat ";
+                    if(data.categoria === 'servicios') badgeClass += "servicios";
+                    else if(data.categoria === 'insumos') badgeClass += "insumos";
+                    else if(data.categoria === 'mantenimiento') badgeClass += "mtto";
+                    else if(data.categoria === 'publicidad') badgeClass += "ads";
+                    else badgeClass += "otros";
+
+                    html += `
+                        <tr>
+                            <td>${formatearFecha(data.fecha)}</td>
+                            <td>${data.descripcion} <br><small style="color:#666;">${data.metodo}</small></td>
+                            <td><span class="${badgeClass}">${data.categoria.toUpperCase()}</span></td>
+                            <td class="amount-negative">-$${data.monto.toFixed(2)}</td>
+                            <td>
+                                <button onclick="eliminarGasto('${doc.id}')" style="background:none; border:none; color:#666; cursor:pointer;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+
+                tbody.innerHTML = html;
+                totalDisplay.innerText = `$${totalSuma.toFixed(2)}`;
+
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        // 5. ELIMINAR GASTO
+        window.eliminarGasto = async function(id) {
+            if(confirm("¿Eliminar este registro?")) {
+                try {
+                    await deleteDoc(doc(db, "gastos", id));
+                    cargarGastos();
+                } catch (e) { console.error(e); }
+            }
+        }
+
+        function formatearFecha(fechaStr) {
+            const partes = fechaStr.split('-');
+            return `${partes[2]}/${partes[1]}/${partes[0]}`;
+        }
+
+        cargarGastos();
+
     </script>
 
 </body>

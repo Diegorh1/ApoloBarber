@@ -20,7 +20,6 @@
             flex-wrap: wrap;
             align-items: flex-end;
         }
-        /* Ajuste para móvil */
         @media (max-width: 768px) {
             .report-toolbar {
                 flex-direction: column;
@@ -52,7 +51,9 @@
                 <li><a href="intPanelControl.html"><i class="fas fa-home"></i> Inicio</a></li>
                 <li><a href="intAgenda.html"><i class="fas fa-calendar-alt"></i> Agenda</a></li>
                 <li><a href="intVentas.html"><i class="fas fa-cash-register"></i> Caja</a></li>
-                <li><a href="../index.html" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+                <li><a href="intGastos.html"><i class="fas fa-wallet"></i> Gastos</a></li>
+                <li><a href="#" class="active"><i class="fas fa-chart-line"></i> Reportes</a></li>
+                <li><a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
             </ul>
         </nav>
     </header>
@@ -70,34 +71,23 @@
             <div class="report-toolbar">
                 
                 <div class="filters-container">
-                    
-                    <div class="filter-group">
-                        <label>Periodo:</label>
-                        <select class="admin-input">
-                            <option value="mensual" selected>Mensual</option>
-                            <option value="bimestral">Bimestral</option>
-                            <option value="semestral">Semestral</option>
-                        </select>
-                    </div>
-
                     <div class="filter-group">
                         <label>Desde:</label>
-                        <input type="date" value="2025-11-01" class="admin-input">
+                        <input type="date" id="date-start" class="admin-input">
                     </div>
 
                     <div class="filter-group">
                         <label>Hasta:</label>
-                        <input type="date" value="2025-11-30" class="admin-input">
+                        <input type="date" id="date-end" class="admin-input">
                     </div>
 
-                    <button class="btn-cta" style="padding: 10px 15px; height: 42px;">
-                        <i class="fas fa-search"></i>
+                    <button class="btn-cta" onclick="generarReporte()" style="padding: 10px 15px; height: 42px;">
+                        <i class="fas fa-search"></i> Generar
                     </button>
                 </div>
 
                 <div class="report-actions">
-                    <button class="btn-outline" onclick="alert('Descargando PDF...')"><i class="fas fa-file-pdf"></i> PDF</button>
-                    <button class="btn-outline" onclick="alert('Descargando Excel...')"><i class="fas fa-file-excel"></i> Excel</button>
+                    <button class="btn-outline" onclick="window.print()"><i class="fas fa-print"></i> Imprimir</button>
                 </div>
             </div>
 
@@ -106,7 +96,7 @@
                     <div class="kpi-icon income"><i class="fas fa-arrow-up"></i></div>
                     <div class="kpi-info">
                         <h3>Ingresos Totales</h3>
-                        <span class="kpi-value income-text">$12,500.00</span>
+                        <span class="kpi-value income-text" id="kpi-ingresos">$0.00</span>
                     </div>
                 </div>
 
@@ -114,7 +104,7 @@
                     <div class="kpi-icon expense"><i class="fas fa-arrow-down"></i></div>
                     <div class="kpi-info">
                         <h3>Gastos Totales</h3>
-                        <span class="kpi-value expense-text">$4,250.00</span>
+                        <span class="kpi-value expense-text" id="kpi-gastos">$0.00</span>
                     </div>
                 </div>
 
@@ -122,32 +112,32 @@
                     <div class="kpi-icon balance"><i class="fas fa-wallet"></i></div>
                     <div class="kpi-info">
                         <h3>Utilidad Neta</h3>
-                        <span class="kpi-value balance-text">$8,250.00</span>
+                        <span class="kpi-value balance-text" id="kpi-utilidad">$0.00</span>
                     </div>
                 </div>
             </div>
 
             <div class="chart-container">
-                <h2>Balance del Periodo Seleccionado</h2>
+                <h2>Balance del Periodo</h2>
                 <div class="simple-bar-chart">
                     
                     <div class="chart-group">
-                        <div class="bar income-bar" style="height: 80%;">
-                            <span class="tooltip">$12,500</span>
+                        <div class="bar income-bar" id="bar-ingresos" style="height: 0%;">
+                            <span class="tooltip" id="tip-ingresos">$0</span>
                         </div>
                         <span class="label">Ingresos</span>
                     </div>
 
                     <div class="chart-group">
-                        <div class="bar expense-bar" style="height: 35%;">
-                            <span class="tooltip">$4,250</span>
+                        <div class="bar expense-bar" id="bar-gastos" style="height: 0%;">
+                            <span class="tooltip" id="tip-gastos">$0</span>
                         </div>
                         <span class="label">Gastos</span>
                     </div>
 
                      <div class="chart-group">
-                        <div class="bar balance-bar" style="height: 60%;">
-                            <span class="tooltip">$8,250</span>
+                        <div class="bar balance-bar" id="bar-utilidad" style="height: 0%;">
+                            <span class="tooltip" id="tip-utilidad">$0</span>
                         </div>
                         <span class="label">Utilidad</span>
                     </div>
@@ -167,39 +157,11 @@
                                 <th>Fecha</th>
                                 <th>Tipo</th>
                                 <th>Descripción</th>
-                                <th>Categoría</th>
                                 <th>Monto</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>17/11/2025</td>
-                                <td><span class="type-badge out">Gasto</span></td>
-                                <td>Compra de Ceras</td>
-                                <td>Insumos</td>
-                                <td class="amount-negative">-$1,200.00</td>
-                            </tr>
-                            <tr>
-                                <td>17/11/2025</td>
-                                <td><span class="type-badge in">Ingreso</span></td>
-                                <td>Corte + Barba (Juan P.)</td>
-                                <td>Servicios</td>
-                                <td class="amount-positive">+$280.00</td>
-                            </tr>
-                            <tr>
-                                <td>16/11/2025</td>
-                                <td><span class="type-badge in">Ingreso</span></td>
-                                <td>Venta Gummy Gel</td>
-                                <td>Productos</td>
-                                <td class="amount-positive">+$150.00</td>
-                            </tr>
-                             <tr>
-                                <td>16/11/2025</td>
-                                <td><span class="type-badge out">Gasto</span></td>
-                                <td>Pago Internet</td>
-                                <td>Servicios</td>
-                                <td class="amount-negative">-$550.00</td>
-                            </tr>
+                        <tbody id="tabla-reportes-body">
+                            <tr><td colspan="4" style="text-align:center">Cargando datos...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -207,6 +169,152 @@
 
         </div>
     </section>
+
+    <script type="module">
+        import { db, verificarSesion, cerrarSesion } from "../js/firebase.js";
+        // Importamos lo necesario para leer
+        import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        verificarSesion();
+        const btnSalir = document.querySelector('.logout-btn');
+        if(btnSalir) btnSalir.addEventListener('click', (e) => { e.preventDefault(); cerrarSesion(); });
+
+        const dateStart = document.getElementById('date-start');
+        const dateEnd = document.getElementById('date-end');
+        const hoy = new Date();
+        
+        const primerDia = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
+        dateStart.value = primerDia.toISOString().split('T')[0];
+        dateEnd.value = hoy.toISOString().split('T')[0];
+
+        window.generarReporte = generarReporte;
+
+        async function generarReporte() {
+            const inicio = dateStart.value;
+            const fin = dateEnd.value;
+            const tbody = document.getElementById('tabla-reportes-body');
+            
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center">Calculando finanzas...</td></tr>';
+
+            try {
+                // 1. CONSULTA DE GASTOS
+                const qGastos = query(collection(db, "gastos"), 
+                    where("fecha", ">=", inicio), where("fecha", "<=", fin)
+                );
+
+                // 2. CONSULTA DE VENTAS (NUEVO)
+                const qVentas = query(collection(db, "ventas"), 
+                    where("fecha", ">=", inicio), where("fecha", "<=", fin)
+                );
+
+                // Ejecutar ambas consultas en paralelo
+                const [snapGastos, snapVentas] = await Promise.all([
+                    getDocs(qGastos),
+                    getDocs(qVentas)
+                ]);
+
+                let totalIngresos = 0;
+                let totalGastos = 0;
+                let movimientos = [];
+
+                // Procesar Gastos
+                snapGastos.forEach(doc => {
+                    const data = doc.data();
+                    totalGastos += Number(data.monto);
+                    movimientos.push({
+                        fecha: data.fecha,
+                        tipo: 'gasto',
+                        desc: data.descripcion,
+                        monto: Number(data.monto),
+                        categoria: data.categoria
+                    });
+                });
+
+                // Procesar Ventas (NUEVO)
+                snapVentas.forEach(doc => {
+                    const data = doc.data();
+                    totalIngresos += Number(data.total);
+                    
+                    // Crear descripción bonita (Ej: "Corte de Cabello + 2 items")
+                    let descripcionVenta = "Venta Mostrador";
+                    if(data.items && data.items.length > 0) {
+                        descripcionVenta = data.items[0].nombre;
+                        if(data.items.length > 1) {
+                            descripcionVenta += ` (+${data.items.length - 1} más)`;
+                        }
+                    }
+
+                    movimientos.push({
+                        fecha: data.fecha,
+                        tipo: 'ingreso',
+                        desc: descripcionVenta,
+                        monto: Number(data.total),
+                        categoria: 'Ventas'
+                    });
+                });
+
+                // Cálculos Finales
+                const utilidad = totalIngresos - totalGastos;
+
+                // Pintar KPIs
+                document.getElementById('kpi-ingresos').innerText = formatMoney(totalIngresos);
+                document.getElementById('kpi-gastos').innerText = formatMoney(totalGastos);
+                document.getElementById('kpi-utilidad').innerText = formatMoney(utilidad);
+
+                // Pintar Gráfica
+                actualizarGrafica(totalIngresos, totalGastos, utilidad);
+
+                // Pintar Tabla
+                movimientos.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+
+                if (movimientos.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#666;">No hay movimientos en este periodo.</td></tr>';
+                } else {
+                    let html = "";
+                    movimientos.forEach(mov => {
+                        const esGasto = mov.tipo === 'gasto';
+                        html += `
+                            <tr>
+                                <td>${mov.fecha}</td>
+                                <td><span class="type-badge ${esGasto ? 'out' : 'in'}">${esGasto ? 'Gasto' : 'Ingreso'}</span></td>
+                                <td>${mov.desc} <small>(${mov.categoria})</small></td>
+                                <td class="${esGasto ? 'amount-negative' : 'amount-positive'}">
+                                    ${esGasto ? '-' : '+'}${formatMoney(mov.monto)}
+                                </td>
+                            </tr>
+                        `;
+                    });
+                    tbody.innerHTML = html;
+                }
+
+            } catch (error) {
+                console.error("Error:", error);
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#e74c3c;">Error cargando datos. Revisa la consola.</td></tr>';
+            }
+        }
+
+        function actualizarGrafica(ingresos, gastos, utilidad) {
+            const maxVal = Math.max(ingresos, gastos, Math.abs(utilidad)) || 1;
+
+            document.getElementById('bar-ingresos').style.height = `${(ingresos / maxVal) * 100}%`;
+            document.getElementById('tip-ingresos').innerText = formatMoney(ingresos);
+
+            document.getElementById('bar-gastos').style.height = `${(gastos / maxVal) * 100}%`;
+            document.getElementById('tip-gastos').innerText = formatMoney(gastos);
+
+            document.getElementById('bar-utilidad').style.height = `${(Math.abs(utilidad) / maxVal) * 100}%`;
+            document.getElementById('tip-utilidad').innerText = formatMoney(utilidad);
+
+            const barUtilidad = document.getElementById('bar-utilidad');
+            barUtilidad.style.backgroundColor = utilidad < 0 ? '#e74c3c' : '#3498db';
+        }
+
+        function formatMoney(amount) {
+            return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(amount);
+        }
+
+        generarReporte();
+    </script>
 
 </body>
 </html>
